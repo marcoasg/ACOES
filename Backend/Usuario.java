@@ -8,6 +8,8 @@ public class Usuario
     
     private String nombre;
     private String password;
+    private String numeroDocumento;
+    private String numeroTelefono;
     private Rol rol;
 
 	public static List<Usuario> ListaUsuarios()
