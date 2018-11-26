@@ -49,7 +49,7 @@ public class Usuario
     	Object[] tupla = miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"
     			+ n + "' and password = '" + "';").get(0);
     	
-    	if (tupla == null) 
+    	if (tupla == null || (String)tupla[1] != p) 
     	{
     		throw new Error("Usuario o contraseña incorrectos."); 
     	}
