@@ -45,18 +45,24 @@ public class Usuario
     {
 		// Crea el objeto cargando sus valores de la base de datos
 		// Si la password almacenada no se corresponde con la suministrada se elevará una excepción
-    	BD miBD = new BD(BD_SERVER,BD_NAME);
-    	Object[] tupla = miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"
-    			+ n + "' and password = '" + "';").get(0);
-    	
-    	if (tupla == null || (String)tupla[1] != p) 
-    	{
-    		throw new Error("Usuario o contraseña incorrectos."); 
+    	if (n.length() == 0) {
+    		throw new Error("Introduzca un usuario.");
     	}
     	
-    	usuario = (String)tupla[0];
-    	password = (String)tupla[1];
-        rol = (Rol)tupla[2];
+    	BD miBD = new BD(BD_SERVER,BD_NAME);
+    	List<Object[]> lista = miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"
+    			+ n + "' and password = '" + "';");
+    	
+    	if (lista.isEmpty()) {
+    		throw new Error("El usuario no existe.");
+    	} else if ((String)lista.get(0)[1] != p){
+    		throw new Error("Contraseña incorrecta.");
+    	} else {
+    		Object[] tupla = lista.get(0);
+        	usuario = (String)tupla[0];
+        	password = (String)tupla[1];
+            rol = (Rol)tupla[2];
+    	}
         
     }
     

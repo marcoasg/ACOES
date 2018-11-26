@@ -6,12 +6,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Backend.*;
+import Backend.Error;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class Login extends JFrame {
 
@@ -24,38 +36,54 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel user = new JLabel("Usuario:");
-		user.setBounds(78, 83, 62, 14);
-		contentPane.add(user);
+		JLabel label_1 = new JLabel("");
+		label_1.setForeground(Color.RED);
+		label_1.setBounds(168, 171, 186, 16);
+		contentPane.add(label_1);
 		
-		JLabel password = new JLabel("Contrase\u00F1a:");
-		password.setBounds(78, 154, 77, 14);
-		contentPane.add(password);
+		JLabel lblAcoes = new JLabel("ACOES");
+		lblAcoes.setBounds(194, 30, 74, 19);
+		lblAcoes.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
+		contentPane.add(lblAcoes);
+		
+		JLabel user_1 = new JLabel("Usuario:");
+		user_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		user_1.setBounds(52, 83, 86, 29);
+		contentPane.add(user_1);
 		
 		textField = new JTextField();
-		textField.setBounds(162, 80, 86, 20);
+		textField.setBounds(168, 89, 122, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnEntrar.setBounds(159, 205, 89, 23);
-		contentPane.add(btnEntrar);
+		JLabel password = new JLabel("Contrase\u00F1a:");
+		password.setFont(new Font("Tahoma", Font.BOLD, 15));
+		password.setBounds(52, 134, 96, 29);
+		contentPane.add(password);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(162, 151, 86, 20);
+		passwordField.setBounds(168, 140, 122, 20);
 		contentPane.add(passwordField);
 		
-		JLabel lblAcoes = new JLabel("ACOES");
-		lblAcoes.setBounds(183, 31, 46, 14);
-		contentPane.add(lblAcoes);
+		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnEntrar.setBounds(194, 221, 76, 29);
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Usuario user = new Usuario(textField.getText(),passwordField.getPassword().toString());
+				} catch (Error e) {
+					// TODO Auto-generated catch block
+					label_1.setText(e.getMessage());
+				}
+			}
+		});
+		contentPane.add(btnEntrar);
+		
 	}
 }
