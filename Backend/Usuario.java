@@ -143,4 +143,144 @@ public class Usuario
 	
 		return nombre + "\t" + password + "\t" + rol.getRolName();
 	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public int getNumSocio() {
+		return numSocio;
+	}
+
+	public void setNumSocio(int numSocio) {
+		this.numSocio = numSocio;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getNif() {
+		return nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public int getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getTelefonoFijo() {
+		return telefonoFijo;
+	}
+
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
+	}
+
+	public String getTelefonoMovil() {
+		return telefonoMovil;
+	}
+
+	public void setTelefonoMovil(String telefonoMovil) {
+		this.telefonoMovil = telefonoMovil;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRelacion() {
+		return relacion;
+	}
+
+	public void setRelacion(String relacion) {
+		this.relacion = relacion;
+	}
+
+	public boolean isCertificado() {
+		return certificado;
+	}
+
+	public void setCertificado(boolean certificado) {
+		this.certificado = certificado;
+	}
+
+	public String getSector() {
+		return sector;
+	}
+
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	public String getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(String fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
+	public String getFechaBaja() {
+		return fechaBaja;
+	}
+
+	public void setFechaBaja(String fechaBaja) {
+		this.fechaBaja = fechaBaja;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 }
