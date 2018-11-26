@@ -46,7 +46,7 @@ public class Usuario
 		// Crea el objeto cargando sus valores de la base de datos
 		// Si la password almacenada no se corresponde con la suministrada se elevará una excepción
     	BD miBD = new BD(BD_SERVER,BD_NAME);
-    	Object[] tupla = miBD.Select("SELECT * FROM tUsuario WHERE nombre = '"
+    	Object[] tupla = miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"
     			+ n + "' and password = '" + "';").get(0);
     	
     	if (tupla == null) 
@@ -54,7 +54,7 @@ public class Usuario
     		throw new Error("Usuario o contraseña incorrectos."); 
     	}
     	
-    	nombre = (String)tupla[0];
+    	usuario = (String)tupla[0];
     	password = (String)tupla[1];
         rol = (Rol)tupla[2];
         
@@ -68,7 +68,7 @@ public class Usuario
     	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
 			miBD.Insert("INSERT into tUsuario values('"+n+"','"+p+"','"+r.getRolName()+"');");
     		
-    		nombre = n;
+    		usuario = n;
 			password = p;
 			rol = r;
 		} else {
@@ -88,8 +88,8 @@ public class Usuario
     	
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE usuario set nombre = '" + value + "' WHERE nombre = '" + nombre + "';");
-    	nombre = value;
+    	miBD.Update("UPDATE tUsuario set usuario = '" + value + "' WHERE usuario = '" + usuario + "';");
+    	usuario = value;
     	
 
     }
@@ -99,8 +99,8 @@ public class Usuario
 		// Actualiza el atributo en memoria y en la base de datos
     	
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Delete("DELETE FROM usuario WHERE nombre = '" + nombre + "' and password = '" + password +  "';");
-    	nombre = null;
+    	miBD.Delete("DELETE FROM tUsuario WHERE usuario = '" + usuario + "' and password = '" + password +  "';");
+    	usuario = null;
     	password = null;
     	rol = null;
     	
@@ -114,7 +114,7 @@ public class Usuario
     { 
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE usuario set password = '" + value + "' WHERE nombre = '" + nombre + "';");
+    	miBD.Update("UPDATE tUsuario set password = '" + value + "' WHERE usuario = '" + usuario + "';");
     	password = value;
     }
 
@@ -134,7 +134,7 @@ public class Usuario
 		// Actualiza el atributo rol de u en memoria y en la base de datos
     	if (this.rol.getRolName() == "Admin" ) {
         	BD miBD = new BD(BD_SERVER, BD_NAME);
-        	miBD.Update("UPDATE usuario set rol = '" + r + "' WHERE nombre = '" + nombre + "';");
+        	miBD.Update("UPDATE tUsuario set rol = '" + r + "' WHERE usuario = '" + usuario + "';");
     		u.rol = r;
     		
     	} else {
@@ -156,7 +156,7 @@ public class Usuario
 	public String toString()
 	{
 	
-		return nombre + "\t" + password + "\t" + rol.getRolName();
+		return usuario + "\t" + password + "\t" + rol.getRolName();
 	}
 
 	public String getUsuario() {
