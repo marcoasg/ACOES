@@ -49,6 +49,11 @@ public class Usuario
     	Object[] tupla = miBD.Select("SELECT * FROM tUsuario WHERE nombre = '"
     			+ n + "' and password = '" + "';").get(0);
     	
+    	if (tupla == null) 
+    	{
+    		throw new Error("Usuario o contraseña incorrectos."); 
+    	}
+    	
     	nombre = (String)tupla[0];
     	password = (String)tupla[1];
         rol = (Rol)tupla[2];
@@ -58,9 +63,19 @@ public class Usuario
     public Usuario(String n, String p, Rol r)
     {
 		// Crea el objeto y lo inserta en la base de datos
-    	nombre = n;
-    	password = p;
-    	rol = r;
+    	BD miBD = new BD(BD_SERVER,BD_NAME);
+    	
+    	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
+			miBD.Insert("INSERT into tUsuario values('"+n+"','"+p+"','"+r.getRolName()+"');");
+    		
+    		nombre = n;
+			password = p;
+			rol = r;
+		} else {
+			throw new Error("El usuario "+n+" ya existe en el sistema.");
+		}
+    	
+    	
     }
 
     public String getNombre() 
