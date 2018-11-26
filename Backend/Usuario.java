@@ -6,11 +6,26 @@ public class Usuario
     private static String BD_SERVER = "localhost";
     private static String BD_NAME = "ACOES";
     
-    private String nombre;
+    private String usuario;
     private String password;
-    private String numeroDocumento;
-    private String numeroTelefono;
     private Rol rol;
+    private int numSocio;
+    private String nombre;
+    private String apellidos;
+    private String estado;
+    private String nif;
+    private String direccion;
+    private int codigoPostal;
+    private String provincia;
+    private String telefonoFijo;
+    private String telefonoMovil;
+    private String email;
+    private String relacion;
+    private boolean certificado;
+    private String sector;
+    private String fechaAlta;
+    private String fechaBaja;
+    private String observaciones;
 
 	public static List<Usuario> ListaUsuarios()
 	{
