@@ -24,7 +24,6 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	public static JTextField textField;
 	public static JPasswordField passwordField;
-
 	public Login() {
 		setTitle("Inicio de sesion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +62,7 @@ public class Login extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(168, 140, 122, 20);
 		contentPane.add(passwordField);
+		
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 12));
