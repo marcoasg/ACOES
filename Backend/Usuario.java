@@ -7,7 +7,7 @@ public class Usuario
     private static String BD_NAME = "ACOES";
     
     private String usuario;
-    private char[] password;
+    private String password;
     private Rol rol;
     private int numSocio;
     private String nombre;
@@ -35,7 +35,7 @@ public class Usuario
 		
 		for(Object[] tupla: miBD.Select("SELECT * FROM tUsuario;"))
 		{
-			Usuario r = new Usuario( (String)tupla[0], (char[])tupla[1],new Rol((String)tupla[2]) );
+			Usuario r = new Usuario( (String)tupla[0], (String)tupla[1],new Rol((String)tupla[2]) );
 			lista.add(r);
 		}
 		return lista;
@@ -61,13 +61,13 @@ public class Usuario
     	}else {
     		Object[] tupla = lista.get(0);
         	usuario = (String)tupla[0];
-        	password = (char[])tupla[1];
-            rol = new Rol((String)tupla[2]);
+        	password = (String)tupla[1];
+            rol = new Rol((String)tupla[3]);
     	}
         
     }
     
-    public Usuario(String n, char[] p, Rol r)
+    public Usuario(String n, String p, Rol r)
     {
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME);
@@ -112,12 +112,12 @@ public class Usuario
     	rol = null;
     	
     }
-    public char[] getPassword() 
+    public String getPassword() 
     { 
     	return password; 
     }
         
-    public void setPassword (char[] value)
+    public void setPassword (String value)
     { 
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);

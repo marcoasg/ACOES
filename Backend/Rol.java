@@ -35,8 +35,8 @@ public class Rol
     	
     	rolName = (String)tupla[0];
     	rolDes = (String)tupla[1];
-        admin = (Boolean)tupla[2];
-        permisos = null;
+        admin = tupla[2] == null ? false : true;
+        permisos = new ArrayList<Permiso>();
     }
     
     public Rol(String name, String des, boolean adm)
