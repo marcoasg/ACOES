@@ -70,7 +70,10 @@ public class Login extends JFrame {
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Usuario user = new Usuario(textField.getText(),passwordField.getPassword().toString());
+					Usuario user = new Usuario(textField.getText(),passwordField.getPassword());
+					General hall = new General(user);
+					hall.setVisible(true);
+					dispose();
 				} catch (Error e) {
 					// TODO Auto-generated catch block
 					label_1.setText(e.getMessage());
