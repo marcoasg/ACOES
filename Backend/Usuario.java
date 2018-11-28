@@ -73,7 +73,7 @@ public class Usuario
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	
     	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
-			miBD.Insert("INSERT into tUsuario values('"+n+"','"+p+"','"+r.getRolName()+"');");
+			miBD.Insert("INSERT into tUsuario values('"+n+"','"+new String(p)+"','"+r.getRolName()+"');");
     		
     		usuario = n;
 			password = p;
@@ -106,7 +106,7 @@ public class Usuario
 		// Actualiza el atributo en memoria y en la base de datos
     	
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Delete("DELETE FROM tUsuario WHERE usuario = '" + usuario + "' and password = '" + password +  "';");
+    	miBD.Delete("DELETE FROM tUsuario WHERE usuario = '" + usuario + "' and password = '" + new String(password) +  "';");
     	usuario = null;
     	password = null;
     	rol = null;
@@ -121,7 +121,7 @@ public class Usuario
     { 
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set password = '" + value + "' WHERE usuario = '" + usuario + "';");
+    	miBD.Update("UPDATE tUsuario set password = '" + new String(value) + "' WHERE usuario = '" + usuario + "';");
     	password = value;
     }
 
@@ -163,7 +163,7 @@ public class Usuario
 	public String toString()
 	{
 	
-		return usuario + "\t" + password + "\t" + rol.getRolName();
+		return usuario + "\t" + new String (password) + "\t" + rol.getRolName();
 	}
 
 	public String getUsuario() {
