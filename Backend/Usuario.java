@@ -54,7 +54,7 @@ public class Usuario
     	
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	List<Object[]> lista = miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"
-    			+ n + "' and password = '" + "';");
+    			+ n + "' AND password = '" + new String(p) +"';");
     	
     	if (lista.isEmpty()) {
     		throw new Error("El usuario no existe.");
@@ -64,7 +64,7 @@ public class Usuario
     		Object[] tupla = lista.get(0);
         	usuario = (String)tupla[0];
         	password = (char[])tupla[1];
-            rol = (Rol)tupla[2];
+            rol = new Rol((String)tupla[2]);
     	}
         
     }

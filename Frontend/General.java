@@ -21,6 +21,7 @@ import Backend.Usuario;
 import javax.swing.JComboBox;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JMenuBar;
 
 public class General extends JFrame {
 
@@ -35,10 +36,6 @@ public class General extends JFrame {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new MigLayout("", "[][][][][][][][][][][][grow]", "[][]"));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Perfil", "Cerrar sesi\u00F3n"}));
-		getContentPane().add(comboBox, "cell 11 0,growx");
-		
 		JButton btnUsuarios = new JButton("Usuarios");
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -47,6 +44,9 @@ public class General extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnCerrarSesin = new JButton("Cerrar sesi\u00F3n");
+		getContentPane().add(btnCerrarSesin, "cell 10 0");
 		getContentPane().add(btnUsuarios, "cell 0 1");
 	}
 }
