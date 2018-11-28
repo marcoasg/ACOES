@@ -57,10 +57,8 @@ public class Usuario
     			+ n + "' AND password = '" + new String(p) +"';");
     	
     	if (lista.isEmpty()) {
-    		throw new Error("El usuario no existe.");
-    	} else if ((char[])lista.get(0)[1] != p){
-    		throw new Error("Contraseña incorrecta.");
-    	} else {
+    		throw new Error("Usuario o contraseña incorrectos.");
+    	}else {
     		Object[] tupla = lista.get(0);
         	usuario = (String)tupla[0];
         	password = (char[])tupla[1];
