@@ -149,16 +149,6 @@ public class Usuario
     	}
 
     }
-
-    public boolean AccesoPantalla(String p)
-    {
-        return rol.Acceso(p);
-    }
-
-    public boolean ModificaPantalla(String p)
-    {
-        return rol.Modificacion(p);
-    }
 	
 	public String toString()
 	{
@@ -175,7 +165,7 @@ public class Usuario
 	}
 
 	public int getNumSocio() {
-		return numSocio;
+		return numSocio == 0 ? -1 : numSocio;
 	}
 
 	public void setNumSocio(int numSocio) {
@@ -215,7 +205,7 @@ public class Usuario
 	}
 
 	public int getCodigoPostal() {
-		return codigoPostal;
+		return codigoPostal == 0 ? -1 : codigoPostal;
 	}
 
 	public void setCodigoPostal(int codigoPostal) {

@@ -8,9 +8,9 @@ public class Rol
     private static String BD_NAME = "ACOES";
     
     private String rolName;
+    // nivel 1 : Agente; nivel 2 : Coord local; nivel 3 : Admin y Coord general
+    private int nivel;
     private String rolDes;
-    private boolean admin;
-    private List<Permiso> permisos; //Lazzy
 
 	public static List<Rol> ListaRoles()
 	{ 
@@ -35,20 +35,18 @@ public class Rol
     	
     	rolName = (String)tupla[0];
     	rolDes = (String)tupla[1];
-        admin = tupla[2] == null ? false : true;
-        permisos = new ArrayList<Permiso>();
+        nivel = (Integer)tupla[2];
     }
     
-    public Rol(String name, String des, boolean adm)
+    public Rol(String name, String des, int nivel)
     {
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	miBD.Insert("INSERT INTO tRol VALUES('" + name +
-    			"', '" + des + "', " + (adm?1:0) + ");");
+    			"', '" + des + "', " + nivel + ");");
     	rolName = name;
         rolDes = des;
-        admin = adm;
-        permisos = null;
+        this.nivel = nivel;
     }
 	
     public String getRolName() 
@@ -79,58 +77,13 @@ public class Rol
     	this.rolDes = value;   
     }
 
-    public boolean getAdmin()
-    { 
-    	return admin; 
+    public int getNivel() {
+    	return nivel;
     }
     
-    public void setAdmin(boolean value)
-    {
-    	throw new Error("Un Rol no puede concederse permisos de administración a sí mismo.");
-    }
-    public void setAdmin(Rol other, boolean value)
-    {
-    	if (!admin) throw new Error("Rol sin permiso para establecer administradores.");
-
-		// Actualiza el atributo admin de other en memoria y en la base de datos
-    	BD miBD = new BD(BD_SERVER,BD_NAME);
-    	miBD.Update("UPDATE tRol SET admin = " + (value?1:0) 
-    			+ " WHERE rolName = '"+ other.rolName + "';");
-    	other.admin = value; 
+    public void setNivel(int niv) {
+    	nivel = niv;
     }
 
-    private List<Permiso> getPermisos()
-    {
-    	if (permisos == null) permisos = Permiso.ListaPermisosRol(this.rolName);
-    	return permisos;
-    }
-    
-    public boolean Acceso(String pantalla)
-    {
-        for (Permiso p : this.getPermisos())
-        {
-        	if (p.getPantalla().compareToIgnoreCase(pantalla)==0) 
-        		return p.getAcceso();
-        }
-        return false;
-    }
-
-    public boolean Modificacion(String pantalla)
-    {
-        for (Permiso p : this.getPermisos())
-        {
-            if (p.getPantalla().compareToIgnoreCase(pantalla)==0) 
-            	return p.getModificacion();
-        }
-        return false;
-    }
-
-    public void AddPermiso(Permiso p)
-    {
-        if (!this.getPermisos().contains(p))
-        {
-            permisos.add(p);
-        }
-    }
     
 }
