@@ -38,7 +38,7 @@ public class Usuarios extends JFrame {
 			i++;
 		}
 		
-		JList<String> list = new JList<>(usuarios);
+		JList list = new JList(usuarios);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(10, 11, 794, 96);
 		contentPane.add(list);
