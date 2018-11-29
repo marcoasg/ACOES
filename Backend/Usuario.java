@@ -48,6 +48,38 @@ public class Usuario
 		return resultado;
 	}
 	
+	public Usuario(String n) {
+    	BD miBD = new BD(BD_SERVER,BD_NAME);
+    	List<Object[]> lista = miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"
+    			+ n + "';");
+    	
+    	if (lista.isEmpty()) {
+    		throw new Error("Usuario o contraseña incorrectos.");
+    	}else {
+    		Object[] tupla = lista.get(0);
+        	usuario = (String)tupla[0];
+        	password = (String)tupla[1];
+        	numSocio = (Integer)tupla[2];
+            rol = new Rol((String)tupla[3]);
+            nombre = (String)tupla[4] == null ? "" : (String)tupla[4];
+            apellidos = (String)tupla[5] == null ? "" : (String)tupla[5];
+            estado = (String)tupla[6] == null ? "" : (String)tupla[6];
+            nif = (String)tupla[7] == null ? "" : (String)tupla[7];
+            direccion = (String)tupla[8] == null ? "" : (String)tupla[8];
+            codigoPostal = (Integer)tupla[9] == null ? -1 : (Integer)tupla[9];
+            provincia = (String)tupla[10] == null ? "" : (String)tupla[10];
+            telefonoFijo = (String)tupla[11] == null ? "" : (String)tupla[11];
+            telefonoMovil = (String)tupla[12] == null ? "" : (String)tupla[12];
+            email = (String)tupla[13] == null ? "" : (String)tupla[13];
+            relacion = (String)tupla[14] == null ? "" : (String)tupla[14];
+            certificado = (Integer)tupla[15] == 1 ? true : false;
+            sector = (String)tupla[16] == null ? "" : (String)tupla[16];
+            fechaAlta = (Date)tupla[17] == null ? new Date() : (Date)tupla[17];
+            fechaBaja = (Date)tupla[18] == null ? new Date() : (Date)tupla[18];
+            observaciones = (String)tupla[19] == null ? "" : (String)tupla[19];
+    	}
+	}
+	
     public Usuario(String n, char[] p)
     {
 		// Crea el objeto cargando sus valores de la base de datos

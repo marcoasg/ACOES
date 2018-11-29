@@ -6,10 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Backend.Usuario;
 import javax.swing.JList;
 import javax.swing.JSpinner;
+import javax.swing.ListSelectionModel;
 
 public class Usuarios extends JFrame {
 
@@ -36,7 +39,17 @@ public class Usuarios extends JFrame {
 		}
 		
 		JList list = new JList(usuarios);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(10, 11, 794, 96);
 		contentPane.add(list);
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				Usuario usuario = new Usuario((String) list.getSelectedValue());
+				if (user.getRol().getNivel() > usuario.getRol().getNivel()) {
+					//mostrar datos del usuario seleccionado
+				}
+				
+			}
+		});
 	}
 }
