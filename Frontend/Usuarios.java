@@ -16,6 +16,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Usuarios extends JFrame {
 
@@ -43,7 +45,7 @@ public class Usuarios extends JFrame {
 		
 		JList list = new JList(usuarios);
 		list.setBounds(10, 11, 794, 103);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		contentPane.add(list);
 		
 		JLabel label_1 = new JLabel("Datos del usuario ");
@@ -214,8 +216,26 @@ public class Usuarios extends JFrame {
 		contentPane.add(label_18);
 		
 		JButton btnRegistrarNuevoUsuario = new JButton("Registrar usuario");
+		btnRegistrarNuevoUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Registro reg = new Registro(user);
+				reg.setVisible(true);
+				dispose();
+			}
+		});
 		btnRegistrarNuevoUsuario.setBounds(441, 386, 150, 34);
 		contentPane.add(btnRegistrarNuevoUsuario);
+		
+		JButton btnMen = new JButton("Men\u00FA");
+		btnMen.setBounds(715, 420, 89, 23);
+		contentPane.add(btnMen);
+		btnMen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				General gen = new General(user);
+				gen.setVisible(true);
+				dispose();
+			}
+		});
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {

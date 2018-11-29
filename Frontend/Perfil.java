@@ -12,6 +12,9 @@ import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Perfil extends JFrame {
 
@@ -38,11 +41,12 @@ public class Perfil extends JFrame {
 	private JLabel label_9;
 	private JLabel lblEmail;
 	private JLabel label_10;
+	private JButton btnNewButton;
 	
 	public Perfil(Usuario u) {
 		setTitle("Perfil");
 		user = u;
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 470, 322);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -168,5 +172,17 @@ public class Perfil extends JFrame {
 		label_10.setBounds(167, 261, 257, 14);
 		contentPane.add(label_10);
 		label_10.setText(user.getEmail());
+		
+		btnNewButton = new JButton("Volver al men\u00FA");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				General gen = new General(user);
+				gen.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnNewButton.setBounds(342, 6, 112, 34);
+		contentPane.add(btnNewButton);
 	}
 }

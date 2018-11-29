@@ -1,4 +1,5 @@
 package Backend;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Usuario 
@@ -72,7 +73,9 @@ public class Usuario
             telefonoMovil = (String)tupla[12] == null ? "" : (String)tupla[12];
             email = (String)tupla[13] == null ? "" : (String)tupla[13];
             relacion = (String)tupla[14] == null ? "" : (String)tupla[14];
-            certificado = (Integer)tupla[15] == 1 ? true : false;
+            boolean esNull = tupla[15] == null ? true : false;
+            if (esNull) certificado = false;
+            if (!esNull) certificado = (Integer)tupla[15] == 1 ? true : false;
             sector = (String)tupla[16] == null ? "" : (String)tupla[16];
             fechaAlta = (Date)tupla[17] == null ? new Date() : (Date)tupla[17];
             fechaBaja = (Date)tupla[18] == null ? new Date() : (Date)tupla[18];
@@ -114,7 +117,9 @@ public class Usuario
             telefonoMovil = (String)tupla[12] == null ? "" : (String)tupla[12];
             email = (String)tupla[13] == null ? "" : (String)tupla[13];
             relacion = (String)tupla[14] == null ? "" : (String)tupla[14];
-            certificado = (Integer)tupla[15] == 1 ? true : false;
+            boolean esNull = tupla[15] == null ? true : false;
+            if (esNull) certificado = false;
+            if (!esNull) certificado = (Integer)tupla[15] == 1 ? true : false;
             sector = (String)tupla[16] == null ? "" : (String)tupla[16];
             fechaAlta = (Date)tupla[17] == null ? new Date() : (Date)tupla[17];
             fechaBaja = (Date)tupla[18] == null ? new Date() : (Date)tupla[18];
@@ -129,7 +134,7 @@ public class Usuario
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	
     	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
-			miBD.Insert("INSERT into tUsuario values('"+n+"','"+new String(p)+"','"+r.getRolName()+"');");
+			miBD.Insert("INSERT into tUsuario values('"+n+"','"+new String(p)+"','"+r.getRolName()+"',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);");
     		
     		usuario = n;
 			password = p;
@@ -151,7 +156,7 @@ public class Usuario
     	
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set usuario = '" + value + "' WHERE usuario = '" + usuario + "';");
+    	miBD.Update("UPDATE tUsuario set nombre = '" + value + "' WHERE usuario = '" + usuario + "';");
     	usuario = value;
     	
 
@@ -359,7 +364,8 @@ public class Usuario
 
 	public void setFechaAlta(Date fechaAlta) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set fechaAlta = '" + fechaAlta.toString() + "' WHERE usuario = '" + this.usuario + "';");
+    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+    	miBD.Update("UPDATE tUsuario set fechaAlta = '" + formatoDelTexto.format(fechaAlta) + "' WHERE usuario = '" + this.usuario + "';");
 		this.fechaAlta = fechaAlta;
 	}
 
@@ -369,7 +375,8 @@ public class Usuario
 
 	public void setFechaBaja(Date fechaBaja) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set fechaBaja = '" + fechaBaja.toString() + "' WHERE usuario = '" + this.usuario + "';");
+    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+    	miBD.Update("UPDATE tUsuario set fechaBaja = '" + formatoDelTexto.format(fechaBaja) + "' WHERE usuario = '" + this.usuario + "';");
 		this.fechaBaja = fechaBaja;
 	}
 

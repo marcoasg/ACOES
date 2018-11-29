@@ -20,8 +20,13 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Registro extends JFrame {
 
@@ -29,7 +34,6 @@ public class Registro extends JFrame {
 	Usuario user;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
@@ -49,7 +53,7 @@ public class Registro extends JFrame {
 	public Registro(Usuario u) {
 		setTitle("Registro");
 		user = u;
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 664, 463);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,10 +87,12 @@ public class Registro extends JFrame {
 		lblRol.setBounds(33, 121, 89, 14);
 		contentPane.add(lblRol);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(144, 118, 160, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Agt", "CoordLoc", "CoordGen", "Admin"}));
+		comboBox.setMaximumRowCount(4);
+		comboBox.setToolTipText("");
+		comboBox.setBounds(144, 117, 160, 22);
+		contentPane.add(comboBox);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(33, 146, 89, 14);
@@ -239,7 +245,7 @@ public class Registro extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Rol r = new Rol(textField_2.getText());
+					Rol r = new Rol((String)comboBox.getSelectedItem());
 					if (user.getRol().getNivel() <= r.getNivel()) {
 						JOptionPane.showMessageDialog(null, "No puede registrar un usuario con un rol superior al suyo.");
 					} else {
@@ -249,23 +255,41 @@ public class Registro extends JFrame {
 						u.setEstado(textField_5.getText());
 						u.setNif(textField_6.getText());
 						u.setDireccion(textField_7.getText());
-						u.setCodigoPostal(Integer.parseInt(textField_8.getText()));
+						if (textField_8.getText().length() != 0) u.setCodigoPostal(Integer.parseInt(textField_8.getText()));
 						u.setProvincia(textField_9.getText());
 						u.setTelefonoFijo(textField_10.getText());
 						u.setTelefonoMovil(textField_11.getText());
 						u.setEmail(textField_12.getText());
-						u.setRelacion(textField_12.getText());
-						boolean c = textField_13.getText() == "S" ? true : false;
+						u.setRelacion(textField_13.getText());
+						boolean c = textField_14.getText() == "S" ? true : false;
 						u.setCertificado(c);
-						u.setSector(textField_14.getText());
-						u.setFechaAlta(new Date(textField_15.getText()));
-						u.setFechaBaja(new Date(textField_16.getText()));
+						u.setSector(textField_15.getText());
+						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+						String strFecha = textField_16.getText();
+						String strFechaB = textField_17.getText();
+						Date fechaAlta = null;
+						Date fechaBaja = null;
+						try {
+							fechaAlta = formatoDelTexto.parse(strFecha);
+							fechaBaja = formatoDelTexto.parse(strFechaB);
+						} catch (ParseException e) {
+							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+						}
+						u.setFechaAlta(fechaAlta);
+						u.setFechaBaja(fechaBaja);
 						u.setObservaciones(textField_17.getText());
+						
+						JOptionPane.showMessageDialog(null, "Se ha registrado al usuario "+u.getNombre());
+						
 					 }
 				} catch (Error e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
+				} finally {
+					Usuarios us = new Usuarios(user);
+					us.setVisible(true);
+					dispose();
 				}
 			}
 		});
@@ -276,5 +300,18 @@ public class Registro extends JFrame {
 		JLabel lblValoresParaRol = new JLabel("Valores para rol: Admin,CoordGen,CoordLoc,Agt");
 		lblValoresParaRol.setBounds(144, 399, 259, 14);
 		contentPane.add(lblValoresParaRol);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Usuarios u = new Usuarios(user);
+				u.setVisible(true);
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(10, 388, 89, 23);
+		contentPane.add(btnCancelar);
+		
+
 	}
 }
