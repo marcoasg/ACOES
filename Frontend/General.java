@@ -16,7 +16,6 @@ import java.awt.Color;
 import Backend.Usuario;
 
 import javax.swing.JComboBox;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
@@ -39,7 +38,7 @@ public class General extends JFrame {
 		getContentPane().add(label);
 		
 		JButton btnUsuarios = new JButton("Usuarios");
-		btnUsuarios.setBounds(10, 51, 89, 23);
+		btnUsuarios.setBounds(10, 41, 89, 23);
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (user.getRol().getNivel() >= 2) {

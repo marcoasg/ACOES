@@ -30,7 +30,6 @@ public class Usuarios extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		Usuario[] lista = Usuario.ListaUsuarios();
 		String[] usuarios = new String[lista.length];
@@ -39,38 +38,52 @@ public class Usuarios extends JFrame {
 			usuarios[i] = us.getUsuario();
 			i++;
 		}
+		contentPane.setLayout(null);
 		
 		JList list = new JList(usuarios);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(10, 11, 794, 96);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		contentPane.add(list);
 		
 		JLabel label_1 = new JLabel("Datos del usuario ");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_1.setBounds(10, 118, 132, 14);
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		contentPane.add(label_1);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNombre.setBounds(10, 162, 132, 14);
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblNombre);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setFont(new Font("Tahoma",Font.BOLD,14));
 		lblNewLabel.setBounds(136, 118, 46, 14);
+		lblNewLabel.setFont(new Font("Tahoma",Font.BOLD,14));
 		contentPane.add(lblNewLabel);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(152, 162, 362, 14);
 		contentPane.add(label);
+		
+		JLabel lblApellidos = new JLabel("Apellidos:");
+		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblApellidos.setBounds(10, 187, 172, 14);
+		contentPane.add(lblApellidos);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setBounds(192, 187, 322, 14);
+		contentPane.add(label_2);
+		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				Usuario usuario = new Usuario((String) list.getSelectedValue());
 				if (user.getRol().getNivel() >= usuario.getRol().getNivel()) {
 					lblNewLabel.setText(usuario.getUsuario());
+					label.setText(usuario.getNombre());
+					label_2.setText(usuario.getApellidos());
 				}
 				
 			}
 		});
+
 	}
 }
