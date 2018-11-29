@@ -217,6 +217,8 @@ public class Usuario
 	}
 
 	public void setUsuario(String usuario) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set usuario = '" + usuario + "' WHERE usuario = '" + this.usuario + "';");
 		this.usuario = usuario;
 	}
 
@@ -225,6 +227,8 @@ public class Usuario
 	}
 
 	public void setNumSocio(int numSocio) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set numSocio = " + numSocio + " WHERE usuario = '" + this.usuario + "';");
 		this.numSocio = numSocio;
 	}
 
@@ -233,6 +237,8 @@ public class Usuario
 	}
 
 	public void setApellidos(String apellidos) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set apellidos = '" + apellidos + "' WHERE usuario = '" + this.usuario + "';");
 		this.apellidos = apellidos;
 	}
 
@@ -241,6 +247,8 @@ public class Usuario
 	}
 
 	public void setEstado(String estado) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set estado = '" + estado + "' WHERE usuario = '" + this.usuario + "';");
 		this.estado = estado;
 	}
 
@@ -249,6 +257,8 @@ public class Usuario
 	}
 
 	public void setNif(String nif) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set nif = '" + nif + "' WHERE usuario = '" + this.usuario + "';");
 		this.nif = nif;
 	}
 
@@ -257,6 +267,8 @@ public class Usuario
 	}
 
 	public void setDireccion(String direccion) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set direccion = '" + direccion + "' WHERE usuario = '" + this.usuario + "';");
 		this.direccion = direccion;
 	}
 
@@ -265,6 +277,8 @@ public class Usuario
 	}
 
 	public void setCodigoPostal(int codigoPostal) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set codigoPostal = " + codigoPostal + " WHERE usuario = '" + this.usuario + "';");
 		this.codigoPostal = codigoPostal;
 	}
 
@@ -273,6 +287,8 @@ public class Usuario
 	}
 
 	public void setProvincia(String provincia) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set provincia = '" + provincia + "' WHERE usuario = '" + this.usuario + "';");
 		this.provincia = provincia;
 	}
 
@@ -281,6 +297,8 @@ public class Usuario
 	}
 
 	public void setTelefonoFijo(String telefonoFijo) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set telefonoFijo = '" + telefonoFijo + "' WHERE usuario = '" + this.usuario + "';");
 		this.telefonoFijo = telefonoFijo;
 	}
 
@@ -289,6 +307,8 @@ public class Usuario
 	}
 
 	public void setTelefonoMovil(String telefonoMovil) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set telefonoMovil = '" + telefonoMovil + "' WHERE usuario = '" + this.usuario + "';");
 		this.telefonoMovil = telefonoMovil;
 	}
 
@@ -297,6 +317,8 @@ public class Usuario
 	}
 
 	public void setEmail(String email) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set email = '" + email + "' WHERE usuario = '" + this.usuario + "';");
 		this.email = email;
 	}
 
@@ -305,6 +327,8 @@ public class Usuario
 	}
 
 	public void setRelacion(String relacion) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set relacion = '" + relacion + "' WHERE usuario = '" + this.usuario + "';");
 		this.relacion = relacion;
 	}
 
@@ -313,6 +337,9 @@ public class Usuario
 	}
 
 	public void setCertificado(boolean certificado) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	int cert = certificado ? 1 : 0;
+    	miBD.Update("UPDATE tUsuario set certificado = " + cert + " WHERE usuario = '" + this.usuario + "';");
 		this.certificado = certificado;
 	}
 
@@ -321,6 +348,8 @@ public class Usuario
 	}
 
 	public void setSector(String sector) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set sector = '" + sector + "' WHERE usuario = '" + this.usuario + "';");
 		this.sector = sector;
 	}
 
@@ -329,6 +358,8 @@ public class Usuario
 	}
 
 	public void setFechaAlta(Date fechaAlta) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set fechaAlta = '" + fechaAlta.toString() + "' WHERE usuario = '" + this.usuario + "';");
 		this.fechaAlta = fechaAlta;
 	}
 
@@ -337,6 +368,8 @@ public class Usuario
 	}
 
 	public void setFechaBaja(Date fechaBaja) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set fechaBaja = '" + fechaBaja.toString() + "' WHERE usuario = '" + this.usuario + "';");
 		this.fechaBaja = fechaBaja;
 	}
 
@@ -345,6 +378,8 @@ public class Usuario
 	}
 
 	public void setObservaciones(String observaciones) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set observaciones = '" + observaciones + "' WHERE usuario = '" + this.usuario + "';");
 		this.observaciones = observaciones;
 	}
 

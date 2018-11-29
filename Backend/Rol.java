@@ -28,6 +28,9 @@ public class Rol
 		
     public Rol(String name)
     {
+    	if (name != "Admin" && name != "CoordGen" && name != "CoordLoc" && name != "Agt") {
+    		throw new Error("El rol no es correcto.");
+    	}
 		// Crea el objeto cargando sus valores de la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	Object[] tupla = miBD.Select("SELECT * FROM tRol WHERE rolName = '"
