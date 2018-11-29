@@ -57,7 +57,7 @@ public class Usuarios extends JFrame {
 		contentPane.add(lblNombre);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(136, 118, 46, 14);
+		lblNewLabel.setBounds(136, 125, 172, 14);
 		lblNewLabel.setFont(new Font("Tahoma",Font.BOLD,14));
 		contentPane.add(lblNewLabel);
 		
@@ -213,7 +213,7 @@ public class Usuarios extends JFrame {
 		label_18.setBounds(435, 308, 334, 53);
 		contentPane.add(label_18);
 		
-		JButton btnRegistrarNuevoUsuario = new JButton("Registrar nuevo usuario");
+		JButton btnRegistrarNuevoUsuario = new JButton("Registrar usuario");
 		btnRegistrarNuevoUsuario.setBounds(441, 386, 150, 34);
 		contentPane.add(btnRegistrarNuevoUsuario);
 		
