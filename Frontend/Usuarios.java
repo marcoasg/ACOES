@@ -34,11 +34,11 @@ public class Usuarios extends JFrame {
 		String[] usuarios = new String[lista.length];
 		int i = 0;
 		for (Usuario us : lista) {
-			usuarios[i] = us.getNombre();
+			usuarios[i] = us.getUsuario();
 			i++;
 		}
 		
-		JList list = new JList(usuarios);
+		JList<String> list = new JList<>(usuarios);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(10, 11, 794, 96);
 		contentPane.add(list);
