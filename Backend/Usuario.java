@@ -55,31 +55,31 @@ public class Usuario
     			+ n + "';");
     	
     	if (lista.isEmpty()) {
-    		throw new Error("Usuario o contraseña incorrectos.");
+    		throw new Error("El usuario no existe en la base de datos.");
     	}else {
     		Object[] tupla = lista.get(0);
         	usuario = (String)tupla[0];
         	password = (String)tupla[1];
         	numSocio = (Integer)tupla[2];
             rol = new Rol((String)tupla[3]);
-            nombre = (String)tupla[4] == null ? "" : (String)tupla[4];
-            apellidos = (String)tupla[5] == null ? "" : (String)tupla[5];
-            estado = (String)tupla[6] == null ? "" : (String)tupla[6];
-            nif = (String)tupla[7] == null ? "" : (String)tupla[7];
+            nombre = tupla[4] == null ? "" : (String)tupla[4];
+            apellidos = tupla[5] == null ? "" : (String)tupla[5];
+            estado = tupla[6] == null ? "" : (String)tupla[6];
+            nif = tupla[7] == null ? "" : (String)tupla[7];
             direccion = (String)tupla[8] == null ? "" : (String)tupla[8];
-            codigoPostal = (Integer)tupla[9] == null ? -1 : (Integer)tupla[9];
-            provincia = (String)tupla[10] == null ? "" : (String)tupla[10];
-            telefonoFijo = (String)tupla[11] == null ? "" : (String)tupla[11];
-            telefonoMovil = (String)tupla[12] == null ? "" : (String)tupla[12];
-            email = (String)tupla[13] == null ? "" : (String)tupla[13];
-            relacion = (String)tupla[14] == null ? "" : (String)tupla[14];
+            codigoPostal = tupla[9] == null ? -1 : (Integer)tupla[9];
+            provincia = tupla[10] == null ? "" : (String)tupla[10];
+            telefonoFijo = tupla[11] == null ? "" : (String)tupla[11];
+            telefonoMovil = tupla[12] == null ? "" : (String)tupla[12];
+            email = tupla[13] == null ? "" : (String)tupla[13];
+            relacion = tupla[14] == null ? "" : (String)tupla[14];
             boolean esNull = tupla[15] == null ? true : false;
             if (esNull) certificado = false;
             if (!esNull) certificado = (Integer)tupla[15] == 1 ? true : false;
-            sector = (String)tupla[16] == null ? "" : (String)tupla[16];
-            fechaAlta = (Date)tupla[17] == null ? new Date() : (Date)tupla[17];
-            fechaBaja = (Date)tupla[18] == null ? new Date() : (Date)tupla[18];
-            observaciones = (String)tupla[19] == null ? "" : (String)tupla[19];
+            sector = tupla[16] == null ? "" : (String)tupla[16];
+            fechaAlta = tupla[17] == null ? new Date() : (Date)tupla[17];
+            fechaBaja = tupla[18] == null ? new Date() : (Date)tupla[18];
+            observaciones = tupla[19] == null ? "" : (String)tupla[19];
     	}
 	}
 	
@@ -160,7 +160,7 @@ public class Usuario
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	miBD.Update("UPDATE tUsuario set nombre = '" + value + "' WHERE usuario = '" + usuario + "';");
-    	usuario = value;
+    	nombre = value;
     	
 
     }

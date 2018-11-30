@@ -69,7 +69,7 @@ public class Usuarios extends JFrame {
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblApellidos.setBounds(10, 187, 172, 14);
+		lblApellidos.setBounds(10, 187, 79, 14);
 		contentPane.add(lblApellidos);
 		
 		JLabel label_2 = new JLabel("");
