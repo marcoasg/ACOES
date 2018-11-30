@@ -133,6 +133,9 @@ public class Usuario
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	
+    	if (n.length() <= 0 || p.length() <= 0 || r.getRolName().length() <= 0) {
+    		throw new Error("Rellene los campos obligatorios.");
+    	}
     	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
 			miBD.Insert("INSERT into tUsuario values('"+n+"','"+new String(p)+"','"+r.getRolName()+"',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);");
     		

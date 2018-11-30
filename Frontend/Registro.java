@@ -194,7 +194,7 @@ public class Registro extends JFrame {
 		textField_13.setColumns(10);
 		
 		JLabel lblCertificadosn = new JLabel("Certificado(S/N):");
-		lblCertificadosn.setBounds(348, 121, 89, 14);
+		lblCertificadosn.setBounds(348, 121, 99, 14);
 		contentPane.add(lblCertificadosn);
 		
 		textField_14 = new JTextField();
@@ -230,7 +230,7 @@ public class Registro extends JFrame {
 		textField_17.setColumns(10);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
-		lblObservaciones.setBounds(348, 221, 89, 14);
+		lblObservaciones.setBounds(348, 221, 99, 14);
 		contentPane.add(lblObservaciones);
 		
 		JTextPane textPane = new JTextPane();
@@ -238,7 +238,7 @@ public class Registro extends JFrame {
 		contentPane.add(textPane);
 		
 		JLabel lbllosCamposMarcados = new JLabel("*Los campos marcados con asterisco son obligatorios.");
-		lbllosCamposMarcados.setBounds(144, 374, 265, 14);
+		lbllosCamposMarcados.setBounds(144, 392, 265, 14);
 		contentPane.add(lbllosCamposMarcados);
 		
 		JButton btnNewButton = new JButton("Registrar");
@@ -277,9 +277,9 @@ public class Registro extends JFrame {
 						}
 						u.setFechaAlta(fechaAlta);
 						u.setFechaBaja(fechaBaja);
-						u.setObservaciones(textField_17.getText());
+						u.setObservaciones(textPane.getText());
 						
-						JOptionPane.showMessageDialog(null, "Se ha registrado al usuario "+u.getNombre());
+						JOptionPane.showMessageDialog(null, "Se ha registrado al usuario con éxito.");
 						
 					 }
 				} catch (Error e) {
@@ -296,10 +296,6 @@ public class Registro extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		btnNewButton.setBounds(447, 370, 160, 54);
 		contentPane.add(btnNewButton);
-		
-		JLabel lblValoresParaRol = new JLabel("Valores para rol: Admin,CoordGen,CoordLoc,Agt");
-		lblValoresParaRol.setBounds(144, 399, 259, 14);
-		contentPane.add(lblValoresParaRol);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {

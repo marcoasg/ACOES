@@ -41,13 +41,10 @@ public class General extends JFrame {
 		btnUsuarios.setBounds(10, 41, 89, 23);
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (user.getRol().getNivel() >= 2) {
+				
 					Usuarios usuarios = new Usuarios(user);
 					usuarios.setVisible(true);
 					dispose();
-				} else {
-					label.setText("No tiene permiso de acceso a 'Usuarios'.");
-				}
 			}
 		});
 		
@@ -62,13 +59,14 @@ public class General extends JFrame {
 		});
 		getContentPane().setLayout(null);
 		getContentPane().add(btnCerrarSesin);
-		getContentPane().add(btnUsuarios);
+		if (user.getRol().getNivel() >= 2) getContentPane().add(btnUsuarios);
 		
 		JButton btnPerfil = new JButton("Perfil");
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Perfil p = new Perfil(user);
 				p.setVisible(true);
+				dispose();
 			}
 		});
 		btnPerfil.setBounds(196, 7, 89, 23);
