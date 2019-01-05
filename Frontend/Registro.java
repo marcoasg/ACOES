@@ -44,7 +44,6 @@ public class Registro extends JFrame {
 	private JTextField textField_10;
 	private JTextField textField_11;
 	private JTextField textField_12;
-	private JTextField textField_13;
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
@@ -184,57 +183,48 @@ public class Registro extends JFrame {
 		contentPane.add(textField_12);
 		textField_12.setColumns(10);
 		
-		JLabel lblRelacin = new JLabel("Relaci\u00F3n:");
-		lblRelacin.setBounds(348, 96, 89, 14);
-		contentPane.add(lblRelacin);
-		
-		textField_13 = new JTextField();
-		textField_13.setBounds(447, 93, 160, 20);
-		contentPane.add(textField_13);
-		textField_13.setColumns(10);
-		
 		JLabel lblCertificadosn = new JLabel("Certificado(S/N):");
-		lblCertificadosn.setBounds(348, 121, 99, 14);
+		lblCertificadosn.setBounds(348, 99, 99, 14);
 		contentPane.add(lblCertificadosn);
 		
 		textField_14 = new JTextField();
-		textField_14.setBounds(447, 118, 160, 20);
+		textField_14.setBounds(447, 96, 160, 20);
 		contentPane.add(textField_14);
 		textField_14.setColumns(10);
 		
 		JLabel lblSector = new JLabel("Sector:");
-		lblSector.setBounds(348, 146, 89, 14);
+		lblSector.setBounds(348, 124, 89, 14);
 		contentPane.add(lblSector);
 		
 		textField_15 = new JTextField();
-		textField_15.setBounds(447, 143, 160, 20);
+		textField_15.setBounds(447, 121, 160, 20);
 		contentPane.add(textField_15);
 		textField_15.setColumns(10);
 		
 		JLabel lblFechaAltayyyymmdd = new JLabel("Fecha alta (YYYY-MM-DD):");
-		lblFechaAltayyyymmdd.setBounds(348, 171, 138, 14);
+		lblFechaAltayyyymmdd.setBounds(348, 149, 138, 14);
 		contentPane.add(lblFechaAltayyyymmdd);
 		
 		textField_16 = new JTextField();
-		textField_16.setBounds(496, 168, 111, 20);
+		textField_16.setBounds(496, 146, 111, 20);
 		contentPane.add(textField_16);
 		textField_16.setColumns(10);
 		
 		JLabel lblFechaBajayyyymmdd = new JLabel("Fecha baja (YYYY-MM-DD):");
-		lblFechaBajayyyymmdd.setBounds(348, 196, 138, 14);
+		lblFechaBajayyyymmdd.setBounds(348, 174, 138, 14);
 		contentPane.add(lblFechaBajayyyymmdd);
 		
 		textField_17 = new JTextField();
-		textField_17.setBounds(496, 193, 111, 20);
+		textField_17.setBounds(496, 171, 111, 20);
 		contentPane.add(textField_17);
 		textField_17.setColumns(10);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
-		lblObservaciones.setBounds(348, 221, 99, 14);
+		lblObservaciones.setBounds(348, 196, 99, 14);
 		contentPane.add(lblObservaciones);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(348, 246, 259, 113);
+		textPane.setBounds(348, 221, 259, 99);
 		contentPane.add(textPane);
 		
 		JLabel lbllosCamposMarcados = new JLabel("*Los campos marcados con asterisco son obligatorios.");
@@ -260,7 +250,6 @@ public class Registro extends JFrame {
 						u.setTelefonoFijo(textField_10.getText());
 						u.setTelefonoMovil(textField_11.getText());
 						u.setEmail(textField_12.getText());
-						u.setRelacion(textField_13.getText());
 						boolean c = textField_14.getText() == "S" ? true : false;
 						u.setCertificado(c);
 						u.setSector(textField_15.getText());
@@ -294,7 +283,7 @@ public class Registro extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		btnNewButton.setBounds(447, 370, 160, 54);
+		btnNewButton.setBounds(447, 346, 160, 54);
 		contentPane.add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar");

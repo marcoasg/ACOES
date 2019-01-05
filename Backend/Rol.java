@@ -7,9 +7,21 @@ public class Rol
     private static String BD_SERVER = "localhost";
     private static String BD_NAME = "ACOES";
     
+    /*
+     * Posibles nombres para el rol según el país:
+     * España:
+     * 	Agente
+     * 	CoordinadorLocal
+     *	CoordinadorGeneral
+     * Honduras:
+     * 	CoordinadorLocal
+     * 	CoordinadorProyecto
+     * 	CoordinadorGeneral
+     * */
+    
     private String rolName;
-    // nivel 1 : Agente; nivel 2 : Coord local; nivel 3 : Admin y Coord general
     private int nivel;
+    private String pais;
     private String rolDes;
 
 	public static List<Rol> ListaRoles()
@@ -36,17 +48,22 @@ public class Rol
     	rolName = (String)tupla[0];
     	rolDes = (String)tupla[1];
         nivel = (Integer)tupla[2];
+        pais = (String)tupla[3];
     }
     
-    public Rol(String name, String des, int nivel)
+    public Rol(String name, String des, int nivel, String pais)
     {
 		// Crea el objeto y lo inserta en la base de datos
+    	if ((name == "Agente" && pais == "Honduras") || (name == "CoordinadorProyecto" && pais == "España"))
+    		throw new Error("Este rol no es válido para el pais escogido.");
+    	
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	miBD.Insert("INSERT INTO tRol VALUES('" + name +
-    			"', '" + des + "', " + nivel + ");");
+    			"', '" + des + "', " + nivel + ",'"+pais+"');");
     	rolName = name;
         rolDes = des;
         this.nivel = nivel;
+        this.pais = pais;
     }
 	
     public String getRolName() 
@@ -57,6 +74,9 @@ public class Rol
     public void setRolName(String value) 
     { 
 		// Actualiza el atributo en memoria y en la base de datos
+    	if ((value == "Agente" && pais == "Honduras") || (value == "CoordinadorProyecto" && pais == "España"))
+    		throw new Error("Este rol no es válido para tu pais.");
+    	
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	miBD.Update("UPDATE tRol SET rolName = '" + value 
     			+ "' WHERE rolName = '"+ this.rolName + "';");
@@ -85,5 +105,7 @@ public class Rol
     	nivel = niv;
     }
 
-    
+	public String getPais() {
+		return pais;
+	} 
 }

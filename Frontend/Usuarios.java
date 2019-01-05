@@ -76,111 +76,97 @@ public class Usuarios extends JFrame {
 		label_2.setBounds(105, 187, 320, 14);
 		contentPane.add(label_2);
 		
-		JLabel lblNSocio = new JLabel("N\u00BA Socio:");
-		lblNSocio.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNSocio.setBounds(10, 215, 79, 14);
-		contentPane.add(lblNSocio);
-		
-		JLabel label_3 = new JLabel("");
-		label_3.setBounds(105, 215, 322, 14);
-		contentPane.add(label_3);
-		
 		JLabel lblRol = new JLabel("Rol:");
 		lblRol.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRol.setBounds(10, 240, 46, 14);
+		lblRol.setBounds(10, 212, 46, 14);
 		contentPane.add(lblRol);
 		
 		JLabel label_4 = new JLabel("");
-		label_4.setBounds(105, 240, 322, 14);
+		label_4.setBounds(105, 212, 322, 14);
 		contentPane.add(label_4);
 		
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEstado.setBounds(10, 265, 46, 14);
+		lblEstado.setBounds(10, 237, 46, 14);
 		contentPane.add(lblEstado);
 		
 		JLabel label_5 = new JLabel("");
-		label_5.setBounds(105, 265, 322, 14);
+		label_5.setBounds(105, 237, 322, 14);
 		contentPane.add(label_5);
 		
 		JLabel lblNif = new JLabel("NIF:");
 		lblNif.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNif.setBounds(10, 290, 46, 14);
+		lblNif.setBounds(10, 262, 46, 14);
 		contentPane.add(lblNif);
 		
 		JLabel lblDireccion = new JLabel("Direccion:");
 		lblDireccion.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblDireccion.setBounds(10, 315, 79, 14);
+		lblDireccion.setBounds(10, 287, 79, 14);
 		contentPane.add(lblDireccion);
 		
 		JLabel lblCodigoPostal = new JLabel("Codigo Postal:");
 		lblCodigoPostal.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCodigoPostal.setBounds(10, 340, 79, 14);
+		lblCodigoPostal.setBounds(10, 312, 79, 14);
 		contentPane.add(lblCodigoPostal);
 		
 		JLabel lblProvincia = new JLabel("Provincia:");
 		lblProvincia.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblProvincia.setBounds(10, 365, 79, 14);
+		lblProvincia.setBounds(10, 337, 79, 14);
 		contentPane.add(lblProvincia);
 		
 		JLabel lblTelefonoFijomovil = new JLabel("Telefono Fijo/Movil:");
 		lblTelefonoFijomovil.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTelefonoFijomovil.setBounds(10, 390, 132, 14);
+		lblTelefonoFijomovil.setBounds(10, 362, 132, 14);
 		contentPane.add(lblTelefonoFijomovil);
 		
 		JLabel lblEmail = new JLabel("E_mail:");
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmail.setBounds(10, 415, 46, 14);
+		lblEmail.setBounds(10, 387, 46, 14);
 		contentPane.add(lblEmail);
-		
-		JLabel lblRelacin = new JLabel("Relaci\u00F3n:");
-		lblRelacin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRelacin.setBounds(435, 162, 79, 14);
-		contentPane.add(lblRelacin);
 		
 		JLabel lblCertificado = new JLabel("Certificado:");
 		lblCertificado.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCertificado.setBounds(435, 187, 95, 14);
+		lblCertificado.setBounds(435, 162, 95, 14);
 		contentPane.add(lblCertificado);
 		
 		JLabel lblSector = new JLabel("Sector:");
 		lblSector.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSector.setBounds(435, 215, 46, 14);
+		lblSector.setBounds(435, 190, 46, 14);
 		contentPane.add(lblSector);
 		
 		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
 		lblFechaDeAlta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaDeAlta.setBounds(435, 240, 95, 14);
+		lblFechaDeAlta.setBounds(435, 215, 95, 14);
 		contentPane.add(lblFechaDeAlta);
 		
 		JLabel lblFechaDeBaja = new JLabel("Fecha de Baja:");
 		lblFechaDeBaja.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaDeBaja.setBounds(435, 265, 95, 14);
+		lblFechaDeBaja.setBounds(435, 240, 95, 14);
 		contentPane.add(lblFechaDeBaja);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblObservaciones.setBounds(435, 290, 95, 14);
+		lblObservaciones.setBounds(435, 265, 95, 14);
 		contentPane.add(lblObservaciones);
 		
 		JLabel label_6 = new JLabel("");
-		label_6.setBounds(105, 290, 320, 14);
+		label_6.setBounds(105, 262, 320, 14);
 		contentPane.add(label_6);
 		
 		JLabel label_7 = new JLabel("");
-		label_7.setBounds(105, 315, 320, 14);
+		label_7.setBounds(105, 287, 320, 14);
 		contentPane.add(label_7);
 		
 		JLabel label_8 = new JLabel("");
-		label_8.setBounds(105, 340, 320, 14);
+		label_8.setBounds(105, 312, 320, 14);
 		contentPane.add(label_8);
 		
 		JLabel label_9 = new JLabel("");
-		label_9.setBounds(105, 365, 320, 14);
+		label_9.setBounds(105, 337, 320, 14);
 		contentPane.add(label_9);
 		
 		JLabel label_10 = new JLabel("");
-		label_10.setBounds(136, 390, 132, 14);
+		label_10.setBounds(136, 362, 132, 14);
 		contentPane.add(label_10);
 		
 		JLabel label_11 = new JLabel("");
@@ -188,31 +174,27 @@ public class Usuarios extends JFrame {
 		contentPane.add(label_11);
 		
 		JLabel label_12 = new JLabel("");
-		label_12.setBounds(105, 415, 320, 14);
+		label_12.setBounds(105, 387, 320, 14);
 		contentPane.add(label_12);
 		
-		JLabel label_13 = new JLabel("");
-		label_13.setBounds(524, 162, 267, 14);
-		contentPane.add(label_13);
-		
 		JLabel label_14 = new JLabel("");
-		label_14.setBounds(524, 187, 267, 14);
+		label_14.setBounds(524, 162, 267, 14);
 		contentPane.add(label_14);
 		
 		JLabel label_15 = new JLabel("");
-		label_15.setBounds(524, 215, 267, 14);
+		label_15.setBounds(524, 190, 267, 14);
 		contentPane.add(label_15);
 		
 		JLabel label_16 = new JLabel("");
-		label_16.setBounds(524, 240, 267, 14);
+		label_16.setBounds(524, 215, 267, 14);
 		contentPane.add(label_16);
 		
 		JLabel label_17 = new JLabel("");
-		label_17.setBounds(524, 265, 267, 14);
+		label_17.setBounds(524, 240, 267, 14);
 		contentPane.add(label_17);
 		
 		JLabel label_18 = new JLabel("");
-		label_18.setBounds(435, 308, 334, 53);
+		label_18.setBounds(435, 283, 334, 53);
 		contentPane.add(label_18);
 		
 		JButton btnRegistrarNuevoUsuario = new JButton("Registrar usuario");
@@ -244,7 +226,6 @@ public class Usuarios extends JFrame {
 					lblNewLabel.setText(usuario.getUsuario());
 					label.setText(usuario.getNombre());
 					label_2.setText(usuario.getApellidos());
-					label_3.setText("" + usuario.getNumSocio());
 					label_4.setText(usuario.getRol().getRolName());
 					label_5.setText(usuario.getEstado());
 					label_6.setText(usuario.getNif());
@@ -254,7 +235,6 @@ public class Usuarios extends JFrame {
 					label_10.setText(usuario.getTelefonoFijo());
 					label_11.setText(usuario.getTelefonoMovil());
 					label_12.setText(usuario.getEmail());
-					label_13.setText(usuario.getRelacion());
 					label_14.setText(usuario.isCertificado() ? "Sí" : "No");
 					label_15.setText(usuario.getSector());
 					label_16.setText(usuario.getFechaAlta().toString());

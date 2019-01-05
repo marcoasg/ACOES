@@ -10,7 +10,6 @@ public class Usuario
     private String usuario;
     private String password;
     private Rol rol;
-    private int numSocio;
     private String nombre;
     private String apellidos;
     private String estado;
@@ -21,7 +20,6 @@ public class Usuario
     private String telefonoFijo;
     private String telefonoMovil;
     private String email;
-    private String relacion;
     private boolean certificado;
     private String sector;
     private Date fechaAlta;
@@ -60,26 +58,24 @@ public class Usuario
     		Object[] tupla = lista.get(0);
         	usuario = (String)tupla[0];
         	password = (String)tupla[1];
-        	numSocio = (Integer)tupla[2];
-            rol = new Rol((String)tupla[3]);
-            nombre = tupla[4] == null ? "" : (String)tupla[4];
-            apellidos = tupla[5] == null ? "" : (String)tupla[5];
-            estado = tupla[6] == null ? "" : (String)tupla[6];
-            nif = tupla[7] == null ? "" : (String)tupla[7];
-            direccion = (String)tupla[8] == null ? "" : (String)tupla[8];
-            codigoPostal = tupla[9] == null ? -1 : (Integer)tupla[9];
-            provincia = tupla[10] == null ? "" : (String)tupla[10];
-            telefonoFijo = tupla[11] == null ? "" : (String)tupla[11];
-            telefonoMovil = tupla[12] == null ? "" : (String)tupla[12];
-            email = tupla[13] == null ? "" : (String)tupla[13];
-            relacion = tupla[14] == null ? "" : (String)tupla[14];
-            boolean esNull = tupla[15] == null ? true : false;
+            rol = new Rol((String)tupla[2]);
+            nombre = tupla[3] == null ? "" : (String)tupla[3];
+            apellidos = tupla[4] == null ? "" : (String)tupla[4];
+            estado = tupla[5] == null ? "" : (String)tupla[5];
+            nif = tupla[6] == null ? "" : (String)tupla[6];
+            direccion = (String)tupla[7] == null ? "" : (String)tupla[7];
+            codigoPostal = tupla[8] == null ? -1 : (Integer)tupla[8];
+            provincia = tupla[9] == null ? "" : (String)tupla[9];
+            telefonoFijo = tupla[10] == null ? "" : (String)tupla[10];
+            telefonoMovil = tupla[11] == null ? "" : (String)tupla[11];
+            email = tupla[12] == null ? "" : (String)tupla[12];
+            boolean esNull = tupla[13] == null ? true : false;
             if (esNull) certificado = false;
-            if (!esNull) certificado = (Integer)tupla[15] == 1 ? true : false;
-            sector = tupla[16] == null ? "" : (String)tupla[16];
-            fechaAlta = tupla[17] == null ? new Date() : (Date)tupla[17];
-            fechaBaja = tupla[18] == null ? new Date() : (Date)tupla[18];
-            observaciones = tupla[19] == null ? "" : (String)tupla[19];
+            if (!esNull) certificado = (Integer)tupla[13] == 1 ? true : false;
+            sector = tupla[14] == null ? "" : (String)tupla[14];
+            fechaAlta = tupla[15] == null ? null : (Date)tupla[15];
+            fechaBaja = tupla[16] == null ? null : (Date)tupla[16];
+            observaciones = tupla[17] == null ? "" : (String)tupla[17];
     	}
 	}
 	
@@ -104,26 +100,24 @@ public class Usuario
     		Object[] tupla = lista.get(0);
         	usuario = (String)tupla[0];
         	password = (String)tupla[1];
-        	numSocio = (Integer)tupla[2];
-            rol = new Rol((String)tupla[3]);
-            nombre = (String)tupla[4] == null ? "" : (String)tupla[4];
-            apellidos = (String)tupla[5] == null ? "" : (String)tupla[5];
-            estado = (String)tupla[6] == null ? "" : (String)tupla[6];
-            nif = (String)tupla[7] == null ? "" : (String)tupla[7];
-            direccion = (String)tupla[8] == null ? "" : (String)tupla[8];
-            codigoPostal = (Integer)tupla[9] == null ? -1 : (Integer)tupla[9];
-            provincia = (String)tupla[10] == null ? "" : (String)tupla[10];
-            telefonoFijo = (String)tupla[11] == null ? "" : (String)tupla[11];
-            telefonoMovil = (String)tupla[12] == null ? "" : (String)tupla[12];
-            email = (String)tupla[13] == null ? "" : (String)tupla[13];
-            relacion = (String)tupla[14] == null ? "" : (String)tupla[14];
-            boolean esNull = tupla[15] == null ? true : false;
+            rol = new Rol((String)tupla[2]);
+            nombre = (String)tupla[3] == null ? "" : (String)tupla[3];
+            apellidos = (String)tupla[4] == null ? "" : (String)tupla[4];
+            estado = (String)tupla[5] == null ? "" : (String)tupla[5];
+            nif = (String)tupla[6] == null ? "" : (String)tupla[6];
+            direccion = (String)tupla[7] == null ? "" : (String)tupla[7];
+            codigoPostal = (Integer)tupla[8] == null ? -1 : (Integer)tupla[8];
+            provincia = (String)tupla[9] == null ? "" : (String)tupla[9];
+            telefonoFijo = (String)tupla[10] == null ? "" : (String)tupla[10];
+            telefonoMovil = (String)tupla[11] == null ? "" : (String)tupla[11];
+            email = (String)tupla[12] == null ? "" : (String)tupla[12];
+            boolean esNull = tupla[13] == null ? true : false;
             if (esNull) certificado = false;
-            if (!esNull) certificado = (Integer)tupla[15] == 1 ? true : false;
-            sector = (String)tupla[16] == null ? "" : (String)tupla[16];
-            fechaAlta = (Date)tupla[17] == null ? new Date() : (Date)tupla[17];
-            fechaBaja = (Date)tupla[18] == null ? new Date() : (Date)tupla[18];
-            observaciones = (String)tupla[19] == null ? "" : (String)tupla[19];
+            if (!esNull) certificado = (Integer)tupla[13] == 1 ? true : false;
+            sector = (String)tupla[14] == null ? "" : (String)tupla[14];
+            fechaAlta = (Date)tupla[15] == null ? null : (Date)tupla[15];
+            fechaBaja = (Date)tupla[16] == null ? null : (Date)tupla[16];
+            observaciones = (String)tupla[17] == null ? "" : (String)tupla[17];
     	}
         
     }
@@ -230,16 +224,6 @@ public class Usuario
 		this.usuario = usuario;
 	}
 
-	public int getNumSocio() {
-		return numSocio == 0 ? -1 : numSocio;
-	}
-
-	public void setNumSocio(int numSocio) {
-    	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set numSocio = " + numSocio + " WHERE usuario = '" + this.usuario + "';");
-		this.numSocio = numSocio;
-	}
-
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -330,16 +314,6 @@ public class Usuario
 		this.email = email;
 	}
 
-	public String getRelacion() {
-		return relacion;
-	}
-
-	public void setRelacion(String relacion) {
-    	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set relacion = '" + relacion + "' WHERE usuario = '" + this.usuario + "';");
-		this.relacion = relacion;
-	}
-
 	public boolean isCertificado() {
 		return certificado;
 	}
@@ -391,9 +365,5 @@ public class Usuario
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	miBD.Update("UPDATE tUsuario set observaciones = '" + observaciones + "' WHERE usuario = '" + this.usuario + "';");
 		this.observaciones = observaciones;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
 	}
 }
