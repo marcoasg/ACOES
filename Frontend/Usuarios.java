@@ -11,6 +11,7 @@ import javax.swing.event.ListSelectionListener;
 
 import Backend.Usuario;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ public class Usuarios extends JFrame {
 
 	private JPanel contentPane;
 	Usuario user;
+	
 	public Usuarios(Usuario u) {
 		
 		JSpinner spinner = new JSpinner();
@@ -197,7 +199,8 @@ public class Usuarios extends JFrame {
 		label_18.setBounds(435, 283, 334, 53);
 		contentPane.add(label_18);
 		
-		JButton btnRegistrarNuevoUsuario = new JButton("Registrar usuario");
+		JButton btnRegistrarNuevoUsuario = new JButton("Registrar nuevo usuario");
+		btnRegistrarNuevoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistrarNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Registro reg = new Registro(user);
@@ -205,12 +208,25 @@ public class Usuarios extends JFrame {
 				dispose();
 			}
 		});
-		btnRegistrarNuevoUsuario.setBounds(441, 386, 150, 34);
+		btnRegistrarNuevoUsuario.setBounds(435, 352, 172, 49);
 		contentPane.add(btnRegistrarNuevoUsuario);
 		
 		JButton btnMen = new JButton("Men\u00FA");
 		btnMen.setBounds(715, 420, 89, 23);
 		contentPane.add(btnMen);
+		
+		JButton btnBorrarUsuario = new JButton("Desactivar usuario");
+		btnBorrarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Usuario usuario = new Usuario((String) list.getSelectedValue());
+				usuario.desactivaUsuario();
+				label_17.setText(usuario.getFechaBaja().toString());
+				JOptionPane.showMessageDialog(null, "Se ha dado de baja al usuario.");
+			}
+		});
+		btnBorrarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnBorrarUsuario.setBounds(435, 420, 172, 23);
+		contentPane.add(btnBorrarUsuario);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				General gen = new General(user);
@@ -237,8 +253,19 @@ public class Usuarios extends JFrame {
 					label_12.setText(usuario.getEmail());
 					label_14.setText(usuario.isCertificado() ? "Sí" : "No");
 					label_15.setText(usuario.getSector());
-					label_16.setText(usuario.getFechaAlta().toString());
-					label_17.setText(usuario.getFechaBaja().toString());
+					
+					if (usuario.getFechaAlta() == null) {
+						label_16.setText("");
+					} else {
+						label_16.setText(usuario.getFechaAlta().toString());
+					}
+					
+					if (usuario.getFechaBaja() == null) {
+						label_17.setText("");
+					} else {
+						label_17.setText(usuario.getFechaBaja().toString());
+
+					}
 					label_18.setText(usuario.getObservaciones());
 				}
 				

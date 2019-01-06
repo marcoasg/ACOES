@@ -47,7 +47,6 @@ public class Registro extends JFrame {
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
-	private JTextField textField_17;
 	
 	public Registro(Usuario u) {
 		setTitle("Registro");
@@ -210,15 +209,6 @@ public class Registro extends JFrame {
 		contentPane.add(textField_16);
 		textField_16.setColumns(10);
 		
-		JLabel lblFechaBajayyyymmdd = new JLabel("Fecha baja (YYYY-MM-DD):");
-		lblFechaBajayyyymmdd.setBounds(348, 174, 138, 14);
-		contentPane.add(lblFechaBajayyyymmdd);
-		
-		textField_17 = new JTextField();
-		textField_17.setBounds(496, 171, 111, 20);
-		contentPane.add(textField_17);
-		textField_17.setColumns(10);
-		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setBounds(348, 196, 99, 14);
 		contentPane.add(lblObservaciones);
@@ -255,17 +245,13 @@ public class Registro extends JFrame {
 						u.setSector(textField_15.getText());
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textField_16.getText();
-						String strFechaB = textField_17.getText();
 						Date fechaAlta = null;
-						Date fechaBaja = null;
 						try {
 							fechaAlta = formatoDelTexto.parse(strFecha);
-							fechaBaja = formatoDelTexto.parse(strFechaB);
 						} catch (ParseException e) {
 							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
 						}
 						u.setFechaAlta(fechaAlta);
-						u.setFechaBaja(fechaBaja);
 						u.setObservaciones(textPane.getText());
 						
 						JOptionPane.showMessageDialog(null, "Se ha registrado al usuario con éxito.");

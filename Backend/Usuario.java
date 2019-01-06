@@ -35,7 +35,7 @@ public class Usuario
 		
 		for(Object[] tupla: miBD.Select("SELECT * FROM tUsuario;"))
 		{
-			Usuario r = new Usuario( (String)tupla[0], ((String)tupla[1]).toCharArray());
+			Usuario r = new Usuario( (String)tupla[0]);
 			lista.add(r);
 		}
 		resultado = new Usuario[lista.size()];
@@ -98,6 +98,10 @@ public class Usuario
     		throw new Error("Usuario o contraseña incorrectos.");
     	}else {
     		Object[] tupla = lista.get(0);
+    		
+    		if (tupla[16] != null)
+    			throw new Error("Usuario dado de baja.");
+    		
         	usuario = (String)tupla[0];
         	password = (String)tupla[1];
             rol = new Rol((String)tupla[2]);
@@ -131,7 +135,7 @@ public class Usuario
     		throw new Error("Rellene los campos obligatorios.");
     	}
     	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
-			miBD.Insert("INSERT into tUsuario values('"+n+"','"+new String(p)+"','"+r.getRolName()+"',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);");
+			miBD.Insert("INSERT into tUsuario values('"+n+"','"+p+"','"+r.getRolName()+"',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);");
     		
     		usuario = n;
 			password = p;
@@ -159,16 +163,16 @@ public class Usuario
 
     }
 
-    public void borraUsuario() 
+    public void desactivaUsuario() 
     {     	
 		// Actualiza el atributo en memoria y en la base de datos
     	
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Delete("DELETE FROM tUsuario WHERE usuario = '" + usuario + "' and password = '" + new String(password) +  "';");
-    	usuario = null;
-    	password = null;
-    	rol = null;
-    	
+    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+    	Date date = new Date();
+    	String fecha = formatoDelTexto.format(date);
+    	miBD.Update("UPDATE tUsuario set fechaBaja = '" + fecha + "' WHERE usuario = '" + this.usuario + "';");
+    	fechaBaja = date;
     }
     public String getPassword() 
     { 
@@ -348,13 +352,6 @@ public class Usuario
 
 	public Date getFechaBaja() {
 		return fechaBaja;
-	}
-
-	public void setFechaBaja(Date fechaBaja) {
-    	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tUsuario set fechaBaja = '" + formatoDelTexto.format(fechaBaja) + "' WHERE usuario = '" + this.usuario + "';");
-		this.fechaBaja = fechaBaja;
 	}
 
 	public String getObservaciones() {
