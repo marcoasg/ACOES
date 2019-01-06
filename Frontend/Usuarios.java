@@ -9,25 +9,49 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import Backend.Usuario;
+import Backend.*;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class Usuarios extends JFrame {
 
 	private JPanel contentPane;
 	Usuario user;
+	Usuario seleccionado;
+	private JTextField textNombre;
+	private JTextField textApellidos;
+	private JTextField textEstado;
+	private JTextField textNIF;
+	private JTextField textDireccion;
+	private JTextField textCP;
+	private JTextField textProvincia;
+	private JTextField textTelefono;
+	private JTextField textEmail;
+	private JTextField textCertificado;
+	private JTextField textSector;
+	private JTextField textFechaAlta;
+	private JTextField textFechaBaja;
+	private JTextField textObservaciones;
+	private JTextField textRol;
 	
 	public Usuarios(Usuario u) {
 		
 		JSpinner spinner = new JSpinner();
+		seleccionado = null;
 		getContentPane().add(spinner, BorderLayout.NORTH);
 		user = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,36 +89,20 @@ public class Usuarios extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma",Font.BOLD,14));
 		contentPane.add(lblNewLabel);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(105, 162, 320, 14);
-		contentPane.add(label);
-		
 		JLabel lblApellidos = new JLabel("Apellidos:");
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblApellidos.setBounds(10, 187, 79, 14);
 		contentPane.add(lblApellidos);
-		
-		JLabel label_2 = new JLabel("");
-		label_2.setBounds(105, 187, 320, 14);
-		contentPane.add(label_2);
 		
 		JLabel lblRol = new JLabel("Rol:");
 		lblRol.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRol.setBounds(10, 212, 46, 14);
 		contentPane.add(lblRol);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setBounds(105, 212, 322, 14);
-		contentPane.add(label_4);
-		
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEstado.setBounds(10, 237, 46, 14);
 		contentPane.add(lblEstado);
-		
-		JLabel label_5 = new JLabel("");
-		label_5.setBounds(105, 237, 322, 14);
-		contentPane.add(label_5);
 		
 		JLabel lblNif = new JLabel("NIF:");
 		lblNif.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -151,53 +159,9 @@ public class Usuarios extends JFrame {
 		lblObservaciones.setBounds(435, 265, 95, 14);
 		contentPane.add(lblObservaciones);
 		
-		JLabel label_6 = new JLabel("");
-		label_6.setBounds(105, 262, 320, 14);
-		contentPane.add(label_6);
-		
-		JLabel label_7 = new JLabel("");
-		label_7.setBounds(105, 287, 320, 14);
-		contentPane.add(label_7);
-		
-		JLabel label_8 = new JLabel("");
-		label_8.setBounds(105, 312, 320, 14);
-		contentPane.add(label_8);
-		
-		JLabel label_9 = new JLabel("");
-		label_9.setBounds(105, 337, 320, 14);
-		contentPane.add(label_9);
-		
-		JLabel label_10 = new JLabel("");
-		label_10.setBounds(136, 362, 132, 14);
-		contentPane.add(label_10);
-		
 		JLabel label_11 = new JLabel("");
 		label_11.setBounds(288, 390, 137, 14);
 		contentPane.add(label_11);
-		
-		JLabel label_12 = new JLabel("");
-		label_12.setBounds(105, 387, 320, 14);
-		contentPane.add(label_12);
-		
-		JLabel label_14 = new JLabel("");
-		label_14.setBounds(524, 162, 267, 14);
-		contentPane.add(label_14);
-		
-		JLabel label_15 = new JLabel("");
-		label_15.setBounds(524, 190, 267, 14);
-		contentPane.add(label_15);
-		
-		JLabel label_16 = new JLabel("");
-		label_16.setBounds(524, 215, 267, 14);
-		contentPane.add(label_16);
-		
-		JLabel label_17 = new JLabel("");
-		label_17.setBounds(524, 240, 267, 14);
-		contentPane.add(label_17);
-		
-		JLabel label_18 = new JLabel("");
-		label_18.setBounds(435, 283, 334, 53);
-		contentPane.add(label_18);
 		
 		JButton btnRegistrarNuevoUsuario = new JButton("Registrar nuevo usuario");
 		btnRegistrarNuevoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -208,25 +172,12 @@ public class Usuarios extends JFrame {
 				dispose();
 			}
 		});
-		btnRegistrarNuevoUsuario.setBounds(435, 352, 172, 49);
+		btnRegistrarNuevoUsuario.setBounds(500, 418, 191, 24);
 		contentPane.add(btnRegistrarNuevoUsuario);
 		
 		JButton btnMen = new JButton("Men\u00FA");
 		btnMen.setBounds(715, 420, 89, 23);
 		contentPane.add(btnMen);
-		
-		JButton btnBorrarUsuario = new JButton("Desactivar usuario");
-		btnBorrarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Usuario usuario = new Usuario((String) list.getSelectedValue());
-				usuario.desactivaUsuario();
-				label_17.setText(usuario.getFechaBaja().toString());
-				JOptionPane.showMessageDialog(null, "Se ha dado de baja al usuario.");
-			}
-		});
-		btnBorrarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrarUsuario.setBounds(435, 420, 172, 23);
-		contentPane.add(btnBorrarUsuario);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				General gen = new General(user);
@@ -235,38 +186,197 @@ public class Usuarios extends JFrame {
 			}
 		});
 		
+		JButton btnBorrarUsuario = new JButton("Desactivar usuario");
+		btnBorrarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Usuario usuario = new Usuario((String) list.getSelectedValue());
+				usuario.desactivaUsuario();
+				textFechaBaja.setText(usuario.getFechaBaja().toString());
+				JOptionPane.showMessageDialog(null, "Se ha dado de baja al usuario.");
+			}
+		});
+		btnBorrarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnBorrarUsuario.setBounds(285, 419, 172, 23);
+		contentPane.add(btnBorrarUsuario);
+		
+		textNombre = new JTextField();
+		textNombre.setBounds(135, 159, 239, 20);
+		contentPane.add(textNombre);
+		textNombre.setColumns(10);
+		
+		textApellidos = new JTextField();
+		textApellidos.setBounds(136, 184, 238, 20);
+		contentPane.add(textApellidos);
+		textApellidos.setColumns(10);
+		
+		textEstado = new JTextField();
+		textEstado.setBounds(136, 234, 238, 20);
+		contentPane.add(textEstado);
+		textEstado.setColumns(10);
+		
+		textNIF = new JTextField();
+		textNIF.setBounds(135, 259, 239, 20);
+		contentPane.add(textNIF);
+		textNIF.setColumns(10);
+		
+		textDireccion = new JTextField();
+		textDireccion.setBounds(136, 284, 238, 20);
+		contentPane.add(textDireccion);
+		textDireccion.setColumns(10);
+		
+		textCP = new JTextField();
+		textCP.setBounds(136, 309, 239, 20);
+		contentPane.add(textCP);
+		textCP.setColumns(10);
+		
+		textProvincia = new JTextField();
+		textProvincia.setBounds(136, 334, 239, 20);
+		contentPane.add(textProvincia);
+		textProvincia.setColumns(10);
+		
+		textTelefono = new JTextField();
+		textTelefono.setBounds(136, 359, 86, 20);
+		contentPane.add(textTelefono);
+		textTelefono.setColumns(10);
+		
+		textEmail = new JTextField();
+		textEmail.setBounds(135, 387, 239, 20);
+		contentPane.add(textEmail);
+		textEmail.setColumns(10);
+		
+		textCertificado = new JTextField();
+		textCertificado.setBounds(521, 159, 86, 20);
+		contentPane.add(textCertificado);
+		textCertificado.setColumns(10);
+		
+		textSector = new JTextField();
+		textSector.setBounds(521, 184, 86, 20);
+		contentPane.add(textSector);
+		textSector.setColumns(10);
+		
+		textFechaAlta = new JTextField();
+		textFechaAlta.setBounds(524, 209, 86, 20);
+		contentPane.add(textFechaAlta);
+		textFechaAlta.setColumns(10);
+		
+		textFechaBaja = new JTextField();
+		textFechaBaja.setBounds(521, 234, 86, 20);
+		contentPane.add(textFechaBaja);
+		textFechaBaja.setColumns(10);
+		
+		textObservaciones = new JTextField();
+		textObservaciones.setBounds(435, 284, 256, 57);
+		contentPane.add(textObservaciones);
+		textObservaciones.setColumns(10);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(seleccionado == null) {
+					
+				}else {
+					if(textNombre.getText() != seleccionado.getNombre()) {
+						seleccionado.setNombre(textNombre.getText());
+					}
+					if(textApellidos.getText() != seleccionado.getApellidos()) {
+						seleccionado.setApellidos(textApellidos.getText());
+					}
+					if(textRol.getText() != seleccionado.getRol().getRolName()) {
+						//user.ModiRol(seleccionado, new Rol(textRol.getText()));
+					}
+					if(textEstado.getText() != seleccionado.getEstado()) {
+						seleccionado.setEstado(textEstado.getText());
+					}
+					if(textNIF.getText() != seleccionado.getNif()) {
+						seleccionado.setNif(textNIF.getText());
+					}
+					if(textDireccion.getText() != seleccionado.getDireccion()) {
+						seleccionado.setDireccion(textDireccion.getText());
+					}
+					if(Integer.parseInt(textCP.getText()) != seleccionado.getCodigoPostal()) {
+						seleccionado.setCodigoPostal(Integer.parseInt(textCP.getText()));
+					}
+					if(textProvincia.getText() != seleccionado.getProvincia()) {
+						seleccionado.setProvincia(textProvincia.getText());
+					}
+					if(textTelefono.getText() != seleccionado.getTelefonoFijo()) {
+						seleccionado.setTelefonoFijo(textTelefono.getText());
+					}
+					if(textEmail.getText() != seleccionado.getEmail()) {
+						seleccionado.setEmail(textEmail.getText());
+					}
+					if(seleccionado.isCertificado() && textCertificado.getText() == "No") {
+						seleccionado.setCertificado(false);
+					}
+					if(!seleccionado.isCertificado() && textCertificado.getText() == "Si") {
+						seleccionado.setCertificado(true);
+					}
+					if(textSector.getText() != seleccionado.getSector()) {
+						seleccionado.setSector(textSector.getText());
+					}
+					if(textFechaAlta.getText() != seleccionado.getFechaAlta().toString() && textFechaAlta.getText() != "") {
+						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+						String strFecha = textFechaAlta.getText();
+						Date fechaAlta = null;
+						try {
+							fechaAlta = formatoDelTexto.parse(strFecha);
+						} catch (ParseException e) {
+							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+						}
+						u.setFechaAlta(fechaAlta);
+					}
+					if(textObservaciones.getText() != seleccionado.getObservaciones()) {
+						seleccionado.setObservaciones(textObservaciones.getText());
+					}
+					
+					JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
+					
+				}
+				
+			}
+		});
+		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnActualizar.setBounds(445, 352, 172, 49);
+		contentPane.add(btnActualizar);
+		
+		textRol = new JTextField();
+		textRol.setBounds(136, 209, 238, 20);
+		contentPane.add(textRol);
+		textRol.setColumns(10);
+		
+		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				Usuario usuario = new Usuario((String) list.getSelectedValue());
-				if (user.getRol().getNivel() >= usuario.getRol().getNivel()) {
-					lblNewLabel.setText(usuario.getUsuario());
-					label.setText(usuario.getNombre());
-					label_2.setText(usuario.getApellidos());
-					label_4.setText(usuario.getRol().getRolName());
-					label_5.setText(usuario.getEstado());
-					label_6.setText(usuario.getNif());
-					label_7.setText(usuario.getDireccion());
-					label_8.setText("" + usuario.getCodigoPostal());
-					label_9.setText(usuario.getProvincia());
-					label_10.setText(usuario.getTelefonoFijo());
-					label_11.setText(usuario.getTelefonoMovil());
-					label_12.setText(usuario.getEmail());
-					label_14.setText(usuario.isCertificado() ? "Sí" : "No");
-					label_15.setText(usuario.getSector());
+				seleccionado = new Usuario((String) list.getSelectedValue());
+				if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
+					lblNewLabel.setText(seleccionado.getUsuario());
+					textNombre.setText(seleccionado.getNombre());
+					textApellidos.setText(seleccionado.getApellidos());
+					textRol.setText(seleccionado.getRol().getRolName());
+					textEstado.setText(seleccionado.getEstado());
+					textNIF.setText(seleccionado.getNif());
+					textDireccion.setText(seleccionado.getDireccion());
+					textCP.setText("" + seleccionado.getCodigoPostal());
+					textProvincia.setText(seleccionado.getProvincia());
+					textTelefono.setText(seleccionado.getTelefonoFijo());
+					label_11.setText(seleccionado.getTelefonoMovil());
+					textEmail.setText(seleccionado.getEmail());
+					textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
+					textSector.setText(seleccionado.getSector());
 					
-					if (usuario.getFechaAlta() == null) {
-						label_16.setText("");
+					if (seleccionado.getFechaAlta() == null) {
+						textFechaAlta.setText("");
 					} else {
-						label_16.setText(usuario.getFechaAlta().toString());
+						textFechaAlta.setText(seleccionado.getFechaAlta().toString());
 					}
 					
-					if (usuario.getFechaBaja() == null) {
-						label_17.setText("");
+					if (seleccionado.getFechaBaja() == null) {
+						textFechaBaja.setText("");
 					} else {
-						label_17.setText(usuario.getFechaBaja().toString());
+						textFechaBaja.setText(seleccionado.getFechaBaja().toString());
 
 					}
-					label_18.setText(usuario.getObservaciones());
+					textObservaciones.setText(seleccionado.getObservaciones());
 				}
 				
 			}
