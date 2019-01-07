@@ -77,5 +77,16 @@ public class General extends JFrame {
 		lblMenu.setBounds(21, 16, 46, 14);
 		getContentPane().add(lblMenu);
 		
+		JButton btnSocios = new JButton("Socios");
+		btnSocios.setBounds(10, 77, 89, 23);
+		btnSocios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Socios socios = new Socios(user);
+				socios.setVisible(true);
+				dispose();
+			}
+		});
+		getContentPane().add(btnSocios);
+		
 	}
 }
