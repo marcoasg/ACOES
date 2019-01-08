@@ -67,18 +67,17 @@ public class Niño
             coloniaProcedencia = tupla[11] == null ? "" : (String)tupla[11];
             coloniaResidencia = tupla[12] == null ? "" : (String)tupla[12];
             observaciones = tupla[13] == null ? "" : (String)tupla[13];
-            boolean esNull = tupla[13] == null ? true : false;
     	}
 	}
 	
 
     
-    public Niño(String a)
+    public Niño()
     {
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME); 
-    	miBD.Insert("INSERT INTO tNiño VALUES('" + a + "', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)");
-    		codigo = (Integer) miBD.Select("SELECT MAX(codigo) FROM tNiño;").get(0)[0];
+    	miBD.Insert("INSERT INTO tNiño VALUES(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)");
+    	codigo = (Integer) miBD.Select("SELECT MAX(codigo) FROM tNiño;").get(0)[0];
    	
     }
 
@@ -122,6 +121,14 @@ public class Niño
     	padrino = value;
     }
 
+    public int getCodigo() {
+    	return codigo;
+    }
+    
+    public void setCodigo(int value) {
+    	codigo = value;
+    }
+    
     public String getApellidos()
     {
         return apellidos;
