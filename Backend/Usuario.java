@@ -201,7 +201,7 @@ public class Usuario
     {
 		// Si el objeto actual es administrador
 		// Actualiza el atributo rol de u en memoria y en la base de datos
-    	if (this.rol.getRolName() == "Admin" ) {
+    	if (this.rol.getRolName() == "admin" ) {
         	BD miBD = new BD(BD_SERVER, BD_NAME);
         	miBD.Update("UPDATE tUsuario set rol = '" + r + "' WHERE usuario = '" + usuario + "';");
     		u.rol = r;
@@ -346,7 +346,7 @@ public class Usuario
 	public void setFechaAlta(Date fechaAlta) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tUsuario set fechaAlta = '" + formatoDelTexto.format(fechaAlta) + "' WHERE usuario = '" + this.usuario + "';");
+    	if(fechaAlta != null) miBD.Update("UPDATE tUsuario set fechaAlta = '" + formatoDelTexto.format(fechaAlta) + "' WHERE usuario = '" + this.usuario + "';");
 		this.fechaAlta = fechaAlta;
 	}
 

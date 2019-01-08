@@ -39,7 +39,7 @@ public class Usuarios extends JFrame {
 	private JTextField textDireccion;
 	private JTextField textCP;
 	private JTextField textProvincia;
-	private JTextField textTelefono;
+	private JTextField textTelefonoFijo;
 	private JTextField textEmail;
 	private JTextField textCertificado;
 	private JTextField textSector;
@@ -47,6 +47,7 @@ public class Usuarios extends JFrame {
 	private JTextField textFechaBaja;
 	private JTextField textObservaciones;
 	private JTextField textRol;
+	private JTextField textTelfMovil;
 	
 	public Usuarios(Usuario u) {
 		
@@ -159,10 +160,6 @@ public class Usuarios extends JFrame {
 		lblObservaciones.setBounds(435, 265, 95, 14);
 		contentPane.add(lblObservaciones);
 		
-		JLabel label_11 = new JLabel("");
-		label_11.setBounds(288, 390, 137, 14);
-		contentPane.add(label_11);
-		
 		JButton btnRegistrarNuevoUsuario = new JButton("Registrar nuevo usuario");
 		btnRegistrarNuevoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistrarNuevoUsuario.addActionListener(new ActionListener() {
@@ -234,10 +231,10 @@ public class Usuarios extends JFrame {
 		contentPane.add(textProvincia);
 		textProvincia.setColumns(10);
 		
-		textTelefono = new JTextField();
-		textTelefono.setBounds(136, 359, 86, 20);
-		contentPane.add(textTelefono);
-		textTelefono.setColumns(10);
+		textTelefonoFijo = new JTextField();
+		textTelefonoFijo.setBounds(136, 359, 86, 20);
+		contentPane.add(textTelefonoFijo);
+		textTelefonoFijo.setColumns(10);
 		
 		textEmail = new JTextField();
 		textEmail.setBounds(135, 387, 239, 20);
@@ -281,9 +278,12 @@ public class Usuarios extends JFrame {
 					if(textApellidos.getText() != seleccionado.getApellidos()) {
 						seleccionado.setApellidos(textApellidos.getText());
 					}
-					if(textRol.getText() != seleccionado.getRol().getRolName()) {
-						//user.ModiRol(seleccionado, new Rol(textRol.getText()));
+					if(textRol.getText() == "admin" || textRol.getText() == "Agt" || textRol.getText() == "CoordLocal" || textRol.getText() == "CoordGen") {
+						if(textRol.getText() != seleccionado.getRol().getRolName()) {
+							user.ModiRol(seleccionado, new Rol(textRol.getText()));
+						}
 					}
+					
 					if(textEstado.getText() != seleccionado.getEstado()) {
 						seleccionado.setEstado(textEstado.getText());
 					}
@@ -299,8 +299,11 @@ public class Usuarios extends JFrame {
 					if(textProvincia.getText() != seleccionado.getProvincia()) {
 						seleccionado.setProvincia(textProvincia.getText());
 					}
-					if(textTelefono.getText() != seleccionado.getTelefonoFijo()) {
-						seleccionado.setTelefonoFijo(textTelefono.getText());
+					if(textTelefonoFijo.getText() != seleccionado.getTelefonoFijo()) {
+						seleccionado.setTelefonoFijo(textTelefonoFijo.getText());
+					}
+					if(textTelfMovil.getText() != seleccionado.getTelefonoMovil()) {
+						seleccionado.setTelefonoMovil(textTelfMovil.getText());
 					}
 					if(textEmail.getText() != seleccionado.getEmail()) {
 						seleccionado.setEmail(textEmail.getText());
@@ -314,7 +317,7 @@ public class Usuarios extends JFrame {
 					if(textSector.getText() != seleccionado.getSector()) {
 						seleccionado.setSector(textSector.getText());
 					}
-					if(textFechaAlta.getText() != seleccionado.getFechaAlta().toString() && textFechaAlta.getText() != "") {
+					if(seleccionado.getFechaAlta() == null || (textFechaAlta.getText() != "" && textFechaAlta.getText() != seleccionado.getFechaAlta().toString()) ) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaAlta.getText();
 						Date fechaAlta = null;
@@ -344,6 +347,11 @@ public class Usuarios extends JFrame {
 		contentPane.add(textRol);
 		textRol.setColumns(10);
 		
+		textTelfMovil = new JTextField();
+		textTelfMovil.setBounds(232, 359, 86, 20);
+		contentPane.add(textTelfMovil);
+		textTelfMovil.setColumns(10);
+		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -358,8 +366,8 @@ public class Usuarios extends JFrame {
 					textDireccion.setText(seleccionado.getDireccion());
 					textCP.setText("" + seleccionado.getCodigoPostal());
 					textProvincia.setText(seleccionado.getProvincia());
-					textTelefono.setText(seleccionado.getTelefonoFijo());
-					label_11.setText(seleccionado.getTelefonoMovil());
+					textTelefonoFijo.setText(seleccionado.getTelefonoFijo());
+					textTelfMovil.setText(seleccionado.getTelefonoMovil());
 					textEmail.setText(seleccionado.getEmail());
 					textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
 					textSector.setText(seleccionado.getSector());
