@@ -203,7 +203,7 @@ public class Usuario
 		// Actualiza el atributo rol de u en memoria y en la base de datos
     	if (this.rol.getRolName() == "admin" ) {
         	BD miBD = new BD(BD_SERVER, BD_NAME);
-        	miBD.Update("UPDATE tUsuario set rol = '" + r + "' WHERE usuario = '" + usuario + "';");
+        	miBD.Update("UPDATE tUsuario set rol = '" + r.getRolName() + "' WHERE usuario = '" + u.getNombre() + "';");
     		u.rol = r;
     		
     	} else {
