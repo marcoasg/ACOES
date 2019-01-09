@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -52,6 +53,7 @@ public class Usuarios extends JFrame {
 	private JLabel lblNewLabel;
 	private JTextField textBuscar;
 	private JList list;
+	private JScrollPane panel;
 	
 	private void actualizarVista(Usuario seleccionado) {
 		if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
@@ -117,7 +119,9 @@ public class Usuarios extends JFrame {
 		list = new JList(usuarios);
 		list.setBounds(285, 11, 474, 103);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		contentPane.add(list);
+		panel = new JScrollPane(list);
+		panel.setBounds(285,11,474,103);
+		contentPane.add(panel);
 		
 		JLabel label_1 = new JLabel("Datos del usuario ");
 		label_1.setBounds(10, 125, 132, 14);
@@ -413,7 +417,7 @@ public class Usuarios extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Usuario[] lista = Usuario.ListaUsuarios();
-				DefaultListModel modelo = new DefaultListModel();
+				DefaultListModel<String> modelo = new DefaultListModel<>();
 				int i = 0;
 				for (Usuario us : lista) {
 					if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais()) {

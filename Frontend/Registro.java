@@ -224,7 +224,7 @@ public class Registro extends JFrame {
 		contentPane.add(textPane);
 		
 		JLabel lbllosCamposMarcados = new JLabel("*Los campos marcados con asterisco son obligatorios.");
-		lbllosCamposMarcados.setBounds(144, 392, 265, 14);
+		lbllosCamposMarcados.setBounds(121, 392, 316, 14);
 		contentPane.add(lbllosCamposMarcados);
 		
 		JButton btnNewButton = new JButton("Registrar");
@@ -255,7 +255,11 @@ public class Registro extends JFrame {
 						String strFecha = textField_16.getText();
 						Date fechaAlta = null;
 						try {
-							fechaAlta = formatoDelTexto.parse(strFecha);
+							if (strFecha.length() > 0) {
+								fechaAlta = formatoDelTexto.parse(strFecha);
+							} else {
+								fechaAlta = new Date();
+							}
 						} catch (ParseException e) {
 							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
 						}
