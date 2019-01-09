@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -29,7 +30,9 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 public class Niños extends JFrame {
-
+	
+	private static String BD_SERVER = "localhost";
+	private static String BD_NAME = "ACOES";
 	private JPanel contentPane;
 	Usuario user;
 	Niño seleccionado;
@@ -49,7 +52,52 @@ public class Niños extends JFrame {
 	private JTextField textColoniaResidencia;
 	private JTextField textObservaciones;
 	private JTextField textPadrino;
-	private JTextField textField;
+	private JTextField textBuscar;
+	
+	private void actualizarVista(Niño seleccionado) {
+		if (user.getRol().getNivel() >= 2) {
+			
+			textNombre.setText(seleccionado.getNombre());
+			textApellidos.setText(seleccionado.getApellidos());
+			textPadrino.setText(Integer.toString(seleccionado.getPadrino().getNumSocio()));
+			textCodigo.setText(Integer.toString(seleccionado.getCodigo()));
+			textEstado.setText(seleccionado.getEstado());
+			textBeca.setText(seleccionado.getBeca());
+			textSexo.setText(seleccionado.getSexo());
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			
+			if (seleccionado.getFechaNacimiento() == null) {
+				textFechaNacimiento.setText("");
+			} else {
+				String strFechaNacimiento = formatoDelTexto.format(seleccionado.getFechaNacimiento());
+				textFechaNacimiento.setText(strFechaNacimiento);
+			}
+			
+			if (seleccionado.getFechaEntrada() == null) {
+				textFechaEntrada.setText("");
+			} else {
+				String strFechaEntrada = formatoDelTexto.format(seleccionado.getFechaEntrada());
+				textFechaEntrada.setText(strFechaEntrada);
+
+			}
+			if (seleccionado.getFechaSalida() == null) {
+				textFechaSalida.setText("");
+			} else {
+				String strFechaSalida = formatoDelTexto.format(seleccionado.getFechaSalida());
+				textFechaSalida.setText(strFechaSalida);
+
+			}
+			textCurso.setText(seleccionado.getCurso());
+			textColoniaProcedencia.setText(seleccionado.getColoniaProcedencia());
+			textColoniaResidencia.setText(seleccionado.getColoniaResidencia());
+			
+			textObservaciones.setText(seleccionado.getObservaciones());
+		}
+		
+	
+	}
+	
+	
 	
 	public Niños(Usuario u) {
 		
@@ -258,7 +306,79 @@ public class Niños extends JFrame {
 		JButton btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(seleccionado == null) {
+					
+				}else {
+					if(!textNombre.getText().equals(seleccionado.getNombre())) {
+						seleccionado.setNombre(textNombre.getText());
+					}
+					if(!textApellidos.getText().equals(seleccionado.getApellidos())) {
+						seleccionado.setApellidos(textApellidos.getText());
+					}
+					if(Integer.parseInt(textPadrino.getText()) != seleccionado.getPadrino().getNumSocio()) {
+						seleccionado.setPadrino(new Socio(seleccionado.getPadrino().getNumSocio()));
+					}
+					if(Integer.parseInt(textCodigo.getText()) != seleccionado.getCodigo()) {
+						seleccionado.setCodigo(Integer.parseInt(textCodigo.getText()));
+					}
+					if(!textEstado.getText().equals(seleccionado.getEstado())) {
+						seleccionado.setEstado(textEstado.getText());
+					}
+					if(!textBeca.getText().equals(seleccionado.getBeca())) {
+						seleccionado.setBeca(textBeca.getText());
+					}
+					if(!textSexo.getText().equals(seleccionado.getSexo())) {
+						seleccionado.setSexo(textSexo.getText());
+					}
+					if(seleccionado.getFechaNacimiento() == null || (!textFechaNacimiento.getText().equals("") && !textFechaNacimiento.getText().equals(seleccionado.getFechaNacimiento().toString())) ) {
+						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+						String strFecha = textFechaNacimiento.getText();
+						Date fechaNacimiento = null;
+						try {
+							fechaNacimiento = formatoDelTexto.parse(strFecha);
+						} catch (ParseException e) {
+							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+						}
+						seleccionado.setFechaNacimiento(fechaNacimiento);
+					}
+					if(seleccionado.getFechaEntrada() == null || (!textFechaEntrada.getText().equals("") && !textFechaEntrada.getText().equals(seleccionado.getFechaEntrada().toString())) ) {
+						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+						String strFecha = textFechaEntrada.getText();
+						Date fechaEntrada = null;
+						try {
+							fechaEntrada = formatoDelTexto.parse(strFecha);
+						} catch (ParseException e) {
+							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+						}
+						seleccionado.setFechaEntrada(fechaEntrada);
+					}
+					if(seleccionado.getFechaSalida() == null || (!textFechaSalida.getText().equals("") && !textFechaSalida.getText().equals(seleccionado.getFechaSalida().toString())) ) {
+						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+						String strFecha = textFechaSalida.getText();
+						Date fechaSalida = null;
+						try {
+							fechaSalida = formatoDelTexto.parse(strFecha);
+						} catch (ParseException e) {
+							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+						}
+						seleccionado.setFechaSalida(fechaSalida);
+					}
+					if(!textCurso.getText().equals(seleccionado.getCurso())) {
+						seleccionado.setCurso(textCurso.getText());
+					}
+					if(!textColoniaProcedencia.getText().equals(seleccionado.getColoniaProcedencia())) {
+						seleccionado.setColoniaProcedencia(textColoniaProcedencia.getText());
+					}
+					if(!textColoniaResidencia.getText().equals(seleccionado.getColoniaResidencia())) {
+						seleccionado.setColoniaResidencia(textColoniaResidencia.getText());
+					}
+					if(!textObservaciones.getText().equals(seleccionado.getObservaciones())) {
+						seleccionado.setObservaciones(textObservaciones.getText());
+					}
+					
+					JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
+					actualizarVista(seleccionado);
+				}
 				
 			}
 		});
@@ -282,22 +402,42 @@ public class Niños extends JFrame {
 		contentPane.add(lblFechaDeSalida);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Niño[] lista = Niño.ListaNiños();
+				DefaultListModel<String> modelo = new DefaultListModel<>();
+				int i = 0;
+				for (Niño n : lista) {
+						String completo = n.getNombre() + " " + n.getApellidos();
+						if (completo.contains(textBuscar.getText()))
+							modelo.addElement(Integer.toString(n.getCodigo()));
+					i++;
+				}
+				
+				list.setModel(modelo);
+			}
+		});
 		btnBuscar.setBounds(87, 80, 89, 23);
 		contentPane.add(btnBuscar);
 		
-		textField = new JTextField();
-		textField.setBounds(32, 49, 182, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textBuscar = new JTextField();
+		textBuscar.setBounds(32, 49, 182, 20);
+		contentPane.add(textBuscar);
+		textBuscar.setColumns(10);
 		
 		JLabel lblListaDeNios = new JLabel("Lista de ni\u00F1os");
 		lblListaDeNios.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblListaDeNios.setBounds(156, 13, 102, 14);
 		contentPane.add(lblListaDeNios);
 		
+		JLabel lblNiñoSeleccionado = new JLabel("");
+		lblNiñoSeleccionado.setBounds(136, 116, 158, 14);
+		contentPane.add(lblNiñoSeleccionado);
+		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				seleccionado = new Niño(Integer.parseInt((String) list.getSelectedValue()) );
+				actualizarVista(seleccionado);
 					}
 		});
 
