@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-public class Proyecto extends JFrame {
+public class ProyectosLocales extends JFrame {
 
 	private JPanel contentPane;
 	private JList list;
@@ -41,7 +41,7 @@ public class Proyecto extends JFrame {
 		
 	}
 
-	public Proyecto(ProyectoGeneral p, Usuario u) {
+	public ProyectosLocales(ProyectoGeneral p, Usuario u) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 782, 504);
 		contentPane = new JPanel();
