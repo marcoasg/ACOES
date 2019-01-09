@@ -59,7 +59,7 @@ public class Niños extends JFrame {
 			
 			textNombre.setText(seleccionado.getNombre());
 			textApellidos.setText(seleccionado.getApellidos());
-			textPadrino.setText(Integer.toString(seleccionado.getPadrino().getNumSocio()));
+			if(seleccionado.getPadrino() != null)textPadrino.setText(Integer.toString(seleccionado.getPadrino().getNumSocio()));
 			textCodigo.setText(Integer.toString(seleccionado.getCodigo()));
 			textEstado.setText(seleccionado.getEstado());
 			textBeca.setText(seleccionado.getBeca());
@@ -198,7 +198,7 @@ public class Niños extends JFrame {
 		btnRegistrarNuevoSocio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistrarNuevoSocio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				RegistroSocio reg = new RegistroSocio(user);
+				RegistroNiños reg = new RegistroNiños(user);
 				reg.setVisible(true);
 				dispose();
 			}
@@ -213,9 +213,9 @@ public class Niños extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame hall;
 				
-				if (user.getRol().getPais() == "ESP") {
+				if (user.getRol().getPais().equals("ESP")) {
 					hall = new InicioEspaña(user);
-				} else if (user.getRol().getPais() == "HON") {
+				} else if (user.getRol().getPais().equals("HON")) {
 					hall = new InicioHonduras(user);
 				} else {
 					hall = new InicioAdmin(user);
@@ -315,11 +315,8 @@ public class Niños extends JFrame {
 					if(!textApellidos.getText().equals(seleccionado.getApellidos())) {
 						seleccionado.setApellidos(textApellidos.getText());
 					}
-					if(Integer.parseInt(textPadrino.getText()) != seleccionado.getPadrino().getNumSocio()) {
+					if(textPadrino.getText().length() > 0  && Integer.parseInt(textPadrino.getText()) != seleccionado.getPadrino().getNumSocio()) {
 						seleccionado.setPadrino(new Socio(seleccionado.getPadrino().getNumSocio()));
-					}
-					if(Integer.parseInt(textCodigo.getText()) != seleccionado.getCodigo()) {
-						seleccionado.setCodigo(Integer.parseInt(textCodigo.getText()));
 					}
 					if(!textEstado.getText().equals(seleccionado.getEstado())) {
 						seleccionado.setEstado(textEstado.getText());
@@ -330,7 +327,7 @@ public class Niños extends JFrame {
 					if(!textSexo.getText().equals(seleccionado.getSexo())) {
 						seleccionado.setSexo(textSexo.getText());
 					}
-					if(seleccionado.getFechaNacimiento() == null || (!textFechaNacimiento.getText().equals("") && !textFechaNacimiento.getText().equals(seleccionado.getFechaNacimiento().toString())) ) {
+					if(textFechaNacimiento.getText().length() > 0 && (seleccionado.getFechaNacimiento() == null || (!textFechaNacimiento.getText().equals("") && !textFechaNacimiento.getText().equals(seleccionado.getFechaNacimiento().toString()))) ) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaNacimiento.getText();
 						Date fechaNacimiento = null;
@@ -341,7 +338,7 @@ public class Niños extends JFrame {
 						}
 						seleccionado.setFechaNacimiento(fechaNacimiento);
 					}
-					if(seleccionado.getFechaEntrada() == null || (!textFechaEntrada.getText().equals("") && !textFechaEntrada.getText().equals(seleccionado.getFechaEntrada().toString())) ) {
+					if(textFechaEntrada.getText().length() > 0 && (seleccionado.getFechaEntrada() == null || (!textFechaEntrada.getText().equals("") && !textFechaEntrada.getText().equals(seleccionado.getFechaEntrada().toString()))) ) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaEntrada.getText();
 						Date fechaEntrada = null;
@@ -352,7 +349,7 @@ public class Niños extends JFrame {
 						}
 						seleccionado.setFechaEntrada(fechaEntrada);
 					}
-					if(seleccionado.getFechaSalida() == null || (!textFechaSalida.getText().equals("") && !textFechaSalida.getText().equals(seleccionado.getFechaSalida().toString())) ) {
+					if(textFechaSalida.getText().length() > 0 && (seleccionado.getFechaSalida() == null || (!textFechaSalida.getText().equals("") && !textFechaSalida.getText().equals(seleccionado.getFechaSalida().toString()))) ) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaSalida.getText();
 						Date fechaSalida = null;

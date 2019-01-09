@@ -100,7 +100,7 @@ public class Socio
     	
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set numSocio = '" + value + "' WHERE numSocio = '" + numSocio + "';");
+    	miBD.Update("UPDATE tSocio set numSocio = '" + value + "' WHERE numSocio = " + numSocio + ";");
     	numSocio = value;
     	
 
@@ -114,7 +114,7 @@ public class Socio
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
     	Date date = new Date();
     	String fecha = formatoDelTexto.format(date);
-    	miBD.Update("UPDATE tSocio set fechaBaja = '" + fecha + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set fechaBaja = '" + fecha + "' WHERE numSocio = " + this.numSocio + ";");
     	fechaBaja = date;
     }
     public String getAgente() 
@@ -126,7 +126,7 @@ public class Socio
     { 
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set agente = '" + value + "' WHERE numSocio = '" + numSocio + "';");
+    	miBD.Update("UPDATE tSocio set agente = '" + value + "' WHERE numSocio = " + numSocio + ";");
     	agente = value;
     }
 
@@ -138,7 +138,7 @@ public class Socio
     public void setRelacion(String value)
     {
        	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set relacion = '" + value + "' WHERE numSocio = '" + numSocio + "';");
+    	miBD.Update("UPDATE tSocio set relacion = '" + value + "' WHERE numSocio = " + numSocio + ";");
     	relacion = value;    
     }
 
@@ -154,7 +154,7 @@ public class Socio
 
 	public void setNombre(String nombre) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set nombre = '" + nombre + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set nombre = '" + nombre + "' WHERE numSocio = " + this.numSocio + ";");
 		this.nombre = nombre;
 	}
 
@@ -164,7 +164,7 @@ public class Socio
 
 	public void setApellidos(String apellidos) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set apellidos = '" + apellidos + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set apellidos = '" + apellidos + "' WHERE numSocio = " + this.numSocio + ";");
 		this.apellidos = apellidos;
 	}
 
@@ -174,7 +174,7 @@ public class Socio
 
 	public void setEstado(String estado) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set estado = '" + estado + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set estado = '" + estado + "' WHERE numSocio = " + this.numSocio + ";");
 		this.estado = estado;
 	}
 
@@ -184,7 +184,7 @@ public class Socio
 
 	public void setNif(String nif) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set nif = '" + nif + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set nif = '" + nif + "' WHERE numSocio = " + this.numSocio + ";");
 		this.nif = nif;
 	}
 
@@ -194,7 +194,7 @@ public class Socio
 
 	public void setDireccion(String direccion) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set direccion = '" + direccion + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set direccion = '" + direccion + "' WHERE numSocio = " + this.numSocio + ";");
 		this.direccion = direccion;
 	}
 
@@ -204,7 +204,7 @@ public class Socio
 
 	public void setCodigoPostal(int codigoPostal) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set codigoPostal = " + codigoPostal + " WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set codigoPostal = " + codigoPostal + " WHERE numSocio = " + this.numSocio + ";");
 		this.codigoPostal = codigoPostal;
 	}
 
@@ -214,7 +214,7 @@ public class Socio
 
 	public void setProvincia(String provincia) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set provincia = '" + provincia + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set provincia = '" + provincia + "' WHERE numSocio = " + this.numSocio + ";");
 		this.provincia = provincia;
 	}
 
@@ -224,7 +224,7 @@ public class Socio
 
 	public void setTelefonoFijo(String telefonoFijo) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set telefonoFijo = '" + telefonoFijo + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set telefonoFijo = '" + telefonoFijo + "' WHERE numSocio = " + this.numSocio + ";");
 		this.telefonoFijo = telefonoFijo;
 	}
 
@@ -234,7 +234,7 @@ public class Socio
 
 	public void setTelefonoMovil(String telefonoMovil) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set telefonoMovil = '" + telefonoMovil + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set telefonoMovil = '" + telefonoMovil + "' WHERE numSocio = " + this.numSocio + ";");
 		this.telefonoMovil = telefonoMovil;
 	}
 
@@ -244,7 +244,7 @@ public class Socio
 
 	public void setEmail(String email) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set email = '" + email + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set email = '" + email + "' WHERE numSocio = " + this.numSocio + ";");
 		this.email = email;
 	}
 
@@ -255,7 +255,7 @@ public class Socio
 	public void setCertificado(boolean certificado) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	int cert = certificado ? 1 : 0;
-    	miBD.Update("UPDATE tSocio set certificado = " + cert + " WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set certificado = " + cert + " WHERE numSocio = " + this.numSocio + ";");
 		this.certificado = certificado;
 	}
 
@@ -265,7 +265,7 @@ public class Socio
 
 	public void setSector(String sector) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set sector = '" + sector + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set sector = '" + sector + "' WHERE numSocio = " + this.numSocio + ";");
 		this.sector = sector;
 	}
 
@@ -276,7 +276,7 @@ public class Socio
 	public void setFechaAlta(Date fechaAlta) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tSocio set fechaAlta = '" + formatoDelTexto.format(fechaAlta) + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set fechaAlta = '" + formatoDelTexto.format(fechaAlta) + "' WHERE numSocio = " + this.numSocio + ";");
 		this.fechaAlta = fechaAlta;
 	}
 
@@ -290,7 +290,7 @@ public class Socio
 
 	public void setObservaciones(String observaciones) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set observaciones = '" + observaciones + "' WHERE numSocio = '" + this.numSocio + "';");
+    	miBD.Update("UPDATE tSocio set observaciones = '" + observaciones + "' WHERE numSocio = " + this.numSocio + ";");
 		this.observaciones = observaciones;
 	}
 }

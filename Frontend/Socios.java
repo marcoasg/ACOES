@@ -412,6 +412,10 @@ public class Socios extends JFrame {
 		contentPane.add(Apadrinados);
 		
 		JButton btnApadrinar = new JButton("Apadrinar");
+		btnApadrinar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnApadrinar.setBounds(704, 255, 89, 23);
 		contentPane.add(btnApadrinar);
 		
