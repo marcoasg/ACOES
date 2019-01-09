@@ -70,7 +70,7 @@ public class NuevoProyectoGeneral extends JFrame {
 				try {
 					ProyectoGeneral pg = new ProyectoGeneral(textField.getText(),new Usuario(textField_1.getText()));
 					pg.setDescripcion(textArea.getText());
-					ProyectosGenerales p = new ProyectosGenerales(user);
+					ProyectosGenerales p = new ProyectosGenerales(user);			
 					p.setVisible(true);
 					dispose();
 				}catch(Error err) {

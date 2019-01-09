@@ -15,6 +15,7 @@ import Backend.ProyectoLocal;
 import Backend.Usuario;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
@@ -41,7 +42,9 @@ public class ProyectosLocales extends JFrame {
 		
 	}
 
-	public ProyectosLocales(ProyectoGeneral p, Usuario u) {
+
+
+	public ProyectosLocales(ProyectoGeneral p, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 782, 504);
 		contentPane = new JPanel();
@@ -65,14 +68,42 @@ public class ProyectosLocales extends JFrame {
 		contentPane.add(panel);
 		
 		JButton btnNewButton = new JButton("Coordinador");
-		btnNewButton.setBounds(410, 326, 144, 29);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (user.getRol().getNivel() >= 2) {
+					try {
+						Usuario u = new Usuario(textField.getText());
+						if (u.getRol().getRolName().equals("CoordinadorProyectoH")) {
+							seleccionado.setCoordinador(u);
+						}
+					} catch (Error err) {
+						JOptionPane.showMessageDialog(null, err.getMessage());
+					} 
+				}
+			}
+		});
+		btnNewButton.setBounds(410, 337, 144, 29);
 		contentPane.add(btnNewButton);
 		
 		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NuevoProyectoLocal pr = new NuevoProyectoLocal(p,user);
+				pr.setVisible(true);
+				dispose();
+			}
+		});
 		btnRegistrar.setBounds(410, 292, 144, 29);
 		contentPane.add(btnRegistrar);
 		
 		JButton btnNewButton_1 = new JButton("Entrar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DatosProyectoLocal d = new DatosProyectoLocal(Integer.parseInt(textField_2.getText()), user);
+				d.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton_1.setBounds(410, 247, 144, 29);
 		contentPane.add(btnNewButton_1);
 		
@@ -95,16 +126,19 @@ public class ProyectosLocales extends JFrame {
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setEditable(false);
 		textField_1.setBounds(36, 327, 146, 26);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		textField_2.setBounds(36, 390, 146, 26);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setBounds(36, 16, 146, 26);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
