@@ -71,7 +71,15 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Usuario user = new Usuario(textField.getText(),passwordField.getPassword());
-					InicioEspaña hall = new InicioEspaña(user);
+					JFrame hall;
+					
+					if (user.getRol().getPais() == "ESP") {
+						hall = new InicioEspaña(user);
+					} else if (user.getRol().getPais() == "HON") {
+						hall = new InicioHonduras(user);
+					} else {
+						hall = new InicioAdmin(user);
+					}
 					hall.setVisible(true);
 					dispose();
 				} catch (Error e) {

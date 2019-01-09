@@ -86,7 +86,13 @@ public class Registro extends JFrame {
 		contentPane.add(lblRol);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Agt", "CoordLoc", "CoordGen", "Admin"}));
+		if (user.getRol().getPais() == "ESP") {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Agente", "CoordinadorLocalE", "CoordinadorGeneralE"}));
+		} else if (user.getRol().getPais() == "HON") {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"CoordinadorLocalH", "CoordinadorProyectoH", "CoordinadorGeneralH"}));
+		} else {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Agente","CoordinadorLocalE","CoordinadorGeneralE","CoordinadorLocalH", "CoordinadorProyectoH", "CoordinadorGeneralH"}));
+		}
 		comboBox.setMaximumRowCount(4);
 		comboBox.setToolTipText("");
 		comboBox.setBounds(144, 117, 160, 22);
@@ -225,7 +231,7 @@ public class Registro extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Rol r = new Rol((String)comboBox.getSelectedItem());
+					Rol r = new Rol((String)comboBox.getSelectedItem(),user.getRol().getPais());
 					if (user.getRol().getNivel() <= r.getNivel()) {
 						JOptionPane.showMessageDialog(null, "No puede registrar un usuario con un rol superior al suyo.");
 					} else {

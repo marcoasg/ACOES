@@ -15,12 +15,12 @@ import javax.swing.border.EmptyBorder;
 
 import Backend.Usuario;
 
-public class InicioHonduras extends JFrame {
+public class InicioAdmin extends JFrame {
 
 
 	Usuario user;
 	
-	public InicioHonduras(Usuario u) {
+	public InicioAdmin(Usuario u) {
 		this.user = u;
 		setForeground(Color.BLACK);
 		setFont(new Font("Dialog", Font.BOLD, 12));

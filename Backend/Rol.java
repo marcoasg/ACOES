@@ -9,14 +9,14 @@ public class Rol
     
     /*
      * Posibles nombres para el rol según el país:
-     * España:
-     * 	Agente
-     * 	CoordinadorLocal
-     *	CoordinadorGeneral
-     * Honduras:
-     * 	CoordinadorLocal
-     * 	CoordinadorProyecto
-     * 	CoordinadorGeneral
+     * ESP:
+     * 	Agente (nivel1)
+     * 	CoordinadorLocalE(nivel2)
+     *	CoordinadorGeneralE(nivel3)
+     * HON:
+     * 	CoordinadorLocalH(nivel1)
+     * 	CoordinadorProyectoH(nivel2)
+     * 	CoordinadorGeneralH(nivel3)
      * */
     
     private String rolName;
@@ -32,18 +32,18 @@ public class Rol
 		
 		for(Object[] tupla: miBD.Select("SELECT * FROM tRol;"))
 		{
-			Rol r = new Rol( (String)tupla[0] );
+			Rol r = new Rol( (String)tupla[0],(String)tupla[3] );
 			lista.add(r);
 		}
 		return lista;
 	}
 		
-    public Rol(String name)
+    public Rol(String name, String pais)
     {
 		// Crea el objeto cargando sus valores de la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME);
     	Object[] tupla = miBD.Select("SELECT * FROM tRol WHERE rolName = '"
-    			+ name + "';").get(0);
+    			+ name + "' and pais = '" + pais + "';").get(0);
     	
     	rolName = (String)tupla[0];
     	rolDes = (String)tupla[1];

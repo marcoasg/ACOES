@@ -56,9 +56,14 @@ public class Usuario
     		throw new Error("El usuario no existe en la base de datos.");
     	}else {
     		Object[] tupla = lista.get(0);
+    		
+        	List<Object[]> lista2 = miBD.Select("SELECT * FROM tRol WHERE rolName = '"
+        			+ (String)tupla[2] + "';");
+        	Object[] tuplaRol = lista2.get(0);
+    		
         	usuario = (String)tupla[0];
         	password = (String)tupla[1];
-            rol = new Rol((String)tupla[2]);
+            rol = new Rol((String)tupla[2],(String)tuplaRol[3]);
             nombre = tupla[3] == null ? "" : (String)tupla[3];
             apellidos = tupla[4] == null ? "" : (String)tupla[4];
             estado = tupla[5] == null ? "" : (String)tupla[5];
@@ -102,9 +107,13 @@ public class Usuario
     		if (tupla[16] != null)
     			throw new Error("Usuario dado de baja.");
     		
+        	List<Object[]> lista2 = miBD.Select("SELECT * FROM tRol WHERE rolName = '"
+        			+ (String)tupla[2] + "';");
+        	Object[] tuplaRol = lista2.get(0);
+    		
         	usuario = (String)tupla[0];
         	password = (String)tupla[1];
-            rol = new Rol((String)tupla[2]);
+            rol = new Rol((String)tupla[2],(String)tuplaRol[3]);
             nombre = (String)tupla[3] == null ? "" : (String)tupla[3];
             apellidos = (String)tupla[4] == null ? "" : (String)tupla[4];
             estado = (String)tupla[5] == null ? "" : (String)tupla[5];

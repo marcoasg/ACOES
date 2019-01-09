@@ -65,7 +65,8 @@ public class Usuarios extends JFrame {
 		String[] usuarios = new String[lista.length];
 		int i = 0;
 		for (Usuario us : lista) {
-			usuarios[i] = us.getUsuario();
+			if (user.getRol().getRolName() == "Administrador" || us.getRol().getPais() == user.getRol().getPais())
+				usuarios[i] = us.getUsuario();
 			i++;
 		}
 		contentPane.setLayout(null);
@@ -280,7 +281,7 @@ public class Usuarios extends JFrame {
 					}
 					if(textRol.getText() == "admin" || textRol.getText() == "Agt" || textRol.getText() == "CoordLocal" || textRol.getText() == "CoordGen") {
 						if(textRol.getText() != seleccionado.getRol().getRolName()) {
-							user.ModiRol(seleccionado, new Rol(textRol.getText()));
+							user.ModiRol(seleccionado, new Rol(textRol.getText(),seleccionado.getRol().getPais()));
 						}
 					}
 					
