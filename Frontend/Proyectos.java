@@ -101,13 +101,15 @@ public class Proyectos extends JFrame {
 		JButton btnActualizar = new JButton("Cambiar coordinador");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-				Usuario u = new Usuario(textField.getText());
-				if(u.getRol().getRolName().equals("CoordinadorProyectoH")) {
-					seleccionado.setCoordinador(u);
-				}
-				}catch(Error err){
-					JOptionPane.showMessageDialog(null, err.getMessage());
+				if (user.getRol().getNivel() == 3) {
+					try {
+						Usuario u = new Usuario(textField.getText());
+						if (u.getRol().getRolName().equals("CoordinadorProyectoH")) {
+							seleccionado.setCoordinador(u);
+						}
+					} catch (Error err) {
+						JOptionPane.showMessageDialog(null, err.getMessage());
+					} 
 				}
 				
 			}
@@ -116,6 +118,13 @@ public class Proyectos extends JFrame {
 		contentPane.add(btnActualizar);
 		
 		JButton btnNuevoProyecto = new JButton("Nuevo proyecto");
+		btnNuevoProyecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
+				np.setVisible(true);
+				dispose();
+			}
+		});
 		btnNuevoProyecto.setBounds(436, 310, 195, 29);
 		contentPane.add(btnNuevoProyecto);
 		
