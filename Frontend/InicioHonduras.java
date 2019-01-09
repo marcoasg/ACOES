@@ -85,5 +85,16 @@ public class InicioHonduras extends JFrame {
 		btnP.setBounds(10, 98, 89, 23);
 		getContentPane().add(btnP);
 		
+		JButton btnNios = new JButton("Ni\u00F1os");
+		btnNios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Niños n = new Niños(user);
+				n.setVisible(true);
+				dispose();
+			}
+		});
+		btnNios.setBounds(142, 98, 89, 23);
+		getContentPane().add(btnNios);
+		
 	}
 }
