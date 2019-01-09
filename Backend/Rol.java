@@ -31,6 +31,13 @@ public class Rol
     	String pais = (String)tupla[3];
     	return pais;
     }
+    
+    public static boolean rolValido(String name, String pais) {
+    	BD miBD = new BD(BD_SERVER,BD_NAME);
+    	List<Object[]> lista = miBD.Select("SELECT * FROM tRol WHERE rolName = '"
+    			+ name + "' and pais = '" + pais + "';");
+    	return !lista.isEmpty();
+    }
 
 	public static List<Rol> ListaRoles()
 	{ 
@@ -56,7 +63,7 @@ public class Rol
     	rolName = (String)tupla[0];
     	rolDes = (String)tupla[1];
         nivel = (Integer)tupla[2];
-        pais = (String)tupla[3];
+        this.pais = (String)tupla[3];
     }
     
     public Rol(String name, String des, int nivel, String pais)

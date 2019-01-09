@@ -48,6 +48,46 @@ public class Usuarios extends JFrame {
 	private JTextField textObservaciones;
 	private JTextField textRol;
 	private JTextField textTelfMovil;
+	private JLabel lblNewLabel;
+	
+	private void actualizarVista(Usuario seleccionado) {
+		if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
+			lblNewLabel.setText(seleccionado.getUsuario());
+			textNombre.setText(seleccionado.getNombre());
+			textApellidos.setText(seleccionado.getApellidos());
+			textRol.setText(seleccionado.getRol().getRolName());
+			textEstado.setText(seleccionado.getEstado());
+			textNIF.setText(seleccionado.getNif());
+			textDireccion.setText(seleccionado.getDireccion());
+			textCP.setText("" + seleccionado.getCodigoPostal());
+			textProvincia.setText(seleccionado.getProvincia());
+			textTelefonoFijo.setText(seleccionado.getTelefonoFijo());
+			textTelfMovil.setText(seleccionado.getTelefonoMovil());
+			textEmail.setText(seleccionado.getEmail());
+			textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
+			textSector.setText(seleccionado.getSector());
+			
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			
+			if (seleccionado.getFechaAlta() == null) {
+				textFechaAlta.setText("");
+			} else {
+				String strFechaAlta = formatoDelTexto.format(seleccionado.getFechaAlta());
+				textFechaAlta.setText(strFechaAlta);
+			}
+			
+			if (seleccionado.getFechaBaja() == null) {
+				textFechaBaja.setText("");
+			} else {
+				String strFechaBaja = formatoDelTexto.format(seleccionado.getFechaBaja());
+				textFechaBaja.setText(strFechaBaja);
+
+			}
+			textObservaciones.setText(seleccionado.getObservaciones());
+		}
+		
+	
+	}
 	
 	public Usuarios(Usuario u) {
 		
@@ -65,7 +105,7 @@ public class Usuarios extends JFrame {
 		String[] usuarios = new String[lista.length];
 		int i = 0;
 		for (Usuario us : lista) {
-			if (user.getRol().getRolName() == "Administrador" || us.getRol().getPais() == user.getRol().getPais())
+			if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais())
 				usuarios[i] = us.getUsuario();
 			i++;
 		}
@@ -86,7 +126,7 @@ public class Usuarios extends JFrame {
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblNombre);
 		
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(136, 125, 172, 14);
 		lblNewLabel.setFont(new Font("Tahoma",Font.BOLD,14));
 		contentPane.add(lblNewLabel);
@@ -178,8 +218,16 @@ public class Usuarios extends JFrame {
 		contentPane.add(btnMen);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InicioEspaña gen = new InicioEspaña(user);
-				gen.setVisible(true);
+				JFrame hall;
+				
+				if (user.getRol().getPais() == "ESP") {
+					hall = new InicioEspaña(user);
+				} else if (user.getRol().getPais() == "HON") {
+					hall = new InicioHonduras(user);
+				} else {
+					hall = new InicioAdmin(user);
+				}
+				hall.setVisible(true);
 				dispose();
 			}
 		});
@@ -187,10 +235,9 @@ public class Usuarios extends JFrame {
 		JButton btnBorrarUsuario = new JButton("Desactivar usuario");
 		btnBorrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Usuario usuario = new Usuario((String) list.getSelectedValue());
-				usuario.desactivaUsuario();
-				textFechaBaja.setText(usuario.getFechaBaja().toString());
+				seleccionado.desactivaUsuario();
 				JOptionPane.showMessageDialog(null, "Se ha dado de baja al usuario.");
+				actualizarVista(seleccionado);
 			}
 		});
 		btnBorrarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -273,54 +320,52 @@ public class Usuarios extends JFrame {
 				if(seleccionado == null) {
 					
 				}else {
-					if(textNombre.getText() != seleccionado.getNombre()) {
+					if(!textNombre.getText().equals(seleccionado.getNombre())) {
 						seleccionado.setNombre(textNombre.getText());
 					}
-					if(textApellidos.getText() != seleccionado.getApellidos()) {
+					if(!textApellidos.getText().equals(seleccionado.getApellidos())) {
 						seleccionado.setApellidos(textApellidos.getText());
 					}
-					if(Rol.ListaRoles().contains(new Rol(textRol.getText(),seleccionado.getRol().getPais()))) {
-						if(textRol.getText() != seleccionado.getRol().getRolName()) {
+					if(Rol.rolValido(textRol.getText(),seleccionado.getRol().getPais())) {
 							user.ModiRol(seleccionado, new Rol(textRol.getText(),seleccionado.getRol().getPais()));
-						}
 					} else {
 						JOptionPane.showMessageDialog(null, "Rol no válido o no compatible en su país.");
 					}
 					
-					if(textEstado.getText() != seleccionado.getEstado()) {
+					if(!textEstado.getText().equals(seleccionado.getEstado())) {
 						seleccionado.setEstado(textEstado.getText());
 					}
-					if(textNIF.getText() != seleccionado.getNif()) {
+					if(!textNIF.getText().equals(seleccionado.getNif())) {
 						seleccionado.setNif(textNIF.getText());
 					}
-					if(textDireccion.getText() != seleccionado.getDireccion()) {
+					if(!textDireccion.getText().equals(seleccionado.getDireccion())) {
 						seleccionado.setDireccion(textDireccion.getText());
 					}
 					if(Integer.parseInt(textCP.getText()) != seleccionado.getCodigoPostal()) {
 						seleccionado.setCodigoPostal(Integer.parseInt(textCP.getText()));
 					}
-					if(textProvincia.getText() != seleccionado.getProvincia()) {
+					if(!textProvincia.getText().equals(seleccionado.getProvincia())) {
 						seleccionado.setProvincia(textProvincia.getText());
 					}
-					if(textTelefonoFijo.getText() != seleccionado.getTelefonoFijo()) {
+					if(!textTelefonoFijo.getText().equals(seleccionado.getTelefonoFijo())) {
 						seleccionado.setTelefonoFijo(textTelefonoFijo.getText());
 					}
-					if(textTelfMovil.getText() != seleccionado.getTelefonoMovil()) {
+					if(!textTelfMovil.getText().equals(seleccionado.getTelefonoMovil())) {
 						seleccionado.setTelefonoMovil(textTelfMovil.getText());
 					}
-					if(textEmail.getText() != seleccionado.getEmail()) {
+					if(!textEmail.getText().equals(seleccionado.getEmail())) {
 						seleccionado.setEmail(textEmail.getText());
 					}
-					if(seleccionado.isCertificado() && textCertificado.getText() == "No") {
+					if(seleccionado.isCertificado() && textCertificado.getText().equals("No")) {
 						seleccionado.setCertificado(false);
 					}
-					if(!seleccionado.isCertificado() && textCertificado.getText() == "Si") {
+					if(!seleccionado.isCertificado() && textCertificado.getText().equals("Sí")) {
 						seleccionado.setCertificado(true);
 					}
-					if(textSector.getText() != seleccionado.getSector()) {
+					if(!textSector.getText().equals(seleccionado.getSector())) {
 						seleccionado.setSector(textSector.getText());
 					}
-					if(seleccionado.getFechaAlta() == null || (textFechaAlta.getText() != "" && textFechaAlta.getText() != seleccionado.getFechaAlta().toString()) ) {
+					if(seleccionado.getFechaAlta() == null || (!textFechaAlta.getText().equals("") && !textFechaAlta.getText().equals(seleccionado.getFechaAlta().toString())) ) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaAlta.getText();
 						Date fechaAlta = null;
@@ -329,13 +374,14 @@ public class Usuarios extends JFrame {
 						} catch (ParseException e) {
 							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
 						}
-						u.setFechaAlta(fechaAlta);
+						seleccionado.setFechaAlta(fechaAlta);
 					}
-					if(textObservaciones.getText() != seleccionado.getObservaciones()) {
+					if(!textObservaciones.getText().equals(seleccionado.getObservaciones())) {
 						seleccionado.setObservaciones(textObservaciones.getText());
 					}
 					
 					JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
+					actualizarVista(seleccionado);
 					
 				}
 				
@@ -359,37 +405,7 @@ public class Usuarios extends JFrame {
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				seleccionado = new Usuario((String) list.getSelectedValue());
-				if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
-					lblNewLabel.setText(seleccionado.getUsuario());
-					textNombre.setText(seleccionado.getNombre());
-					textApellidos.setText(seleccionado.getApellidos());
-					textRol.setText(seleccionado.getRol().getRolName());
-					textEstado.setText(seleccionado.getEstado());
-					textNIF.setText(seleccionado.getNif());
-					textDireccion.setText(seleccionado.getDireccion());
-					textCP.setText("" + seleccionado.getCodigoPostal());
-					textProvincia.setText(seleccionado.getProvincia());
-					textTelefonoFijo.setText(seleccionado.getTelefonoFijo());
-					textTelfMovil.setText(seleccionado.getTelefonoMovil());
-					textEmail.setText(seleccionado.getEmail());
-					textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
-					textSector.setText(seleccionado.getSector());
-					
-					if (seleccionado.getFechaAlta() == null) {
-						textFechaAlta.setText("");
-					} else {
-						textFechaAlta.setText(seleccionado.getFechaAlta().toString());
-					}
-					
-					if (seleccionado.getFechaBaja() == null) {
-						textFechaBaja.setText("");
-					} else {
-						textFechaBaja.setText(seleccionado.getFechaBaja().toString());
-
-					}
-					textObservaciones.setText(seleccionado.getObservaciones());
-				}
-				
+				actualizarVista(seleccionado);
 			}
 		});
 

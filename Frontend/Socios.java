@@ -87,7 +87,7 @@ public class Socios extends JFrame {
 		contentPane.add(lblNombre);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(136, 36, 172, 14);
+		lblNewLabel.setBounds(136, 11, 172, 14);
 		lblNewLabel.setFont(new Font("Tahoma",Font.BOLD,14));
 		contentPane.add(lblNewLabel);
 		
@@ -173,8 +173,16 @@ public class Socios extends JFrame {
 		contentPane.add(btnMen);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InicioEspaña gen = new InicioEspaña(user);
-				gen.setVisible(true);
+				JFrame hall;
+				
+				if (user.getRol().getPais() == "ESP") {
+					hall = new InicioEspaña(user);
+				} else if (user.getRol().getPais() == "HON") {
+					hall = new InicioHonduras(user);
+				} else {
+					hall = new InicioAdmin(user);
+				}
+				hall.setVisible(true);
 				dispose();
 			}
 		});

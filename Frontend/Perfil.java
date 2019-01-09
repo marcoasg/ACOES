@@ -161,8 +161,16 @@ public class Perfil extends JFrame {
 		btnNewButton = new JButton("Volver al men\u00FA");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InicioEspaña gen = new InicioEspaña(user);
-				gen.setVisible(true);
+				JFrame hall;
+				
+				if (user.getRol().getPais() == "ESP") {
+					hall = new InicioEspaña(user);
+				} else if (user.getRol().getPais() == "HON") {
+					hall = new InicioHonduras(user);
+				} else {
+					hall = new InicioAdmin(user);
+				}
+				hall.setVisible(true);
 				dispose();
 			}
 		});

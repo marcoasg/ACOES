@@ -167,8 +167,16 @@ public class Niños extends JFrame {
 		contentPane.add(btnMen);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InicioEspaña gen = new InicioEspaña(user);
-				gen.setVisible(true);
+				JFrame hall;
+				
+				if (user.getRol().getPais() == "ESP") {
+					hall = new InicioEspaña(user);
+				} else if (user.getRol().getPais() == "HON") {
+					hall = new InicioHonduras(user);
+				} else {
+					hall = new InicioAdmin(user);
+				}
+				hall.setVisible(true);
 				dispose();
 			}
 		});
