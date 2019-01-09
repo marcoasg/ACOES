@@ -54,7 +54,7 @@ public class Niño
     	}else {
     		Object[] tupla = lista.get(0);
         	nombre = (String)tupla[0];
-        	padrino = (Socio)tupla[1];
+        	padrino = new Socio((Integer)tupla[1]);
             codigo = (int)tupla[2];
             apellidos = tupla[3] == null ? "" : (String)tupla[3];
             estado = tupla[4] == null ? "" : (String)tupla[4];
