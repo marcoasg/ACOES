@@ -26,7 +26,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Proyectos extends JFrame {
+public class ProyectosGenerales extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -45,7 +45,7 @@ public class Proyectos extends JFrame {
 		
 	}
 	
-	public Proyectos(Usuario u) {
+	public ProyectosGenerales(Usuario u) {
 		user = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 689, 526);

@@ -69,7 +69,7 @@ public class NuevoProyectoGeneral extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					ProyectoGeneral pg = new ProyectoGeneral(textField.getText(),new Usuario(textField_1.getText()));
-					Proyectos p = new Proyectos(user);
+					ProyectosGenerales p = new ProyectosGenerales(user);
 					p.setVisible(true);
 					dispose();
 				}catch(Error err) {
@@ -84,7 +84,7 @@ public class NuevoProyectoGeneral extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Proyectos p = new Proyectos(user);
+				ProyectosGenerales p = new ProyectosGenerales(user);
 				p.setVisible(true);
 				dispose();
 			}
