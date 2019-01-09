@@ -177,7 +177,7 @@ public class Usuarios extends JFrame {
 		contentPane.add(btnMen);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				General gen = new General(user);
+				InicioEspaña gen = new InicioEspaña(user);
 				gen.setVisible(true);
 				dispose();
 			}

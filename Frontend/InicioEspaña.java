@@ -21,11 +21,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
-public class General extends JFrame {
+public class InicioEspaña extends JFrame {
 
 	Usuario user;
 	
-	public General(Usuario u) {
+	public InicioEspaña(Usuario u) {
 		this.user = u;
 		setForeground(Color.BLACK);
 		setFont(new Font("Dialog", Font.BOLD, 12));

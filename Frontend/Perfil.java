@@ -161,7 +161,7 @@ public class Perfil extends JFrame {
 		btnNewButton = new JButton("Volver al men\u00FA");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				General gen = new General(user);
+				InicioEspaña gen = new InicioEspaña(user);
 				gen.setVisible(true);
 				dispose();
 			}
