@@ -23,6 +23,14 @@ public class Rol
     private int nivel;
     private String pais;
     private String rolDes;
+    
+    public static String pais(String name) {
+    	BD miBD = new BD(BD_SERVER,BD_NAME);
+    	Object[] tupla = miBD.Select("SELECT * FROM tRol WHERE rolName = '"
+    			+ name + "';").get(0);
+    	String pais = (String)tupla[3];
+    	return pais;
+    }
 
 	public static List<Rol> ListaRoles()
 	{ 

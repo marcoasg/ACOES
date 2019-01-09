@@ -231,7 +231,9 @@ public class Registro extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Rol r = new Rol((String)comboBox.getSelectedItem(),user.getRol().getPais());
+					
+					
+					Rol r = new Rol((String)comboBox.getSelectedItem(),Rol.pais((String)comboBox.getSelectedItem()));
 					if (user.getRol().getNivel() <= r.getNivel()) {
 						JOptionPane.showMessageDialog(null, "No puede registrar un usuario con un rol superior al suyo.");
 					} else {
@@ -267,6 +269,7 @@ public class Registro extends JFrame {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
+					e.printStackTrace();
 				} finally {
 					Usuarios us = new Usuarios(user);
 					us.setVisible(true);
