@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -34,6 +35,8 @@ public class Socios extends JFrame {
 	private JPanel contentPane;
 	Usuario user;
 	Socio seleccionado;
+    private static String BD_SERVER = "localhost";
+    private static String BD_NAME = "ACOES";
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textEstado;
@@ -97,7 +100,7 @@ public class Socios extends JFrame {
 		getContentPane().add(spinner, BorderLayout.NORTH);
 		user = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 906, 563);
+		setBounds(100, 100, 654, 563);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -417,13 +420,24 @@ public class Socios extends JFrame {
 		JButton btnApadrinar = new JButton("Apadrinar");
 		btnApadrinar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BD miBD = new BD(BD_SERVER,BD_NAME);
+				List<Object[]> lista = miBD.Select("SELECT codigo from tNiño where codigo not in (select niño from tApadrinamiento);");
+				if (!lista.isEmpty()) {
+					Object[] tupla = lista.get(0);
+					Niño child = new Niño((Integer) tupla[0]);
+					Apadrinamiento apadrinamiento = new Apadrinamiento(seleccionado, child);
+					JOptionPane.showMessageDialog(null, "Apadrinamiento completado, un pequeño paso para el hombre, pero un gran salto para Olive");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error en algun sitio");
+				}
+				
 			}
 		});
-		btnApadrinar.setBounds(704, 255, 89, 23);
+		btnApadrinar.setBounds(358, 453, 191, 23);
 		contentPane.add(btnApadrinar);
 		
 		JButton btnHacerEnvo = new JButton("Hacer env\u00EDo");
-		btnHacerEnvo.setBounds(704, 289, 89, 23);
+		btnHacerEnvo.setBounds(358, 487, 191, 23);
 		contentPane.add(btnHacerEnvo);
 		
 		textField = new JTextField();
@@ -483,14 +497,7 @@ public class Socios extends JFrame {
 					}
 					textObservaciones.setText(seleccionado.getObservaciones());
 				
-					Niño[] listaNiños = seleccionado.listaApadrinados();
-					JList Apadrinados = new JList(listaNiños);
-					Apadrinados.setBounds(676, 350, 179, 103);
-					Apadrinados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-					panelNiños = new JScrollPane(Apadrinados);
-					panelNiños.setBounds(676, 350, 179, 103);
-					contentPane.add(Apadrinados);
-					
+				
 					
 			}
 		});

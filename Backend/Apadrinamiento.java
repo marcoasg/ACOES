@@ -38,11 +38,15 @@ public class Apadrinamiento {
 
 	
 	public Apadrinamiento(Socio s, Niño n) {
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		BD miBD = new BD(BD_SERVER,BD_NAME);
-		miBD.Insert("Insert into tApadrinamiento values("+socio.getNumSocio()+","+niño.getCodigo()+",null,null);");
+		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","
+				+n.getCodigo()+",'"
+				+ formatoDelTexto.format(new Date()) 
+				+"',null);");
 		socio = s;
 		niño = n;
-		fechaAlta = null;
+		fechaAlta = new Date();
 		fechaBaja = null;
 		codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tApadrinamiento;");
 	}
@@ -72,5 +76,30 @@ public class Apadrinamiento {
     	String fecha = formatoDelTexto.format(date);
     	miBD.Update("UPDATE tApadrinamiento set fechaBaja = '" + fecha + "' WHERE codigo = " + this.codigo + ";");
     	fechaBaja = date;
+	}
+
+
+	public Socio getSocio() {
+		return socio;
+	}
+
+
+	public Niño getNiño() {
+		return niño;
+	}
+
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+
+	public Date getFechaBaja() {
+		return fechaBaja;
+	}
+
+
+	public int getCodigo() {
+		return codigo;
 	}
 }
