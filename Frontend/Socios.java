@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -53,6 +54,7 @@ public class Socios extends JFrame {
 	private JList list;
 	private JScrollPane panel;
 	private JScrollPane panelNiños;
+	private JTextField textField;
 	
 	private void actualizarVista(Socio seleccionado) {
 			textNombre.setText(seleccionado.getNombre());
@@ -423,6 +425,30 @@ public class Socios extends JFrame {
 		JButton btnHacerEnvo = new JButton("Hacer env\u00EDo");
 		btnHacerEnvo.setBounds(704, 289, 89, 23);
 		contentPane.add(btnHacerEnvo);
+		
+		textField = new JTextField();
+		textField.setBounds(101, 464, 144, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Socio[] lista = Socio.ListaSocios();
+				DefaultListModel<String> modelo = new DefaultListModel<>();
+				int i = 0;
+				for (Socio so : lista) {
+						String completo = Integer.toString(so.getNumSocio());
+						if (completo.contains(textField.getText()))
+							modelo.addElement(Integer.toString(so.getNumSocio()));
+					i++;
+				}
+				
+				list.setModel(modelo);
+			}
+		});
+		btnBuscar.setBounds(133, 490, 89, 23);
+		contentPane.add(btnBuscar);
 		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
