@@ -61,7 +61,7 @@ public class ProyectoGeneral {
     	if (n.length() <= 0 || c==null) {
     		throw new Error("Rellene los campos obligatorios.");
     	}
-    	if(!c.getRol().getRolName().equalsIgnoreCase("CoordinadorProyecto")) {
+    	if(c.getRol().getNivel() >= 3) {
     		throw new Error("El usuario debe ser un coordinador");
     	}
     	
