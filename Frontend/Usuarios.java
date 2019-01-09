@@ -279,10 +279,12 @@ public class Usuarios extends JFrame {
 					if(textApellidos.getText() != seleccionado.getApellidos()) {
 						seleccionado.setApellidos(textApellidos.getText());
 					}
-					if(textRol.getText() == "admin" || textRol.getText() == "Agt" || textRol.getText() == "CoordLocal" || textRol.getText() == "CoordGen") {
+					if(Rol.ListaRoles().contains(new Rol(textRol.getText(),seleccionado.getRol().getPais()))) {
 						if(textRol.getText() != seleccionado.getRol().getRolName()) {
 							user.ModiRol(seleccionado, new Rol(textRol.getText(),seleccionado.getRol().getPais()));
 						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Rol no válido o no compatible en su país.");
 					}
 					
 					if(textEstado.getText() != seleccionado.getEstado()) {
