@@ -69,6 +69,7 @@ public class NuevoProyectoGeneral extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					ProyectoGeneral pg = new ProyectoGeneral(textField.getText(),new Usuario(textField_1.getText()));
+					pg.setDescripcion(textArea.getText());
 					Proyectos p = new Proyectos(user);
 					p.setVisible(true);
 					dispose();

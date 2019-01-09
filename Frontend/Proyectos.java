@@ -37,12 +37,12 @@ public class Proyectos extends JFrame {
 	private ProyectoGeneral seleccionado;
 	private Usuario user;
 	private JButton btnVolverAlMen;
+	private JButton btnVerProyecto;
 	
 	private void actualizarVista(ProyectoGeneral p) {
 		textField.setText(p.getCoordinador().getUsuario());
 		label.setText(p.getNombre());
 		textArea.setText(p.getDescripcion());
-		
 	}
 	
 	public Proyectos(Usuario u) {
@@ -99,6 +99,7 @@ public class Proyectos extends JFrame {
 		contentPane.add(textArea);
 		
 		JButton btnActualizar = new JButton("Cambiar coordinador");
+		btnActualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (user.getRol().getNivel() == 3) {
@@ -114,10 +115,11 @@ public class Proyectos extends JFrame {
 				
 			}
 		});
-		btnActualizar.setBounds(436, 254, 195, 29);
+		btnActualizar.setBounds(437, 311, 195, 29);
 		contentPane.add(btnActualizar);
 		
 		JButton btnNuevoProyecto = new JButton("Nuevo proyecto");
+		btnNuevoProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNuevoProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
@@ -125,10 +127,11 @@ public class Proyectos extends JFrame {
 				dispose();
 			}
 		});
-		btnNuevoProyecto.setBounds(436, 310, 195, 29);
+		btnNuevoProyecto.setBounds(437, 367, 195, 29);
 		contentPane.add(btnNuevoProyecto);
 		
 		btnVolverAlMen = new JButton("Volver al men\u00FA");
+		btnVolverAlMen.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVolverAlMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InicioHonduras inicio = new InicioHonduras(user);
@@ -136,8 +139,20 @@ public class Proyectos extends JFrame {
 				dispose();
 			}
 		});
-		btnVolverAlMen.setBounds(436, 383, 195, 23);
+		btnVolverAlMen.setBounds(437, 440, 195, 23);
 		contentPane.add(btnVolverAlMen);
+		
+		btnVerProyecto = new JButton("Ver proyecto");
+		btnVerProyecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Proyecto p = new Proyecto(seleccionado,user);
+				p.setVisible(true);
+				dispose();
+			}
+		});
+		btnVerProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnVerProyecto.setBounds(437, 257, 195, 23);
+		contentPane.add(btnVerProyecto);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
