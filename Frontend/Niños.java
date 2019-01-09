@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -32,22 +33,23 @@ public class Niños extends JFrame {
 	private JPanel contentPane;
 	Usuario user;
 	Niño seleccionado;
+	private JList list;
+	private JScrollPane panel;
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textCodigo;
 	private JTextField textEstado;
 	private JTextField textBeca;
-	private JTextField textCP;
-	private JTextField textProvincia;
-	private JTextField textTelefono;
-	private JTextField textEmail;
-	private JTextField textCertificado;
-	private JTextField textSector;
-	private JTextField textFechaAlta;
-	private JTextField textFechaBaja;
+	private JTextField textSexo;
+	private JTextField textFechaNacimiento;
+	private JTextField textFechaEntrada;
+	private JTextField textFechaSalida;
+	private JTextField textCurso;
+	private JTextField textColoniaProcedencia;
+	private JTextField textColoniaResidencia;
 	private JTextField textObservaciones;
 	private JTextField textPadrino;
-	private JTextField textMovil;
+	private JTextField textField;
 	
 	public Niños(Usuario u) {
 		
@@ -70,10 +72,14 @@ public class Niños extends JFrame {
 		}
 		contentPane.setLayout(null);
 		
-		JList list = new JList(niños);
-		list.setBounds(10, 11, 794, 103);
+		list = new JList(niños);
+		panel = new JScrollPane(list);
+		list.setBounds(285, 11, 474, 103);
+		panel.setBounds(285,11,474,103);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		contentPane.add(list);
+		contentPane.add(panel);
+		
+		
 		
 		JLabel lblDatosDelNiño = new JLabel("Datos del niño");
 		lblDatosDelNiño.setBounds(10, 114, 132, 14);
@@ -105,52 +111,42 @@ public class Niños extends JFrame {
 		lblBeca.setBounds(10, 287, 79, 14);
 		contentPane.add(lblBeca);
 		
-		JLabel lblCodigoPostal = new JLabel("Codigo Postal:");
-		lblCodigoPostal.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCodigoPostal.setBounds(10, 312, 79, 14);
-		contentPane.add(lblCodigoPostal);
+		JLabel lblSexo = new JLabel("Sexo:");
+		lblSexo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSexo.setBounds(10, 312, 79, 14);
+		contentPane.add(lblSexo);
 		
-		JLabel lblProvincia = new JLabel("Provincia:");
-		lblProvincia.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblProvincia.setBounds(10, 337, 79, 14);
-		contentPane.add(lblProvincia);
+		JLabel lblFechaNacimiento = new JLabel("Fecha de nacimiento:");
+		lblFechaNacimiento.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFechaNacimiento.setBounds(10, 337, 132, 14);
+		contentPane.add(lblFechaNacimiento);
 		
-		JLabel lblTelefonoFijomovil = new JLabel("Telefono Fijo/Movil:");
-		lblTelefonoFijomovil.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTelefonoFijomovil.setBounds(10, 362, 132, 14);
-		contentPane.add(lblTelefonoFijomovil);
+		JLabel lblFechaEntrada = new JLabel("Fecha de entrada:");
+		lblFechaEntrada.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFechaEntrada.setBounds(10, 362, 132, 14);
+		contentPane.add(lblFechaEntrada);
 		
-		JLabel lblEmail = new JLabel("E_mail:");
-		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmail.setBounds(10, 387, 46, 14);
-		contentPane.add(lblEmail);
+		JLabel lblCurso = new JLabel("Curso:");
+		lblCurso.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCurso.setBounds(435, 162, 95, 14);
+		contentPane.add(lblCurso);
 		
-		JLabel lblCertificado = new JLabel("Certificado:");
-		lblCertificado.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCertificado.setBounds(435, 162, 95, 14);
-		contentPane.add(lblCertificado);
+		JLabel lblColoniaProcedencia = new JLabel("Colonia de procedencia:");
+		lblColoniaProcedencia.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblColoniaProcedencia.setBounds(435, 190, 142, 14);
+		contentPane.add(lblColoniaProcedencia);
 		
-		JLabel lblSector = new JLabel("Sector:");
-		lblSector.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSector.setBounds(435, 190, 46, 14);
-		contentPane.add(lblSector);
-		
-		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
-		lblFechaDeAlta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaDeAlta.setBounds(435, 215, 95, 14);
-		contentPane.add(lblFechaDeAlta);
-		
-		JLabel lblFechaDeBaja = new JLabel("Fecha de Baja:");
-		lblFechaDeBaja.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaDeBaja.setBounds(435, 240, 95, 14);
-		contentPane.add(lblFechaDeBaja);
+		JLabel lblColoniaResidencia = new JLabel("Colonia de residencia:");
+		lblColoniaResidencia.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblColoniaResidencia.setBounds(435, 215, 142, 14);
+		contentPane.add(lblColoniaResidencia);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblObservaciones.setBounds(435, 265, 95, 14);
 		contentPane.add(lblObservaciones);
 		
-		JButton btnRegistrarNuevoSocio = new JButton("Registrar nuevo socio");
+		JButton btnRegistrarNuevoSocio = new JButton("Registrar nuevo ni\u00F1o");
 		btnRegistrarNuevoSocio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistrarNuevoSocio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -181,18 +177,18 @@ public class Niños extends JFrame {
 			}
 		});
 		
-		JButton btnBorrarSocio = new JButton("Desactivar socio");
-		btnBorrarSocio.addActionListener(new ActionListener() {
+		JButton btnBorrarNiño = new JButton("Desactivar ni\u00F1o");
+		btnBorrarNiño.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Socio socio = new Socio( Integer.parseInt((String) list.getSelectedValue()));
-				socio.desactivaSocio();
-				textFechaBaja.setText(socio.getFechaBaja().toString());
+				Niño niño = new Niño( Integer.parseInt((String) list.getSelectedValue()));
+				niño.desactivaNiño();
+				textFechaSalida.setText(niño.getFechaSalida().toString());
 				JOptionPane.showMessageDialog(null, "Se ha dado de baja al socio.");
 			}
 		});
-		btnBorrarSocio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrarSocio.setBounds(285, 419, 172, 23);
-		contentPane.add(btnBorrarSocio);
+		btnBorrarNiño.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnBorrarNiño.setBounds(285, 419, 172, 23);
+		contentPane.add(btnBorrarNiño);
 		
 		textNombre = new JTextField();
 		textNombre.setBounds(136, 136, 239, 20);
@@ -219,45 +215,40 @@ public class Niños extends JFrame {
 		contentPane.add(textBeca);
 		textBeca.setColumns(10);
 		
-		textCP = new JTextField();
-		textCP.setBounds(136, 309, 239, 20);
-		contentPane.add(textCP);
-		textCP.setColumns(10);
+		textSexo = new JTextField();
+		textSexo.setBounds(136, 309, 239, 20);
+		contentPane.add(textSexo);
+		textSexo.setColumns(10);
 		
-		textProvincia = new JTextField();
-		textProvincia.setBounds(136, 334, 239, 20);
-		contentPane.add(textProvincia);
-		textProvincia.setColumns(10);
+		textFechaNacimiento = new JTextField();
+		textFechaNacimiento.setBounds(136, 334, 122, 20);
+		contentPane.add(textFechaNacimiento);
+		textFechaNacimiento.setColumns(10);
 		
-		textTelefono = new JTextField();
-		textTelefono.setBounds(136, 359, 86, 20);
-		contentPane.add(textTelefono);
-		textTelefono.setColumns(10);
+		textFechaEntrada = new JTextField();
+		textFechaEntrada.setBounds(136, 359, 122, 20);
+		contentPane.add(textFechaEntrada);
+		textFechaEntrada.setColumns(10);
 		
-		textEmail = new JTextField();
-		textEmail.setBounds(135, 387, 239, 20);
-		contentPane.add(textEmail);
-		textEmail.setColumns(10);
+		textFechaSalida = new JTextField();
+		textFechaSalida.setBounds(135, 387, 122, 20);
+		contentPane.add(textFechaSalida);
+		textFechaSalida.setColumns(10);
 		
-		textCertificado = new JTextField();
-		textCertificado.setBounds(521, 159, 86, 20);
-		contentPane.add(textCertificado);
-		textCertificado.setColumns(10);
+		textCurso = new JTextField();
+		textCurso.setBounds(521, 159, 86, 20);
+		contentPane.add(textCurso);
+		textCurso.setColumns(10);
 		
-		textSector = new JTextField();
-		textSector.setBounds(521, 184, 86, 20);
-		contentPane.add(textSector);
-		textSector.setColumns(10);
+		textColoniaProcedencia = new JTextField();
+		textColoniaProcedencia.setBounds(587, 187, 86, 20);
+		contentPane.add(textColoniaProcedencia);
+		textColoniaProcedencia.setColumns(10);
 		
-		textFechaAlta = new JTextField();
-		textFechaAlta.setBounds(524, 209, 86, 20);
-		contentPane.add(textFechaAlta);
-		textFechaAlta.setColumns(10);
-		
-		textFechaBaja = new JTextField();
-		textFechaBaja.setBounds(521, 234, 86, 20);
-		contentPane.add(textFechaBaja);
-		textFechaBaja.setColumns(10);
+		textColoniaResidencia = new JTextField();
+		textColoniaResidencia.setBounds(587, 212, 86, 20);
+		contentPane.add(textColoniaResidencia);
+		textColoniaResidencia.setColumns(10);
 		
 		textObservaciones = new JTextField();
 		textObservaciones.setBounds(435, 284, 256, 57);
@@ -267,6 +258,7 @@ public class Niños extends JFrame {
 		JButton btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				
 			}
 		});
@@ -284,11 +276,24 @@ public class Niños extends JFrame {
 		contentPane.add(textPadrino);
 		textPadrino.setColumns(10);
 		
-		textMovil = new JTextField();
-		textMovil.setBounds(252, 359, 86, 20);
-		contentPane.add(textMovil);
-		textMovil.setColumns(10);
+		JLabel lblFechaDeSalida = new JLabel("Fecha de salida:");
+		lblFechaDeSalida.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFechaDeSalida.setBounds(10, 387, 95, 14);
+		contentPane.add(lblFechaDeSalida);
 		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(87, 80, 89, 23);
+		contentPane.add(btnBuscar);
+		
+		textField = new JTextField();
+		textField.setBounds(32, 49, 182, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblListaDeNios = new JLabel("Lista de ni\u00F1os");
+		lblListaDeNios.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblListaDeNios.setBounds(156, 13, 102, 14);
+		contentPane.add(lblListaDeNios);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
