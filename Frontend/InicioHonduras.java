@@ -85,7 +85,7 @@ public class InicioHonduras extends JFrame {
 				}
 			}
 		});
-		btnP.setBounds(15, 55, 101, 23);
+		btnP.setBounds(10, 98, 89, 23);
 		getContentPane().add(btnP);
 		
 	}

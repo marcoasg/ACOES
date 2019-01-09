@@ -73,9 +73,9 @@ public class Login extends JFrame {
 					Usuario user = new Usuario(textField.getText(),passwordField.getPassword());
 					JFrame hall;
 					
-					if (user.getRol().getPais() == "ESP") {
+					if (user.getRol().getPais().equals("ESP")) {
 						hall = new InicioEspaña(user);
-					} else if (user.getRol().getPais() == "HON") {
+					} else if (user.getRol().getPais().equals("HON")) {
 						hall = new InicioHonduras(user);
 					} else {
 						hall = new InicioAdmin(user);

@@ -36,6 +36,7 @@ public class Proyectos extends JFrame {
 	private JScrollPane panel;
 	private ProyectoGeneral seleccionado;
 	private Usuario user;
+	private JButton btnVolverAlMen;
 	
 	private void actualizarVista(ProyectoGeneral p) {
 		textField.setText(p.getCoordinador().getUsuario());
@@ -47,7 +48,7 @@ public class Proyectos extends JFrame {
 	public Proyectos(Usuario u) {
 		user = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 880, 546);
+		setBounds(100, 100, 689, 526);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -117,6 +118,17 @@ public class Proyectos extends JFrame {
 		JButton btnNuevoProyecto = new JButton("Nuevo proyecto");
 		btnNuevoProyecto.setBounds(436, 310, 195, 29);
 		contentPane.add(btnNuevoProyecto);
+		
+		btnVolverAlMen = new JButton("Volver al men\u00FA");
+		btnVolverAlMen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InicioHonduras inicio = new InicioHonduras(user);
+				inicio.setVisible(true);
+				dispose();
+			}
+		});
+		btnVolverAlMen.setBounds(436, 383, 195, 23);
+		contentPane.add(btnVolverAlMen);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
