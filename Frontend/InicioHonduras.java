@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -72,6 +73,20 @@ public class InicioHonduras extends JFrame {
 		lblMenu.setBounds(21, 16, 46, 14);
 		getContentPane().add(lblMenu);
 		
+		JButton btnP = new JButton("Proyectos");
+		btnP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(user.getRol().getNivel()>=2) {
+					Proyectos pr = new Proyectos(user);
+					pr.setVisible(true);
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "No tiene permiso ");
+				}
+			}
+		});
+		btnP.setBounds(15, 55, 101, 23);
+		getContentPane().add(btnP);
+		
 	}
-
 }
