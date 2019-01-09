@@ -32,7 +32,7 @@ public class Niño
 		
 		for(Object[] tupla: miBD.Select("SELECT * FROM tNiño;"))
 		{
-			Niño r = new Niño( ((Integer)tupla[2]));
+			Niño r = new Niño( ((Integer)tupla[1]));
 			lista.add(r);
 		}
 		resultado = new Niño[lista.size()];
@@ -54,19 +54,18 @@ public class Niño
     	}else {
     		Object[] tupla = lista.get(0);
         	nombre = (String)tupla[0];
-        	padrino = new Socio((Integer)tupla[1]);
-            codigo = (int)tupla[2];
-            apellidos = tupla[3] == null ? "" : (String)tupla[3];
-            estado = tupla[4] == null ? "" : (String)tupla[4];
-            beca = tupla[5] == null ? "" : (String)tupla[5];
-            sexo = tupla[6] == null ? "" : (String)tupla[6];
-            fechaNacimiento = tupla[7] == null ? null : (Date)tupla[7];
-            fechaEntrada = tupla[8] == null ? null : (Date)tupla[8];
-            fechaSalida = tupla[9] == null ? null : (Date)tupla[9];
-            curso = tupla[10] == null ? "" : (String)tupla[10];
-            coloniaProcedencia = tupla[11] == null ? "" : (String)tupla[11];
-            coloniaResidencia = tupla[12] == null ? "" : (String)tupla[12];
-            observaciones = tupla[13] == null ? "" : (String)tupla[13];
+            codigo = (int)tupla[1];
+            apellidos = tupla[2] == null ? "" : (String)tupla[2];
+            estado = tupla[3] == null ? "" : (String)tupla[3];
+            beca = tupla[4] == null ? "" : (String)tupla[4];
+            sexo = tupla[5] == null ? "" : (String)tupla[5];
+            fechaNacimiento = tupla[6] == null ? null : (Date)tupla[6];
+            fechaEntrada = tupla[7] == null ? null : (Date)tupla[7];
+            fechaSalida = tupla[8] == null ? null : (Date)tupla[8];
+            curso = tupla[9] == null ? "" : (String)tupla[9];
+            coloniaProcedencia = tupla[10] == null ? "" : (String)tupla[10];
+            coloniaResidencia = tupla[11] == null ? "" : (String)tupla[11];
+            observaciones = tupla[12] == null ? "" : (String)tupla[12];
     	}
 	}
 	
@@ -107,18 +106,6 @@ public class Niño
     	String fecha = formatoDelTexto.format(date);
     	miBD.Update("UPDATE tNiño set fechaSalida = '" + fecha + "' WHERE codigo = " + this.codigo + ";");
     	fechaSalida = date;
-    }
-    public Socio getPadrino() 
-    { 
-    	return padrino; 
-    }
-        
-    public void setPadrino (Socio value)
-    { 
-		// Actualiza el atributo en memoria y en la base de datos
-    	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set padrino = " + value.getNumSocio() + " WHERE codigo = " + codigo + ";");
-    	padrino = value;
     }
 
     public int getCodigo() {

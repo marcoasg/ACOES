@@ -110,7 +110,7 @@ public class Usuarios extends JFrame {
 		String[] usuarios = new String[lista.length];
 		int i = 0;
 		for (Usuario us : lista) {
-			if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais())
+			if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais().equals(user.getRol().getPais()))
 				usuarios[i] = us.getUsuario();
 			i++;
 		}
@@ -420,7 +420,7 @@ public class Usuarios extends JFrame {
 				DefaultListModel<String> modelo = new DefaultListModel<>();
 				int i = 0;
 				for (Usuario us : lista) {
-					if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais()) {
+					if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais().equals(user.getRol().getPais())) {
 						if (us.getUsuario().contains(textBuscar.getText()))
 							modelo.addElement(us.getUsuario());
 					}

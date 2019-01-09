@@ -35,7 +35,6 @@ public class RegistroNiños extends JFrame {
 
 	private JPanel contentPane;
 	Usuario user;
-	private JTextField textPadrino;
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textEstado;
@@ -63,15 +62,6 @@ public class RegistroNiños extends JFrame {
 		lblRelleneLosSiguientes.setBounds(121, 28, 389, 14);
 		contentPane.add(lblRelleneLosSiguientes);
 		
-		JLabel lblPadrino = new JLabel("Padrino:");
-		lblPadrino.setBounds(33, 124, 89, 14);
-		contentPane.add(lblPadrino);
-		
-		textPadrino = new JTextField();
-		textPadrino.setBounds(144, 121, 160, 20);
-		contentPane.add(textPadrino);
-		textPadrino.setColumns(10);
-		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(33, 71, 89, 14);
 		contentPane.add(lblNombre);
@@ -91,11 +81,11 @@ public class RegistroNiños extends JFrame {
 		textApellidos.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(33, 155, 89, 14);
+		lblEstado.setBounds(33, 135, 89, 14);
 		contentPane.add(lblEstado);
 		
 		textEstado = new JTextField();
-		textEstado.setBounds(144, 155, 160, 20);
+		textEstado.setBounds(144, 135, 160, 20);
 		contentPane.add(textEstado);
 		textEstado.setColumns(10);
 		
@@ -188,7 +178,6 @@ public class RegistroNiños extends JFrame {
 						Niño n = new Niño();
 						n.setNombre(textNombre.getText());
 						n.setApellidos(textApellidos.getText());
-						if(textPadrino.getText().length() > 0)n.setPadrino(new Socio(Integer.parseInt(textPadrino.getText())));
 						n.setEstado(textEstado.getText());
 						n.setBeca(textBeca.getText());
 						n.setSexo(textSexo.getText());

@@ -51,7 +51,6 @@ public class Niños extends JFrame {
 	private JTextField textColoniaProcedencia;
 	private JTextField textColoniaResidencia;
 	private JTextField textObservaciones;
-	private JTextField textPadrino;
 	private JTextField textBuscar;
 	
 	private void actualizarVista(Niño seleccionado) {
@@ -59,7 +58,6 @@ public class Niños extends JFrame {
 			
 			textNombre.setText(seleccionado.getNombre());
 			textApellidos.setText(seleccionado.getApellidos());
-			if(seleccionado.getPadrino() != null)textPadrino.setText(Integer.toString(seleccionado.getPadrino().getNumSocio()));
 			textCodigo.setText(Integer.toString(seleccionado.getCodigo()));
 			textEstado.setText(seleccionado.getEstado());
 			textBeca.setText(seleccionado.getBeca());
@@ -315,9 +313,6 @@ public class Niños extends JFrame {
 					if(!textApellidos.getText().equals(seleccionado.getApellidos())) {
 						seleccionado.setApellidos(textApellidos.getText());
 					}
-					if(textPadrino.getText().length() > 0  && Integer.parseInt(textPadrino.getText()) != seleccionado.getPadrino().getNumSocio()) {
-						seleccionado.setPadrino(new Socio(seleccionado.getPadrino().getNumSocio()));
-					}
 					if(!textEstado.getText().equals(seleccionado.getEstado())) {
 						seleccionado.setEstado(textEstado.getText());
 					}
@@ -382,16 +377,6 @@ public class Niños extends JFrame {
 		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnActualizar.setBounds(445, 352, 172, 49);
 		contentPane.add(btnActualizar);
-		
-		JLabel lblPadrino = new JLabel("Padrino:");
-		lblPadrino.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPadrino.setBounds(10, 195, 63, 14);
-		contentPane.add(lblPadrino);
-		
-		textPadrino = new JTextField();
-		textPadrino.setBounds(136, 192, 238, 20);
-		contentPane.add(textPadrino);
-		textPadrino.setColumns(10);
 		
 		JLabel lblFechaDeSalida = new JLabel("Fecha de salida:");
 		lblFechaDeSalida.setFont(new Font("Tahoma", Font.BOLD, 11));

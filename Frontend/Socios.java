@@ -52,6 +52,7 @@ public class Socios extends JFrame {
 	private JTextField textMovil;
 	private JList list;
 	private JScrollPane panel;
+	private JScrollPane panelNiños;
 	
 	private void actualizarVista(Socio seleccionado) {
 			textNombre.setText(seleccionado.getNombre());
@@ -109,8 +110,8 @@ public class Socios extends JFrame {
 		contentPane.setLayout(null);
 		
 		list = new JList(socios);
-		list.setBounds(29, 350, 279, 103);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		list.setBounds(29, 350, 279, 103);
 		panel = new JScrollPane(list);
 		panel.setBounds(29, 350, 279, 103);
 		contentPane.add(panel);
@@ -214,9 +215,9 @@ public class Socios extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame hall;
 				
-				if (user.getRol().getPais() == "ESP") {
+				if (user.getRol().getPais().equals("ESP")) {
 					hall = new InicioEspaña(user);
-				} else if (user.getRol().getPais() == "HON") {
+				} else if (user.getRol().getPais().equals("HON")) {
 					hall = new InicioHonduras(user);
 				} else {
 					hall = new InicioAdmin(user);
@@ -253,6 +254,8 @@ public class Socios extends JFrame {
 		textEstado.setBounds(136, 139, 238, 20);
 		contentPane.add(textEstado);
 		textEstado.setColumns(10);
+		
+		
 		
 		textNIF = new JTextField();
 		textNIF.setBounds(135, 164, 239, 20);
@@ -356,7 +359,7 @@ public class Socios extends JFrame {
 					if(textSector.getText() != seleccionado.getSector()) {
 						seleccionado.setSector(textSector.getText());
 					}
-					if(textFechaAlta.getText() != seleccionado.getFechaAlta().toString() && textFechaAlta.getText() != "") {
+					if(textFechaAlta.getText().length() > 0 && (textFechaAlta.getText() != seleccionado.getFechaAlta().toString() && textFechaAlta.getText() != "")) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaAlta.getText();
 						Date fechaAlta = null;
@@ -407,9 +410,7 @@ public class Socios extends JFrame {
 		contentPane.add(textMovil);
 		textMovil.setColumns(10);
 		
-		JList Apadrinados = new JList();
-		Apadrinados.setBounds(676, 350, 179, 103);
-		contentPane.add(Apadrinados);
+
 		
 		JButton btnApadrinar = new JButton("Apadrinar");
 		btnApadrinar.addActionListener(new ActionListener() {
@@ -456,7 +457,15 @@ public class Socios extends JFrame {
 					}
 					textObservaciones.setText(seleccionado.getObservaciones());
 				
-				
+					Niño[] listaNiños = seleccionado.listaApadrinados();
+					JList Apadrinados = new JList(listaNiños);
+					Apadrinados.setBounds(676, 350, 179, 103);
+					Apadrinados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+					panelNiños = new JScrollPane(Apadrinados);
+					panelNiños.setBounds(676, 350, 179, 103);
+					contentPane.add(Apadrinados);
+					
+					
 			}
 		});
 

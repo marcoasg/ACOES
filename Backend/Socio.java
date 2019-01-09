@@ -293,4 +293,27 @@ public class Socio
     	miBD.Update("UPDATE tSocio set observaciones = '" + observaciones + "' WHERE numSocio = " + this.numSocio + ";");
 		this.observaciones = observaciones;
 	}
+	
+	public Niño[] listaApadrinados() {
+		List<Niño> lista = new ArrayList<Niño>();
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		Niño[] resultado;
+		
+		for(Object[] tupla: miBD.Select("SELECT niño FROM tApadrinamiento WHERE socio = "+ this.numSocio+";"))
+		{
+			Niño r = new Niño( ((Integer)tupla[0]));
+			lista.add(r);
+		}
+		resultado = new Niño[lista.size()];
+		int i = 0;
+		for (Niño n : lista) {
+			resultado[i] = n;
+			i++;
+		}
+		return resultado;
+		
+		
+		
+	}
+	
 }
