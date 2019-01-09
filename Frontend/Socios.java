@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -49,6 +50,42 @@ public class Socios extends JFrame {
 	private JTextField textRelacion;
 	private JTextField textAgente;
 	private JTextField textMovil;
+	private JList list;
+	private JScrollPane panel;
+	
+	private void actualizarVista(Socio seleccionado) {
+			textNombre.setText(seleccionado.getNombre());
+			textApellidos.setText(seleccionado.getApellidos());
+			textEstado.setText(seleccionado.getEstado());
+			textNIF.setText(seleccionado.getNif());
+			textDireccion.setText(seleccionado.getDireccion());
+			textCP.setText("" + seleccionado.getCodigoPostal());
+			textProvincia.setText(seleccionado.getProvincia());
+			textTelefono.setText(seleccionado.getTelefonoFijo());
+			textMovil.setText(seleccionado.getTelefonoMovil());
+			textEmail.setText(seleccionado.getEmail());
+			textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
+			textSector.setText(seleccionado.getSector());
+			
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			
+			if (seleccionado.getFechaAlta() == null) {
+				textFechaAlta.setText("");
+			} else {
+				String strFechaAlta = formatoDelTexto.format(seleccionado.getFechaAlta());
+				textFechaAlta.setText(strFechaAlta);
+			}
+			
+			if (seleccionado.getFechaBaja() == null) {
+				textFechaBaja.setText("");
+			} else {
+				String strFechaBaja = formatoDelTexto.format(seleccionado.getFechaBaja());
+				textFechaBaja.setText(strFechaBaja);
+
+			}
+			textObservaciones.setText(seleccionado.getObservaciones());
+		}
+		
 	
 	public Socios(Usuario u) {
 		
@@ -71,10 +108,12 @@ public class Socios extends JFrame {
 		}
 		contentPane.setLayout(null);
 		
-		JList list = new JList(socios);
+		list = new JList(socios);
 		list.setBounds(29, 350, 279, 103);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		contentPane.add(list);
+		panel = new JScrollPane(list);
+		panel.setBounds(29, 350, 279, 103);
+		contentPane.add(panel);
 		
 		JLabel lblDatosDelSocio = new JLabel("Datos del socio");
 		lblDatosDelSocio.setBounds(10, 11, 132, 14);
@@ -336,6 +375,7 @@ public class Socios extends JFrame {
 					
 				}
 				
+				actualizarVista(seleccionado);
 			}
 		});
 		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 13));
