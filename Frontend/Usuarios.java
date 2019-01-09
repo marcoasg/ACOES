@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -49,6 +50,8 @@ public class Usuarios extends JFrame {
 	private JTextField textRol;
 	private JTextField textTelfMovil;
 	private JLabel lblNewLabel;
+	private JTextField textBuscar;
+	private JList list;
 	
 	private void actualizarVista(Usuario seleccionado) {
 		if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
@@ -111,8 +114,8 @@ public class Usuarios extends JFrame {
 		}
 		contentPane.setLayout(null);
 		
-		JList list = new JList(usuarios);
-		list.setBounds(10, 11, 794, 103);
+		list = new JList(usuarios);
+		list.setBounds(285, 11, 474, 103);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		contentPane.add(list);
 		
@@ -400,6 +403,36 @@ public class Usuarios extends JFrame {
 		textTelfMovil.setBounds(232, 359, 86, 20);
 		contentPane.add(textTelfMovil);
 		textTelfMovil.setColumns(10);
+		
+		JLabel lblListaDeUsuarios = new JLabel("Lista de usuarios:");
+		lblListaDeUsuarios.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblListaDeUsuarios.setBounds(164, 12, 111, 14);
+		contentPane.add(lblListaDeUsuarios);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Usuario[] lista = Usuario.ListaUsuarios();
+				DefaultListModel modelo = new DefaultListModel();
+				int i = 0;
+				for (Usuario us : lista) {
+					if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais()) {
+						if (us.getUsuario().contains(textBuscar.getText()))
+							modelo.addElement(us.getUsuario());
+					}
+					i++;
+				}
+				
+				list.setModel(modelo);
+			}
+		});
+		btnBuscar.setBounds(88, 91, 89, 23);
+		contentPane.add(btnBuscar);
+		
+		textBuscar = new JTextField();
+		textBuscar.setBounds(43, 60, 179, 20);
+		contentPane.add(textBuscar);
+		textBuscar.setColumns(10);
 		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
