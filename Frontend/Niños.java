@@ -223,13 +223,13 @@ public class Niños extends JFrame {
 			}
 		});
 		
-		JButton btnBorrarNiño = new JButton("Desactivar ni\u00F1o");
+		JButton btnBorrarNiño = new JButton("Dar de baja ni\u00F1o");
 		btnBorrarNiño.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Niño niño = new Niño( Integer.parseInt((String) list.getSelectedValue()));
 				niño.desactivaNiño();
 				textFechaSalida.setText(niño.getFechaSalida().toString());
-				JOptionPane.showMessageDialog(null, "Se ha dado de baja al socio.");
+				JOptionPane.showMessageDialog(null, "Se ha dado de baja al niño.");
 			}
 		});
 		btnBorrarNiño.setFont(new Font("Tahoma", Font.PLAIN, 12));
