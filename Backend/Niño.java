@@ -54,7 +54,7 @@ public class Niño
     	}else {
     		Object[] tupla = lista.get(0);
         	nombre = (String)tupla[0];
-            codigo = (int)tupla[1];
+            codigo = (Integer)tupla[1];
             apellidos = tupla[2] == null ? "" : (String)tupla[2];
             estado = tupla[3] == null ? "" : (String)tupla[3];
             beca = tupla[4] == null ? "" : (String)tupla[4];
@@ -149,7 +149,7 @@ public class Niño
 	public void setBeca(String value) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	miBD.Update("UPDATE tNiño set beca = '" + value + "' WHERE codigo = " + this.codigo + ";");
-		this.beca = beca;
+		this.beca = value;
 	}
 
 	public String getSexo() {

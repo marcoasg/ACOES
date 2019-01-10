@@ -105,6 +105,7 @@ public class Usuarios extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		Usuario[] lista = Usuario.ListaUsuarios();
 		String[] usuarios = new String[lista.length];
@@ -114,7 +115,7 @@ public class Usuarios extends JFrame {
 				usuarios[i] = us.getUsuario();
 			i++;
 		}
-		contentPane.setLayout(null);
+
 		
 		list = new JList(usuarios);
 		list.setBounds(285, 11, 474, 103);

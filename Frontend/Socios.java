@@ -426,9 +426,9 @@ public class Socios extends JFrame {
 					Object[] tupla = lista.get(0);
 					Niño child = new Niño((Integer) tupla[0]);
 					Apadrinamiento apadrinamiento = new Apadrinamiento(seleccionado, child);
-					JOptionPane.showMessageDialog(null, "Apadrinamiento completado, un pequeño paso para el hombre, pero un gran salto para Olive");
+					JOptionPane.showMessageDialog(null, child.getNombre() + " apadrinado.");
 				} else {
-					JOptionPane.showMessageDialog(null, "Error en algun sitio");
+					JOptionPane.showMessageDialog(null, "No hay niños para apadrinar.");
 				}
 				
 			}
@@ -437,6 +437,18 @@ public class Socios extends JFrame {
 		contentPane.add(btnApadrinar);
 		
 		JButton btnHacerEnvo = new JButton("Hacer env\u00EDo");
+		btnHacerEnvo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (seleccionado != null) {
+					RegistrarEnvio registro = new RegistrarEnvio(seleccionado,user);
+					registro.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Seleccione un socio.");
+				}
+				
+			}
+		});
 		btnHacerEnvo.setBounds(358, 487, 191, 23);
 		contentPane.add(btnHacerEnvo);
 		
