@@ -105,16 +105,17 @@ public class Usuarios extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		Usuario[] lista = Usuario.ListaUsuarios();
 		String[] usuarios = new String[lista.length];
 		int i = 0;
 		for (Usuario us : lista) {
-			if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais())
+			if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais().equals(user.getRol().getPais()))
 				usuarios[i] = us.getUsuario();
 			i++;
 		}
-		contentPane.setLayout(null);
+
 		
 		list = new JList(usuarios);
 		list.setBounds(285, 11, 474, 103);
@@ -227,9 +228,9 @@ public class Usuarios extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame hall;
 				
-				if (user.getRol().getPais() == "ESP") {
+				if (user.getRol().getPais().equals("ESP")) {
 					hall = new InicioEspaña(user);
-				} else if (user.getRol().getPais() == "HON") {
+				} else if (user.getRol().getPais().equals("HON")) {
 					hall = new InicioHonduras(user);
 				} else {
 					hall = new InicioAdmin(user);
@@ -420,7 +421,7 @@ public class Usuarios extends JFrame {
 				DefaultListModel<String> modelo = new DefaultListModel<>();
 				int i = 0;
 				for (Usuario us : lista) {
-					if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais() == user.getRol().getPais()) {
+					if (user.getRol().getRolName().equals("Administrador") || us.getRol().getPais().equals(user.getRol().getPais())) {
 						if (us.getUsuario().contains(textBuscar.getText()))
 							modelo.addElement(us.getUsuario());
 					}

@@ -32,7 +32,7 @@ public class Niño
 		
 		for(Object[] tupla: miBD.Select("SELECT * FROM tNiño;"))
 		{
-			Niño r = new Niño( ((Integer)tupla[0]));
+			Niño r = new Niño( ((Integer)tupla[1]));
 			lista.add(r);
 		}
 		resultado = new Niño[lista.size()];
@@ -54,19 +54,18 @@ public class Niño
     	}else {
     		Object[] tupla = lista.get(0);
         	nombre = (String)tupla[0];
-        	padrino = (Socio)tupla[1];
-            codigo = (int)tupla[2];
-            apellidos = tupla[3] == null ? "" : (String)tupla[3];
-            estado = tupla[4] == null ? "" : (String)tupla[4];
-            beca = tupla[5] == null ? "" : (String)tupla[5];
-            sexo = tupla[6] == null ? "" : (String)tupla[6];
-            fechaNacimiento = tupla[7] == null ? null : (Date)tupla[7];
-            fechaEntrada = tupla[8] == null ? null : (Date)tupla[8];
-            fechaSalida = tupla[9] == null ? null : (Date)tupla[9];
-            curso = tupla[10] == null ? "" : (String)tupla[10];
-            coloniaProcedencia = tupla[11] == null ? "" : (String)tupla[11];
-            coloniaResidencia = tupla[12] == null ? "" : (String)tupla[12];
-            observaciones = tupla[13] == null ? "" : (String)tupla[13];
+            codigo = (Integer)tupla[1];
+            apellidos = tupla[2] == null ? "" : (String)tupla[2];
+            estado = tupla[3] == null ? "" : (String)tupla[3];
+            beca = tupla[4] == null ? "" : (String)tupla[4];
+            sexo = tupla[5] == null ? "" : (String)tupla[5];
+            fechaNacimiento = tupla[6] == null ? null : (Date)tupla[6];
+            fechaEntrada = tupla[7] == null ? null : (Date)tupla[7];
+            fechaSalida = tupla[8] == null ? null : (Date)tupla[8];
+            curso = tupla[9] == null ? "" : (String)tupla[9];
+            coloniaProcedencia = tupla[10] == null ? "" : (String)tupla[10];
+            coloniaResidencia = tupla[11] == null ? "" : (String)tupla[11];
+            observaciones = tupla[12] == null ? "" : (String)tupla[12];
     	}
 	}
 	
@@ -76,7 +75,7 @@ public class Niño
     {
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME); 
-    	miBD.Insert("INSERT INTO tNiño VALUES(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)");
+    	miBD.Insert("INSERT INTO tNiño VALUES(null, null, null, null, null, null, null, null, null, null, null, null, null)");
     	codigo = (Integer) miBD.Select("SELECT MAX(codigo) FROM tNiño;").get(0)[0];
    	
     }
@@ -91,7 +90,7 @@ public class Niño
     	
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set nombre = '" + value + "' WHERE numSocio = '" + codigo + "';");
+    	miBD.Update("UPDATE tNiño set nombre = '" + value + "' WHERE codigo = " + codigo + ";");
     	nombre = value;
     	
 
@@ -105,29 +104,14 @@ public class Niño
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
     	Date date = new Date();
     	String fecha = formatoDelTexto.format(date);
-    	miBD.Update("UPDATE tNiño set fechaBaja = '" + fecha + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set fechaSalida = '" + fecha + "' WHERE codigo = " + this.codigo + ";");
     	fechaSalida = date;
-    }
-    public Socio getPadrino() 
-    { 
-    	return padrino; 
-    }
-        
-    public void setPadrino (Socio value)
-    { 
-		// Actualiza el atributo en memoria y en la base de datos
-    	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set agente = '" + value + "' WHERE numSocio = '" + codigo + "';");
-    	padrino = value;
     }
 
     public int getCodigo() {
     	return codigo;
     }
     
-    public void setCodigo(int value) {
-    	codigo = value;
-    }
     
     public String getApellidos()
     {
@@ -137,7 +121,7 @@ public class Niño
     public void setApellidos(String value)
     {
        	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set relacion = '" + value + "' WHERE numSocio = '" + codigo + "';");
+    	miBD.Update("UPDATE tNiño set apellidos = '" + value + "' WHERE codigo = " + codigo + ";");
     	apellidos = value;    
     }
 
@@ -154,7 +138,7 @@ public class Niño
 
 	public void setEstado(String estado) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set estado = '" + estado + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set estado = '" + estado + "' WHERE codigo = " + this.codigo + ";");
 		this.estado = estado;
 	}
 
@@ -164,8 +148,8 @@ public class Niño
 
 	public void setBeca(String value) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set nif = '" + value + "' WHERE numSocio = '" + this.codigo + "';");
-		this.beca = beca;
+    	miBD.Update("UPDATE tNiño set beca = '" + value + "' WHERE codigo = " + this.codigo + ";");
+		this.beca = value;
 	}
 
 	public String getSexo() {
@@ -174,7 +158,7 @@ public class Niño
 
 	public void setSexo(String value) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set direccion = '" + value + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set sexo = '" + value + "' WHERE codigo = " + this.codigo + ";");
 		this.sexo = value;
 	}
 
@@ -185,18 +169,18 @@ public class Niño
 	public void setFechaNacimiento(Date value) {
 		BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tNiño set fechaAlta = '" + formatoDelTexto.format(fechaNacimiento) + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set fechaNacimiento = '" + formatoDelTexto.format(value) + "' WHERE codigo = " + this.codigo + ";");
 		this.fechaNacimiento = value;
 	}
 
 	public Date getFechaEntrada() {
-		return fechaNacimiento;
+		return fechaEntrada;
 	}
 
 	public void setFechaEntrada(Date value) {
 		BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tNiño set fechaAlta = '" + formatoDelTexto.format(fechaEntrada) + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set fechaEntrada = '" + formatoDelTexto.format(value) + "' WHERE codigo = " + this.codigo + ";");
 		this.fechaEntrada = value;
 	}
 
@@ -207,7 +191,7 @@ public class Niño
 	public void setFechaSalida(Date value) {
 		BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tNiño set fechaAlta = '" + formatoDelTexto.format(fechaSalida) + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set fechaSalida = '" + formatoDelTexto.format(value) + "' WHERE codigo = " + this.codigo + ";");
 		this.fechaSalida = value;
 	}
 
@@ -217,7 +201,7 @@ public class Niño
 
 	public void setCurso(String value) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set telefonoMovil = '" + value + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set curso = '" + value + "' WHERE codigo = " + this.codigo + ";");
 		this.curso = value;
 	}
 
@@ -227,7 +211,7 @@ public class Niño
 
 	public void setColoniaProcedencia(String value) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set email = '" + value + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set coloniaProcedencia = '" + value + "' WHERE codigo = " + this.codigo + ";");
 		this.coloniaProcedencia = value;
 	}
 
@@ -237,7 +221,7 @@ public class Niño
 
 	public void setColoniaResidencia(String value) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set certificado = " + value + " WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set coloniaResidencia = " + value + " WHERE codigo = " + this.codigo + ";");
 		this.coloniaResidencia = value;
 	}
 
@@ -248,7 +232,7 @@ public class Niño
 
 	public void setObservaciones(String observaciones) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tNiño set observaciones = '" + observaciones + "' WHERE numSocio = '" + this.codigo + "';");
+    	miBD.Update("UPDATE tNiño set observaciones = '" + observaciones + "' WHERE codigo = " + this.codigo + ";");
 		this.observaciones = observaciones;
 	}
 }

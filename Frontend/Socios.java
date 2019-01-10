@@ -19,11 +19,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -33,6 +35,8 @@ public class Socios extends JFrame {
 	private JPanel contentPane;
 	Usuario user;
 	Socio seleccionado;
+    private static String BD_SERVER = "localhost";
+    private static String BD_NAME = "ACOES";
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textEstado;
@@ -52,6 +56,8 @@ public class Socios extends JFrame {
 	private JTextField textMovil;
 	private JList list;
 	private JScrollPane panel;
+	private JScrollPane panelNiños;
+	private JTextField textField;
 	
 	private void actualizarVista(Socio seleccionado) {
 			textNombre.setText(seleccionado.getNombre());
@@ -94,7 +100,7 @@ public class Socios extends JFrame {
 		getContentPane().add(spinner, BorderLayout.NORTH);
 		user = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 906, 563);
+		setBounds(100, 100, 654, 563);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -109,8 +115,8 @@ public class Socios extends JFrame {
 		contentPane.setLayout(null);
 		
 		list = new JList(socios);
-		list.setBounds(29, 350, 279, 103);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		list.setBounds(29, 350, 279, 103);
 		panel = new JScrollPane(list);
 		panel.setBounds(29, 350, 279, 103);
 		contentPane.add(panel);
@@ -214,9 +220,9 @@ public class Socios extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame hall;
 				
-				if (user.getRol().getPais() == "ESP") {
+				if (user.getRol().getPais().equals("ESP")) {
 					hall = new InicioEspaña(user);
-				} else if (user.getRol().getPais() == "HON") {
+				} else if (user.getRol().getPais().equals("HON")) {
 					hall = new InicioHonduras(user);
 				} else {
 					hall = new InicioAdmin(user);
@@ -253,6 +259,8 @@ public class Socios extends JFrame {
 		textEstado.setBounds(136, 139, 238, 20);
 		contentPane.add(textEstado);
 		textEstado.setColumns(10);
+		
+		
 		
 		textNIF = new JTextField();
 		textNIF.setBounds(135, 164, 239, 20);
@@ -356,7 +364,7 @@ public class Socios extends JFrame {
 					if(textSector.getText() != seleccionado.getSector()) {
 						seleccionado.setSector(textSector.getText());
 					}
-					if(textFechaAlta.getText() != seleccionado.getFechaAlta().toString() && textFechaAlta.getText() != "") {
+					if(textFechaAlta.getText().length() > 0 && (textFechaAlta.getText() != seleccionado.getFechaAlta().toString() && textFechaAlta.getText() != "")) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaAlta.getText();
 						Date fechaAlta = null;
@@ -407,17 +415,66 @@ public class Socios extends JFrame {
 		contentPane.add(textMovil);
 		textMovil.setColumns(10);
 		
-		JList Apadrinados = new JList();
-		Apadrinados.setBounds(676, 350, 179, 103);
-		contentPane.add(Apadrinados);
+
 		
 		JButton btnApadrinar = new JButton("Apadrinar");
-		btnApadrinar.setBounds(704, 255, 89, 23);
+		btnApadrinar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BD miBD = new BD(BD_SERVER,BD_NAME);
+				List<Object[]> lista = miBD.Select("SELECT codigo from tNiño where codigo not in (select niño from tApadrinamiento);");
+				if (!lista.isEmpty()) {
+					Object[] tupla = lista.get(0);
+					Niño child = new Niño((Integer) tupla[0]);
+					Apadrinamiento apadrinamiento = new Apadrinamiento(seleccionado, child);
+					JOptionPane.showMessageDialog(null, child.getNombre() + " apadrinado.");
+				} else {
+					JOptionPane.showMessageDialog(null, "No hay niños para apadrinar.");
+				}
+				
+			}
+		});
+		btnApadrinar.setBounds(358, 453, 191, 23);
 		contentPane.add(btnApadrinar);
 		
 		JButton btnHacerEnvo = new JButton("Hacer env\u00EDo");
-		btnHacerEnvo.setBounds(704, 289, 89, 23);
+		btnHacerEnvo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (seleccionado != null) {
+					RegistrarEnvio registro = new RegistrarEnvio(seleccionado,user);
+					registro.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Seleccione un socio.");
+				}
+				
+			}
+		});
+		btnHacerEnvo.setBounds(358, 487, 191, 23);
 		contentPane.add(btnHacerEnvo);
+		
+		textField = new JTextField();
+		textField.setBounds(101, 464, 144, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Socio[] lista = Socio.ListaSocios();
+				DefaultListModel<String> modelo = new DefaultListModel<>();
+				int i = 0;
+				for (Socio so : lista) {
+						String completo = Integer.toString(so.getNumSocio());
+						if (completo.contains(textField.getText()))
+							modelo.addElement(Integer.toString(so.getNumSocio()));
+					i++;
+				}
+				
+				list.setModel(modelo);
+			}
+		});
+		btnBuscar.setBounds(133, 490, 89, 23);
+		contentPane.add(btnBuscar);
 		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -453,6 +510,7 @@ public class Socios extends JFrame {
 					textObservaciones.setText(seleccionado.getObservaciones());
 				
 				
+					
 			}
 		});
 

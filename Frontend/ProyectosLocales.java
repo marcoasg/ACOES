@@ -42,6 +42,8 @@ public class ProyectosLocales extends JFrame {
 		
 	}
 
+
+
 	public ProyectosLocales(ProyectoGeneral p, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 782, 504);
