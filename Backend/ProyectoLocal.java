@@ -12,6 +12,7 @@ public class ProyectoLocal {
 	private ProyectoGeneral proyecto;
 	private Usuario coordinador;
 	private int codigo;
+
 	
 	 public static ProyectoLocal[] ListaProyectosLocales(ProyectoGeneral pg)
 		{

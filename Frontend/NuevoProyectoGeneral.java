@@ -26,9 +26,6 @@ public class NuevoProyectoGeneral extends JFrame {
 	private JTextField textField_1;
 	private Usuario user;
 
-	/**
-	 * Create the frame.
-	 */
 	public NuevoProyectoGeneral(Usuario u) {
 		user = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

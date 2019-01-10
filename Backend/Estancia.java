@@ -16,6 +16,27 @@ public class Estancia {
 	private Date fechaBaja;
 	private int codigo;
 	
+	public static Estancia[] listaEstancias (ProyectoLocal pl) {
+		List<Estancia> lista = new ArrayList<Estancia>();
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		Estancia[] res;
+		
+		for(Object[] tupla: miBD.Select("SELECT * FROM tEstancia WHERE proyecto = "+pl.getCodigo()+";"))
+		{
+			Estancia e = new Estancia((Integer)tupla[4]);
+			lista.add(e);
+		}
+		res = new Estancia[lista.size()];
+		int i = 0;
+		for (Estancia e : lista) {
+			res[i] = e;
+			i++;
+		}
+		return res;
+		
+		
+	}
+	
 	public Estancia(int c) {
     	// Crea el objeto cargando sus valores de la base de datos
     	if ((Integer)c == null) {

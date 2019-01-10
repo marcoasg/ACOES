@@ -97,7 +97,7 @@ public class ProyectosLocales extends JFrame {
 		JButton btnNewButton_1 = new JButton("Entrar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DatosProyectoLocal d = new DatosProyectoLocal(Integer.parseInt(textField_2.getText()), user);
+				DatosProyectoLocal d = new DatosProyectoLocal(new ProyectoLocal(Integer.parseInt(textField_2.getText())), user);
 				d.setVisible(true);
 				dispose();
 			}
