@@ -14,6 +14,7 @@ public class Apadrinamiento {
 	private Date fechaAlta;
 	private Date fechaBaja;
 	private int codigo;
+	private int cuota;
 	
 	public static Apadrinamiento[] ListaApadrinamientos()
 	{
@@ -37,18 +38,16 @@ public class Apadrinamiento {
 	}
 
 	
-	public Apadrinamiento(Socio s, Niño n) {
+	public Apadrinamiento(Socio s, Niño n, int cuota) {
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		BD miBD = new BD(BD_SERVER,BD_NAME);
-		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","
-				+n.getCodigo()+",'"
-				+ formatoDelTexto.format(new Date()) 
-				+"',null);");
+		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(new Date()) +"',null, "+cuota+";);");
 		socio = s;
 		niño = n;
 		fechaAlta = new Date();
 		fechaBaja = null;
 		codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tApadrinamiento;");
+		cuota = cuota;
 	}
 	
 	public Apadrinamiento(int cod) {
@@ -65,6 +64,7 @@ public class Apadrinamiento {
     		fechaAlta = tupla[2] == null ? null : (Date)tupla[2];
     		fechaBaja = tupla[3] == null ? null : (Date)tupla[3];
     		codigo = cod;
+    		cuota = (Integer) tupla[5];
     	}
 	}
 	
@@ -101,5 +101,9 @@ public class Apadrinamiento {
 
 	public int getCodigo() {
 		return codigo;
+	}
+	
+	public int getCuota() {
+		return cuota;
 	}
 }
