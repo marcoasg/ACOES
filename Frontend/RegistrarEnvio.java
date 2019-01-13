@@ -29,8 +29,8 @@ import java.awt.event.ActionEvent;
 public class RegistrarEnvio extends JFrame {
 
 	private JPanel contentPane;
-	Socio socio;
-	Niño seleccionado;
+	private Socio socio;
+	private Niño seleccionado;
 
 	/**
 	 * Create the frame.
@@ -53,7 +53,7 @@ public class RegistrarEnvio extends JFrame {
 		Integer[] niños = new Integer[lista.length];
 		int i = 0;
 		for (Apadrinamiento ap : lista) {
-			if (ap.getSocio().getNumSocio() == socio.getNumSocio())
+			if (ap.getSocio().getNumSocio() == socio.getNumSocio() && ap.getFechaBaja() == null)
 				niños[i] = ap.getNiño().getCodigo();
 			i++;
 		}
