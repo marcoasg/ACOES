@@ -420,18 +420,9 @@ public class Socios extends JFrame {
 		JButton btnApadrinar = new JButton("Apadrinar");
 		btnApadrinar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				BD miBD = new BD(BD_SERVER,BD_NAME);
-				List<Object[]> lista = miBD.Select("SELECT codigo from tNiño where codigo not in (select niño from tApadrinamiento);");
-				if (!lista.isEmpty()) {
-					Object[] tupla = lista.get(0);
-					Niño child = new Niño((Integer) tupla[0]);
-					Apadrinamiento apadrinamiento = new Apadrinamiento(seleccionado, child);
-					JOptionPane.showMessageDialog(null, child.getNombre() + " apadrinado.");
-				} else {
-					JOptionPane.showMessageDialog(null, "No hay niños para apadrinar.");
-				}
-				*/
+				Apadrinar a = new Apadrinar(user,seleccionado);
+				a.setVisible(true);
+				dispose();
 			}
 		});
 		btnApadrinar.setBounds(358, 453, 191, 23);

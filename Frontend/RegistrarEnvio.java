@@ -25,6 +25,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class RegistrarEnvio extends JFrame {
 
@@ -69,11 +70,11 @@ public class RegistrarEnvio extends JFrame {
 		});
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(110, 105, 253, 93);
+		textArea.setBounds(110, 113, 253, 78);
 		contentPane.add(textArea);
 		
 		JLabel lblContenido = new JLabel("Contenido:");
-		lblContenido.setBounds(10, 110, 75, 14);
+		lblContenido.setBounds(10, 118, 75, 14);
 		contentPane.add(lblContenido);
 		
 		JButton btnRegistrarEnvo = new JButton("Registrar env\u00EDo");

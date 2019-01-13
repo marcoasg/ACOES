@@ -100,7 +100,7 @@ public class Socio
     	
 		// Actualiza el atributo en memoria y en la base de datos
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tSocio set numSocio = '" + value + "' WHERE numSocio = " + numSocio + ";");
+    	miBD.Update("UPDATE tSocio set numSocio = " + value + " WHERE numSocio = " + numSocio + ";");
     	numSocio = value;
     	
 

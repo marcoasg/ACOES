@@ -14,7 +14,8 @@ public class Apadrinamiento {
 	private Date fechaAlta;
 	private Date fechaBaja;
 	private int codigo;
-	private int cuota;
+	private int donacion;
+	private int cuotaMensual;
 	
 	public static Apadrinamiento[] ListaApadrinamientos()
 	{
@@ -38,18 +39,18 @@ public class Apadrinamiento {
 	}
 
 	
-	public Apadrinamiento(Socio s, Niño n, int cuota) {
+	public Apadrinamiento(Socio s, Niño n, int donacion) {
 		//inserta el apadrinamiento en la BD
 		Date fecha = new Date();
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		BD miBD = new BD(BD_SERVER,BD_NAME);
-		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(fecha) +"',null, "+cuota+";);");
+		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(fecha) +"',null,"+donacion+",null);");
 		socio = s;
 		niño = n;
 		fechaAlta = fecha;
 		fechaBaja = null;
 		codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tApadrinamiento;");
-		this.cuota = cuota;
+		this.donacion = donacion;
 	}
 	
 	public Apadrinamiento(int cod) {
@@ -66,7 +67,7 @@ public class Apadrinamiento {
     		fechaAlta = tupla[2] == null ? null : (Date)tupla[2];
     		fechaBaja = tupla[3] == null ? null : (Date)tupla[3];
     		codigo = cod;
-    		cuota = (Integer) tupla[5];
+    		donacion = (Integer) tupla[5];
     	}
 	}
 	
@@ -74,7 +75,7 @@ public class Apadrinamiento {
 
 		BD miBD = new BD(BD_SERVER,BD_NAME);
     	List<Object[]> lista = miBD.Select("SELECT * FROM tApadrinamiento WHERE socio = "
-    			+ s.getNumSocio() + " and niño = "+n.getCodigo()+";");
+    			+ s.getNumSocio() + " and niño = " + n.getCodigo() + ";");
     	
     	if (lista.isEmpty()) {
     		throw new Error("El apadrinamiento no existe en la base de datos.");
@@ -85,7 +86,7 @@ public class Apadrinamiento {
     		fechaAlta = tupla[2] == null ? null : (Date)tupla[2];
     		fechaBaja = tupla[3] == null ? null : (Date)tupla[3];
     		codigo = (Integer)tupla[4];
-    		cuota = (Integer) tupla[5];
+    		donacion = (Integer) tupla[5];
     	}
 	
 	}
@@ -125,7 +126,20 @@ public class Apadrinamiento {
 		return codigo;
 	}
 	
-	public int getCuota() {
-		return cuota;
+	public int getCuotaMensual() {
+		return cuotaMensual;
+	}
+	public void setCuotaMensual(int x) {
+		if (x < 0) throw new Error("La cuota debe ser positiva.");
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+    	miBD.Update("UPDATE tApadrinamiento set cuota = " + x + " WHERE codigo = " + this.codigo + ";");
+    	cuotaMensual = x;
+	}
+	public void donar(int x) {
+		if (x < 0) throw new Error("La donación debe ser positiva.");
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		int total = x+donacion;
+    	miBD.Update("UPDATE tApadrinamiento set donacion = " + total + " WHERE codigo = " + this.codigo + ";");
+    	donacion += x;
 	}
 }
