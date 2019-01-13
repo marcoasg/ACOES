@@ -29,14 +29,12 @@ import java.awt.event.ActionEvent;
 public class RegistrarEnvio extends JFrame {
 
 	private JPanel contentPane;
-	private Socio socio;
 	private Niño seleccionado;
 
 	/**
 	 * Create the frame.
 	 */
-	public RegistrarEnvio(Socio s, Usuario user) {
-		socio = s;
+	public RegistrarEnvio(Usuario user, Socio s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,7 +51,7 @@ public class RegistrarEnvio extends JFrame {
 		Integer[] niños = new Integer[lista.length];
 		int i = 0;
 		for (Apadrinamiento ap : lista) {
-			if (ap.getSocio().getNumSocio() == socio.getNumSocio() && ap.getFechaBaja() == null)
+			if (ap.getSocio().getNumSocio() == s.getNumSocio() && ap.getFechaBaja() == null)
 				niños[i] = ap.getNiño().getCodigo();
 			i++;
 		}
@@ -82,7 +80,7 @@ public class RegistrarEnvio extends JFrame {
 		btnRegistrarEnvo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (seleccionado != null) {
-					Envio envio = new Envio(new Apadrinamiento(socio,seleccionado));
+					Envio envio = new Envio(new Apadrinamiento(s,seleccionado));
 					envio.setDescripcion(textArea.getText());
 					JOptionPane.showMessageDialog(null, "Envío registrado.");
 					Socios socios = new Socios(user);

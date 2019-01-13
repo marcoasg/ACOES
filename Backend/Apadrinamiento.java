@@ -39,15 +39,17 @@ public class Apadrinamiento {
 
 	
 	public Apadrinamiento(Socio s, Niño n, int cuota) {
+		//inserta el apadrinamiento en la BD
+		Date fecha = new Date();
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		BD miBD = new BD(BD_SERVER,BD_NAME);
-		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(new Date()) +"',null, "+cuota+";);");
+		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(fecha) +"',null, "+cuota+";);");
 		socio = s;
 		niño = n;
-		fechaAlta = new Date();
+		fechaAlta = fecha;
 		fechaBaja = null;
 		codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tApadrinamiento;");
-		cuota = cuota;
+		this.cuota = cuota;
 	}
 	
 	public Apadrinamiento(int cod) {
@@ -66,6 +68,26 @@ public class Apadrinamiento {
     		codigo = cod;
     		cuota = (Integer) tupla[5];
     	}
+	}
+	
+	public Apadrinamiento(Socio s, Niño n) {
+
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+    	List<Object[]> lista = miBD.Select("SELECT * FROM tApadrinamiento WHERE socio = "
+    			+ s.getNumSocio() + " and niño = "+n.getCodigo()+";");
+    	
+    	if (lista.isEmpty()) {
+    		throw new Error("El apadrinamiento no existe en la base de datos.");
+    	}else {
+    		Object[] tupla = lista.get(0);
+    		socio = new Socio((Integer) tupla[0]);
+    		niño = new Niño((Integer) tupla[1]);
+    		fechaAlta = tupla[2] == null ? null : (Date)tupla[2];
+    		fechaBaja = tupla[3] == null ? null : (Date)tupla[3];
+    		codigo = (Integer)tupla[4];
+    		cuota = (Integer) tupla[5];
+    	}
+	
 	}
 	
 	
