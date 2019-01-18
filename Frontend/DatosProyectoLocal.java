@@ -87,7 +87,8 @@ public class DatosProyectoLocal extends JFrame {
 		btnEliminarNiño.setBounds(53, 337, 172, 29);
 		contentPane.add(btnEliminarNiño);
 		
-		JButton btnNewButton = new JButton("agregar ni\u00F1o");
+		JButton btnNewButton = new JButton("Agregar ni\u00F1o");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AñadirEstancia est = new AñadirEstancia(proyectoLocal, user);

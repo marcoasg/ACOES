@@ -103,14 +103,16 @@ public class ProyectosGenerales extends JFrame {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (user.getRol().getNivel() == 3) {
-					try {
-						Usuario u = new Usuario(textField.getText());
-						if (u.getRol().getRolName().equals("CoordinadorProyectoH")) {
-							seleccionado.setCoordinador(u);
+						if (seleccionado != null) {
+							Usuario u = new Usuario(textField.getText());
+							if (u.getRol().getRolName().equals("CoordinadorProyectoH")) {
+								seleccionado.setCoordinador(u);
+							}else {
+								JOptionPane.showMessageDialog(null, "Escoja un proyecto");
+							}
 						}
-					} catch (Error err) {
-						JOptionPane.showMessageDialog(null, err.getMessage());
-					} 
+				}else {
+					JOptionPane.showMessageDialog(null, "Su rol no tiene permiso para realizar esta acción");
 				}
 				
 			}
@@ -122,9 +124,13 @@ public class ProyectosGenerales extends JFrame {
 		btnNuevoProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNuevoProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
-				np.setVisible(true);
-				dispose();
+				if (seleccionado != null) {
+					NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
+					np.setVisible(true);
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Escoja un proyecto");
+				}
 			}
 		});
 		btnNuevoProyecto.setBounds(437, 367, 195, 29);
@@ -134,9 +140,10 @@ public class ProyectosGenerales extends JFrame {
 		btnVolverAlMen.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVolverAlMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InicioHonduras inicio = new InicioHonduras(user);
-				inicio.setVisible(true);
-				dispose();
+					InicioHonduras inicio = new InicioHonduras(user);
+					inicio.setVisible(true);
+					dispose();
+				
 			}
 		});
 		btnVolverAlMen.setBounds(437, 440, 195, 23);
@@ -145,9 +152,14 @@ public class ProyectosGenerales extends JFrame {
 		btnVerProyecto = new JButton("Ver proyecto");
 		btnVerProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProyectosLocales p = new ProyectosLocales(seleccionado,user);
-				p.setVisible(true);
-				dispose();
+				if(seleccionado != null) {
+					ProyectosLocales p = new ProyectosLocales(seleccionado,user);
+					p.setVisible(true);
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Escoja un proyecto");
+				}
+				
 			}
 		});
 		btnVerProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));

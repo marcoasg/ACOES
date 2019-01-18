@@ -67,7 +67,7 @@ public class ProyectosLocales extends JFrame {
 		list.setBounds(36, 61, 570, 160);
 		contentPane.add(panel);
 		
-		JButton btnNewButton = new JButton("Coordinador");
+		JButton btnNewButton = new JButton("Cambiar coordinador");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (user.getRol().getNivel() >= 2) {

@@ -83,7 +83,7 @@ public class InicioHonduras extends JFrame {
 
 			}
 		});
-		btnP.setBounds(10, 98, 89, 23);
+		btnP.setBounds(158, 93, 104, 23);
 		getContentPane().add(btnP);
 		
 		JButton btnNios = new JButton("Ni\u00F1os");
@@ -94,7 +94,7 @@ public class InicioHonduras extends JFrame {
 				dispose();
 			}
 		});
-		btnNios.setBounds(142, 98, 89, 23);
+		btnNios.setBounds(158, 131, 104, 23);
 		getContentPane().add(btnNios);
 		
 	}

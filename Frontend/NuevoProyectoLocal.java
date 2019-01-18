@@ -46,11 +46,11 @@ public class NuevoProyectoLocal extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("introducir Localizaci\u00F3n:");
+		JLabel lblNewLabel = new JLabel("Introducir localizaci\u00F3n:");
 		lblNewLabel.setBounds(49, 331, 166, 20);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblIntroducir = new JLabel("elejir coordinador:");
+		JLabel lblIntroducir = new JLabel("Elegir coordinador:");
 		lblIntroducir.setBounds(49, 107, 166, 20);
 		contentPane.add(lblIntroducir);
 		

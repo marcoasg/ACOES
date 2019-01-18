@@ -44,7 +44,7 @@ public class ProyectoGeneral {
     			+ n + "';");
     	
     	if (lista.isEmpty()) {
-    		throw new Error("nombre de proyecto incorrecto");
+    		throw new Error("ombre de proyecto incorrecto");
     	}else {
     		Object[] tupla = lista.get(0);
     		
@@ -99,7 +99,7 @@ public class ProyectoGeneral {
     }
     
     public void setCoordinador(Usuario value) {
-    	if(!value.getRol().getRolName().equalsIgnoreCase("Coordinador")) {
+    	if(!value.getRol().getRolName().contains("Coordinador")) {
     		throw new Error("El usuario debe ser un coordinador");
     	}
     	BD miBD = new BD(BD_SERVER, BD_NAME);
