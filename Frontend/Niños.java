@@ -55,7 +55,11 @@ public class Niños extends JFrame {
 	private JTextField textBuscar;
 	
 	private void actualizarVista(Niño seleccionado) {
-		if (user.getRol().getNivel() >= 2) {
+		boolean esSuCoordinador = false;
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		if (!miBD.Select("Select * from tEstancia where niño = "+seleccionado.getCodigo()+" and proyecto in (select codigo from tProyectoLoc where coordinador = '"+user.getUsuario()+"');").isEmpty())
+			esSuCoordinador = true;
+		if (user.getRol().getNivel() >= 2 || esSuCoordinador) {
 			
 			textNombre.setText(seleccionado.getNombre());
 			textApellidos.setText(seleccionado.getApellidos());
@@ -422,7 +426,11 @@ public class Niños extends JFrame {
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Niño(codigos[list.getSelectedIndex()]);
+				try {
+					seleccionado = new Niño(codigos[list.getSelectedIndex()]);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}
 				actualizarVista(seleccionado);
 					}
 		});
