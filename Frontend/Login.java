@@ -36,7 +36,7 @@ public class Login extends JFrame {
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setForeground(Color.RED);
-		label_1.setBounds(168, 171, 186, 16);
+		label_1.setBounds(130, 171, 224, 16);
 		contentPane.add(label_1);
 		
 		JLabel lblAcoes = new JLabel("ACOES");

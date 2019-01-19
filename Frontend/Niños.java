@@ -34,8 +34,9 @@ public class Niños extends JFrame {
 	private static String BD_SERVER = "localhost";
 	private static String BD_NAME = "ACOES";
 	private JPanel contentPane;
-	Usuario user;
-	Niño seleccionado;
+	private Usuario user;
+	private Niño seleccionado;
+	private Integer[] codigos;
 	private JList list;
 	private JScrollPane panel;
 	private JTextField textNombre;
@@ -113,7 +114,8 @@ public class Niños extends JFrame {
 		String[] niños = new String[lista.length];
 		int i = 0;
 		for (Niño n : lista) {
-			niños[i] = Integer.toString(n.getCodigo());
+			codigos[i] = n.getCodigo();
+			niños[i] = n.getNombre() + " " + n.getApellidos();
 			i++;
 		}
 		contentPane.setLayout(null);
@@ -386,14 +388,15 @@ public class Niños extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Niño[] lista = Niño.ListaNiños();
+				codigos = new Integer[codigos.length];
 				DefaultListModel<String> modelo = new DefaultListModel<>();
 				int i = 0;
 				for (Niño n : lista) {
-						String completo = n.getNombre() + " " + n.getApellidos();
-						if (completo.contains(textBuscar.getText()))
-							modelo.addElement(Integer.toString(n.getCodigo()));
-					i++;
+						if ((n.getNombre() + " " + n.getApellidos()).toLowerCase().contains(textBuscar.getText().toLowerCase())) {
+							modelo.addElement(n.getNombre() + " " + n.getApellidos());
+							codigos[i] = n.getCodigo();
+							i++;
+						}
 				}
 				
 				list.setModel(modelo);
@@ -418,7 +421,7 @@ public class Niños extends JFrame {
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Niño(Integer.parseInt((String) list.getSelectedValue()) );
+				seleccionado = new Niño(codigos[list.getSelectedIndex()]);
 				actualizarVista(seleccionado);
 					}
 		});
