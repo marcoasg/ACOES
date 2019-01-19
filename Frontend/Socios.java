@@ -35,6 +35,7 @@ public class Socios extends JFrame {
 	private JPanel contentPane;
 	Usuario user;
 	Socio seleccionado;
+	Integer[] codigos;
     private static String BD_SERVER = "localhost";
     private static String BD_NAME = "ACOES";
 	private JTextField textNombre;
@@ -107,9 +108,11 @@ public class Socios extends JFrame {
 		
 		Socio[] lista = Socio.ListaSocios();
 		String[] socios = new String[lista.length];
+		codigos = new Integer[lista.length];
 		int i = 0;
 		for (Socio so : lista) {
-			socios[i] = Integer.toString(so.getNumSocio());
+			codigos[i] = so.getNumSocio();
+			socios[i] = so.getNombre() + " " + so.getApellidos();
 			i++;
 		}
 		contentPane.setLayout(null);
@@ -452,14 +455,15 @@ public class Socios extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Socio[] lista = Socio.ListaSocios();
+				codigos = new Integer[codigos.length];
 				DefaultListModel<String> modelo = new DefaultListModel<>();
 				int i = 0;
 				for (Socio so : lista) {
-						String completo = Integer.toString(so.getNumSocio());
-						if (completo.contains(textField.getText()))
-							modelo.addElement(Integer.toString(so.getNumSocio()));
-					i++;
+						if ((so.getNombre() + " " + so.getApellidos()).toLowerCase().contains(textField.getText().toLowerCase())) {
+							codigos[i] = so.getNumSocio();
+							modelo.addElement(so.getNombre() + " " + so.getApellidos());
+							i++;
+						}
 				}
 				
 				list.setModel(modelo);
@@ -471,7 +475,8 @@ public class Socios extends JFrame {
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Socio(Integer.parseInt((String) list.getSelectedValue()) );
+				try {
+					seleccionado = new Socio(codigos[list.getSelectedIndex()]);
 					textAgente.setText(seleccionado.getAgente());
 					textRelacion.setText(seleccionado.getRelacion());
 					textNombre.setText(seleccionado.getNombre());
@@ -500,9 +505,10 @@ public class Socios extends JFrame {
 
 					}
 					textObservaciones.setText(seleccionado.getObservaciones());
-				
-				
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
 					
+				}	
 			}
 		});
 
