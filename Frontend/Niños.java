@@ -112,6 +112,7 @@ public class Niños extends JFrame {
 		
 		Niño[] lista = Niño.ListaNiños();
 		String[] niños = new String[lista.length];
+		codigos = new Integer[lista.length];
 		int i = 0;
 		for (Niño n : lista) {
 			codigos[i] = n.getCodigo();
