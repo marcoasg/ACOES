@@ -104,11 +104,17 @@ public class ProyectosGenerales extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (user.getRol().getNivel() == 3) {
 						if (seleccionado != null) {
-							Usuario u = new Usuario(textField.getText());
-							if (u.getRol().getRolName().equals("CoordinadorProyectoH")) {
-								seleccionado.setCoordinador(u);
-							}else {
-								JOptionPane.showMessageDialog(null, "Escoja un proyecto");
+							Usuario u;
+							try {
+								u = new Usuario(textField.getText());
+								if (u.getRol().getRolName().equals("CoordinadorProyectoH")) {
+									seleccionado.setCoordinador(u);
+								}else {
+									JOptionPane.showMessageDialog(null, "Escoja un proyecto");
+								}
+							} catch (Backend.Error e1) {
+								// TODO Auto-generated catch block
+								JOptionPane.showMessageDialog(null, e1.getMessage());
 							}
 						}
 				}else {
@@ -124,13 +130,9 @@ public class ProyectosGenerales extends JFrame {
 		btnNuevoProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNuevoProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (seleccionado != null) {
 					NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
 					np.setVisible(true);
 					dispose();
-				}else {
-					JOptionPane.showMessageDialog(null, "Escoja un proyecto");
-				}
 			}
 		});
 		btnNuevoProyecto.setBounds(437, 367, 195, 29);

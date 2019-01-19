@@ -74,7 +74,6 @@ public class InicioHonduras extends JFrame {
 		getContentPane().add(lblMenu);
 		
 		JButton btnP = new JButton("Proyectos");
-		btnP.setVisible(true);
 		btnP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					ProyectosGenerales pr = new ProyectosGenerales(user);
