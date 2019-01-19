@@ -59,8 +59,9 @@ public class ProyectosGenerales extends JFrame {
 		String[] pro = new String[proyectos.length];
 		int i = 0;
 		for(ProyectoGeneral p : proyectos) {
-			pro[i] = p.getNombre();
-			i++;
+				pro[i] = p.getNombre();
+				i++;
+
 		}
 		list = new JList(pro);
 		panel = new JScrollPane(list);
@@ -130,9 +131,13 @@ public class ProyectosGenerales extends JFrame {
 		btnNuevoProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNuevoProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
-					np.setVisible(true);
-					dispose();
+					if (user.getRol().getNivel() == 3) {
+						NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
+						np.setVisible(true);
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "No tiene permiso para crear proyectos.");
+					}
 			}
 		});
 		btnNuevoProyecto.setBounds(437, 367, 195, 29);
@@ -154,14 +159,16 @@ public class ProyectosGenerales extends JFrame {
 		btnVerProyecto = new JButton("Ver proyecto");
 		btnVerProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(seleccionado != null) {
-					ProyectosLocales p = new ProyectosLocales(seleccionado,user);
-					p.setVisible(true);
-					dispose();
-				}else {
-					JOptionPane.showMessageDialog(null, "Escoja un proyecto");
-				}
-				
+					try {
+						if (seleccionado == null)
+							throw new Backend.Error("Seleccione un proyecto.");
+						ProyectosLocales p = new ProyectosLocales(seleccionado,user);
+						p.setVisible(true);
+						dispose();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					}
 			}
 		});
 		btnVerProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));

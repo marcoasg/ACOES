@@ -44,7 +44,7 @@ public class ProyectoGeneral {
     			+ n + "';");
     	
     	if (lista.isEmpty()) {
-    		throw new Error("ombre de proyecto incorrecto");
+    		throw new Error("Nombre de proyecto incorrecto");
     	}else {
     		Object[] tupla = lista.get(0);
     		

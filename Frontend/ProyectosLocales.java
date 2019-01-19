@@ -34,6 +34,7 @@ public class ProyectosLocales extends JFrame {
 	private JTextField textField_2;
 	private ProyectoLocal seleccionado;
 	private JTextField textField_3;
+	private Integer[] codigos;
 	
 	private void actualizarVista(ProyectoLocal p) {
 		textField.setText(p.getCoordinador().getUsuario());
@@ -56,10 +57,14 @@ public class ProyectosLocales extends JFrame {
 		
 		ProyectoLocal[] proyectos = ProyectoLocal.ListaProyectosLocales(p);
 		String[] pro = new String[proyectos.length];
+		codigos = new Integer[proyectos.length];
 		int i = 0;
 		for(ProyectoLocal pr : proyectos) {
-			pro[i] = Integer.toString(pr.getCodigo());
-			i++;
+			if (user.getRol().getNivel() >= 2 || pr.getCoordinador().getUsuario().equals(user.getUsuario())) {
+				codigos[i] = pr.getCodigo();
+				pro[i] = pr.getProyecto() + ", " + pr.getLocalizacion();
+				i++;
+			}
 		}
 		list = new JList(pro);
 		panel = new JScrollPane(list);
@@ -145,7 +150,7 @@ public class ProyectosLocales extends JFrame {
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new ProyectoLocal((int) list.getSelectedValue());
+				seleccionado = new ProyectoLocal(codigos[list.getSelectedIndex()]);
 				actualizarVista(seleccionado);
 			}
 		});
