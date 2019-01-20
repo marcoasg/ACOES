@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class ProyectosLocales extends JFrame {
 
@@ -46,13 +47,15 @@ public class ProyectosLocales extends JFrame {
 
 
 	public ProyectosLocales(ProyectoGeneral p, Usuario user) {
+		setTitle("Proyectos locales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 782, 504);
+		setBounds(100, 100, 644, 504);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		textField_3 = new JTextField();		
 		textField_3.setText(p.getNombre());
 		
 		ProyectoLocal[] proyectos = ProyectoLocal.ListaProyectosLocales(p);
@@ -62,7 +65,7 @@ public class ProyectosLocales extends JFrame {
 		for(ProyectoLocal pr : proyectos) {
 			if (user.getRol().getNivel() >= 2 || pr.getCoordinador().getUsuario().equals(user.getUsuario())) {
 				codigos[i] = pr.getCodigo();
-				pro[i] = pr.getProyecto() + ", " + pr.getLocalizacion();
+				pro[i] = pr.getProyecto().getNombre() + ", " + pr.getLocalizacion();
 				i++;
 			}
 		}
@@ -73,6 +76,7 @@ public class ProyectosLocales extends JFrame {
 		contentPane.add(panel);
 		
 		JButton btnNewButton = new JButton("Cambiar coordinador");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (user.getRol().getNivel() >= 2) {
@@ -142,11 +146,22 @@ public class ProyectosLocales extends JFrame {
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
+
 		textField_3.setEditable(false);
 		textField_3.setBounds(36, 16, 146, 26);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProyectosGenerales pr = new ProyectosGenerales(user);
+				pr.setVisible(true);
+				dispose();
+			}
+		});
+		btnVolver.setBounds(410, 431, 144, 23);
+		contentPane.add(btnVolver);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {

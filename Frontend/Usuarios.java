@@ -64,7 +64,7 @@ public class Usuarios extends JFrame {
 			textEstado.setText(seleccionado.getEstado());
 			textNIF.setText(seleccionado.getNif());
 			textDireccion.setText(seleccionado.getDireccion());
-			textCP.setText("" + seleccionado.getCodigoPostal());
+			textCP.setText("" + (seleccionado.getCodigoPostal() == -1 ? "" : seleccionado.getCodigoPostal()));
 			textProvincia.setText(seleccionado.getProvincia());
 			textTelefonoFijo.setText(seleccionado.getTelefonoFijo());
 			textTelfMovil.setText(seleccionado.getTelefonoMovil());
@@ -442,7 +442,11 @@ public class Usuarios extends JFrame {
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Usuario((String) list.getSelectedValue());
+				try {
+					seleccionado = new Usuario((String) list.getSelectedValue());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}
 				actualizarVista(seleccionado);
 			}
 		});

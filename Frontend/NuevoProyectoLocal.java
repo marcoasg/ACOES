@@ -39,7 +39,8 @@ public class NuevoProyectoLocal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField_1.setText("añadir proyecto local al proyecto " + pg.getNombre());
+		textField_1 = new JTextField();
+		textField_1.setText("Añadir proyecto local al proyecto " + pg.getNombre());
 		
 		textField = new JTextField();
 		textField.setBounds(49, 378, 300, 26);
@@ -96,7 +97,6 @@ public class NuevoProyectoLocal extends JFrame {
 		list.setBounds(49, 143, 720, 158);
 		contentPane.add(panel);
 		
-		textField_1 = new JTextField();
 		textField_1.setEditable(false);
 		textField_1.setBounds(49, 36, 344, 26);
 		contentPane.add(textField_1);

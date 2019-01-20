@@ -21,7 +21,7 @@ public class ProyectoLocal {
 			BD miBD = new BD(BD_SERVER,BD_NAME);
 			ProyectoLocal[] resultado;
 			
-			for(Object[] tupla: miBD.Select("SELECT * FROM tProyectoLocal WHERE proyecto = '"+pg.getNombre()+"';"))
+			for(Object[] tupla: miBD.Select("SELECT * FROM tProyectoLoc WHERE proyecto = '"+pg.getNombre()+"';"))
 			{
 				ProyectoLocal p = new ProyectoLocal((Integer)tupla[3]);
 				lista.add(p);

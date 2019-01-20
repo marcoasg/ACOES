@@ -8,7 +8,6 @@ public class Niño
     private static String BD_NAME = "ACOES";
     
     private String nombre;
-    private Socio padrino;
     private int codigo;
     private String apellidos;
     private String estado;

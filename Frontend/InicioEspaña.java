@@ -29,7 +29,7 @@ public class InicioEspaña extends JFrame {
 		this.user = u;
 		setForeground(Color.BLACK);
 		setFont(new Font("Dialog", Font.BOLD, 12));
-		setTitle("ACOES");
+		setTitle("ACOES España");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
