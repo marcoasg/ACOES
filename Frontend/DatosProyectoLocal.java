@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ import Backend.ProyectoLocal;
 import Backend.Usuario;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
@@ -32,15 +34,17 @@ public class DatosProyectoLocal extends JFrame {
 	private Niño seleccionado;
 	private JList list;
 	private JScrollPane panel;
-	private JTextPane textPane;
+	private Integer codigos[];
+	JLabel labelCodigo;
+	JLabel labelFecha;
 	
 	private void actualizarVista(Niño n) {
-		textPane.setText(n.getNombre() + " " +n.getApellidos());
+		labelCodigo.setText(""+n.getCodigo());
 	}
 	
 	public DatosProyectoLocal(ProyectoLocal proyectoLocal, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 908, 483);
+		setBounds(100, 100, 785, 483);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -51,44 +55,50 @@ public class DatosProyectoLocal extends JFrame {
 		textField.setBounds(53, 42, 585, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		textField.setText("Proyecto "+ proyectoLocal.getProyecto().getNombre() + " en "+ proyectoLocal.getLocalizacion()+ ".");
 		
 		Estancia[] estancias = Estancia.listaEstancias(proyectoLocal);
 		String[] niños = new String[estancias.length];
+		codigos = new Integer[estancias.length];
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		int i = 0;
 		for(Estancia e : estancias) {
 			if(!e.estanciaTerminada()) {
-			niños[i] = Integer.toString(e.getNiño().getCodigo());
-			}
+			codigos[i] = e.getNiño().getCodigo();
+			String strFecha = formatoDelTexto.format(e.getFechaAlta());
+			niños[i] = e.getNiño().getNombre() + " " + e.getNiño().getApellidos() + ", desde "+ strFecha;
 			i++;
+			}
 		}
-		textField.setText("Proyecto con codigo " + proyectoLocal.getCodigo());
+		
+		list = new JList(niños);
+		list.setBounds(53, 121, 688, 165);
 		panel = new JScrollPane(list);
 		panel.setBounds(53, 106, 688, 165);
-		list = new JList();
-		list.setBounds(53, 121, 688, 165);
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel = new JLabel("Ni\u00F1os del proyecto");
 		lblNewLabel.setBounds(53, 84, 140, 20);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnEliminarNiño = new JButton("Eliminar ni\u00F1o");
-		btnEliminarNiño.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JButton btnEliminarNiño = new JButton("Quitar ni\u00F1o");
+		btnEliminarNiño.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnEliminarNiño.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			Estancia[] estancias = Estancia.listaEstancias(proyectoLocal);
 			for(Estancia e : estancias) {
-				if(e.getNiño().getCodigo() == seleccionado.getCodigo()) {
+				if(e.getNiño().getCodigo() == seleccionado.getCodigo() && !e.estanciaTerminada()) {
 					e.setFechaBaja(new Date());
+					JOptionPane.showMessageDialog(null, "Niño quitado del proyecto.");
 				}
 			}
 			}
 		});
-		btnEliminarNiño.setBounds(53, 337, 172, 29);
+		btnEliminarNiño.setBounds(348, 369, 172, 29);
 		contentPane.add(btnEliminarNiño);
 		
 		JButton btnNewButton = new JButton("Agregar ni\u00F1o");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AñadirEstancia est = new AñadirEstancia(proyectoLocal, user);
@@ -96,21 +106,35 @@ public class DatosProyectoLocal extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(53, 382, 172, 29);
+		btnNewButton.setBounds(53, 369, 172, 29);
 		contentPane.add(btnNewButton);
 		
-		textPane = new JTextPane();
-		
-		textPane.setBounds(53, 302, 526, 26);
-		contentPane.add(textPane);
-		
-		JLabel lblDatosNio = new JLabel("datos ni\u00F1o:");
+		JLabel lblDatosNio = new JLabel("Código:");
 		lblDatosNio.setBounds(53, 275, 97, 20);
 		contentPane.add(lblDatosNio);
 		
+		labelCodigo = new JLabel("");
+		labelCodigo.setBounds(53, 311, 97, 14);
+		contentPane.add(labelCodigo);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProyectosLocales pl = new ProyectosLocales(proyectoLocal.getProyecto(),user);
+				pl.setVisible(true);
+				dispose();
+			}
+		});
+		btnVolver.setBounds(652, 373, 89, 23);
+		contentPane.add(btnVolver);
+		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Niño((Integer)list.getSelectedValue());
+				try {
+					seleccionado = new Niño(codigos[list.getSelectedIndex()]);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}
 				actualizarVista(seleccionado);
 			}
 		});

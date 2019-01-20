@@ -18,8 +18,10 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
@@ -27,25 +29,45 @@ public class AñadirEstancia extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JList list;
 	private JScrollPane panel;
 	private Niño seleccionado;
 	private JButton btnBuscar;
+	private JLabel lblFechaDeNacimiento;
+	private JLabel labelFecha;
+	private JLabel lblColoniaDeProcedencia;
+	private JLabel labelColonia;
+	private JLabel lblCdigo;
+	private JLabel labelCodigo;
+	private Integer[] codigos;
 	
 	private void actualizarVista(Niño n) {
-		textField_1.setText(n.getNombre() +" "+n.getApellidos());
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+		String strFecha = n.getFechaNacimiento() == null ? "No consta" : formatoDelTexto.format(n.getFechaNacimiento());
+		labelFecha.setText(strFecha);
+		labelColonia.setText(n.getColoniaProcedencia());
+		labelCodigo.setText(""+n.getCodigo());
 	}
 
 	public AñadirEstancia(ProyectoLocal pl, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 802, 465);
+		setBounds(100, 100, 729, 465);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		list = new JList();
+		Niño[] lista = Niño.ListaNiños();
+		String[] niños = new String[lista.length];
+		codigos = new Integer[lista.length];
+		int i = 0;
+		for (Niño n : lista) {
+			codigos[i] = n.getCodigo();
+			niños[i] = n.getNombre() + " " + n.getApellidos();
+			i++;
+		}
+		
+		list = new JList(niños);
 		panel = new JScrollPane(list);
 		panel.setBounds(63, 92, 618, 167);
 		list.setBounds(63, 92, 618, 167);
@@ -59,16 +81,6 @@ public class AñadirEstancia extends JFrame {
 		JLabel lblBuscarNio = new JLabel("Buscar ni\u00F1o:");
 		lblBuscarNio.setBounds(63, 16, 88, 20);
 		contentPane.add(lblBuscarNio);
-		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(63, 305, 405, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Ni\u00F1o seleccionado:");
-		lblNewLabel.setBounds(63, 275, 138, 20);
-		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(54, 364, 59, -4);
@@ -90,10 +102,10 @@ public class AñadirEstancia extends JFrame {
 		btnAadirNio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(seleccionado == null) {
-					JOptionPane.showMessageDialog(null, "Seleccione un Niño");
+					JOptionPane.showMessageDialog(null, "Seleccione un niño.");
 				}else {
 					Estancia est = new Estancia(seleccionado,pl,new Date());
-					JOptionPane.showMessageDialog(null, "niño añadido");
+					JOptionPane.showMessageDialog(null, "Niño añadido.");
 					DatosProyectoLocal p = new DatosProyectoLocal(pl,user);
 					p.setVisible(true);
 					dispose();
@@ -106,25 +118,54 @@ public class AñadirEstancia extends JFrame {
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String b = textField.getText();
-				Niño[] niños = Niño.ListaNiños();
-				String[] lista = new String[niños.length];
+				codigos = new Integer[codigos.length];
+				DefaultListModel<String> modelo = new DefaultListModel<>();
 				int i = 0;
-				for(Niño n : niños) {
-					if((n.getNombre().contains(b))||(n.getApellidos().contains(b))) {
-						lista[i]=Integer.toString(n.getCodigo());
-					}
-					i++;
+				for (Niño n : lista) {
+						if ((n.getNombre() + " " + n.getApellidos()).toLowerCase().contains(textField.getText().toLowerCase())) {
+							modelo.addElement(n.getNombre() + " " + n.getApellidos());
+							codigos[i] = n.getCodigo();
+							i++;
+						}
 				}
-				list = new JList(lista);
+				
+				list.setModel(modelo);
 			}
 		});
-		btnBuscar.setBounds(516, 49, 115, 29);
+		btnBuscar.setBounds(482, 49, 115, 29);
 		contentPane.add(btnBuscar);
+		
+		lblFechaDeNacimiento = new JLabel("Fecha de nacimiento:");
+		lblFechaDeNacimiento.setBounds(63, 270, 102, 14);
+		contentPane.add(lblFechaDeNacimiento);
+		
+		labelFecha = new JLabel("");
+		labelFecha.setBounds(63, 295, 102, 14);
+		contentPane.add(labelFecha);
+		
+		lblColoniaDeProcedencia = new JLabel("Colonia de procedencia:");
+		lblColoniaDeProcedencia.setBounds(225, 270, 123, 14);
+		contentPane.add(lblColoniaDeProcedencia);
+		
+		labelColonia = new JLabel("");
+		labelColonia.setBounds(225, 295, 123, 14);
+		contentPane.add(labelColonia);
+		
+		lblCdigo = new JLabel("C\u00F3digo:");
+		lblCdigo.setBounds(413, 270, 46, 14);
+		contentPane.add(lblCdigo);
+		
+		labelCodigo = new JLabel("");
+		labelCodigo.setBounds(413, 295, 46, 14);
+		contentPane.add(labelCodigo);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Niño((int)list.getSelectedValue());
+				try {
+					seleccionado = new Niño(codigos[list.getSelectedIndex()]);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}
 				actualizarVista(seleccionado);
 			}
 		});
