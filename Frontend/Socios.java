@@ -109,7 +109,7 @@ public class Socios extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		Socio[] lista = Socio.ListaSocios();
+		Socio[] lista = Socio.ListaSocios(user.getSede());
 		String[] socios = new String[lista.length];
 		codigos = new Integer[lista.length];
 		int i = 0;
@@ -216,11 +216,11 @@ public class Socios extends JFrame {
 				dispose();
 			}
 		});
-		btnRegistrarNuevoSocio.setBounds(358, 384, 191, 24);
+		btnRegistrarNuevoSocio.setBounds(358, 367, 191, 24);
 		contentPane.add(btnRegistrarNuevoSocio);
 		
 		JButton btnMen = new JButton("Men\u00FA");
-		btnMen.setBounds(358, 419, 191, 23);
+		btnMen.setBounds(358, 407, 191, 23);
 		contentPane.add(btnMen);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -248,7 +248,7 @@ public class Socios extends JFrame {
 			}
 		});
 		btnBorrarSocio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrarSocio.setBounds(358, 350, 191, 23);
+		btnBorrarSocio.setBounds(358, 328, 191, 23);
 		contentPane.add(btnBorrarSocio);
 		
 		textNombre = new JTextField();
@@ -424,25 +424,12 @@ public class Socios extends JFrame {
 		textMovil.setBounds(252, 264, 86, 20);
 		contentPane.add(textMovil);
 		textMovil.setColumns(10);
-		
-
-		
-		JButton btnApadrinar = new JButton("Apadrinar");
-		btnApadrinar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Apadrinar a = new Apadrinar(user,seleccionado);
-				a.setVisible(true);
-				dispose();
-			}
-		});
-		btnApadrinar.setBounds(358, 453, 191, 23);
-		contentPane.add(btnApadrinar);
-		
-		JButton btnHacerEnvo = new JButton("Hacer env\u00EDo");
-		btnHacerEnvo.addActionListener(new ActionListener() {
+				
+		JButton btnApadrinados = new JButton("Apadrinados");
+		btnApadrinados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (seleccionado != null) {
-					RegistrarEnvio registro = new RegistrarEnvio(user,seleccionado);
+					Apadrinados registro = new Apadrinados(user,seleccionado);
 					registro.setVisible(true);
 					dispose();
 				} else {
@@ -451,8 +438,8 @@ public class Socios extends JFrame {
 				
 			}
 		});
-		btnHacerEnvo.setBounds(358, 487, 191, 23);
-		contentPane.add(btnHacerEnvo);
+		btnApadrinados.setBounds(358, 485, 191, 23);
+		contentPane.add(btnApadrinados);
 		
 		textField = new JTextField();
 		textField.setBounds(101, 464, 144, 20);
