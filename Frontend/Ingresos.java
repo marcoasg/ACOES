@@ -29,7 +29,7 @@ import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Gastos extends JFrame {
+public class Ingresos extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -43,7 +43,7 @@ public class Gastos extends JFrame {
 	private ProyectoLocal proyecto;
 	private JTextField tEstado;
 	
-	public Gastos(Usuario u, ProyectoLocal pr, Date fIni, Date fF) {
+	public Ingresos(Usuario u, ProyectoLocal pr, Date fIni, Date fF) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 808, 562);
 		contentPane = new JPanel();

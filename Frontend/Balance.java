@@ -58,7 +58,7 @@ public class Balance extends JFrame {
 		JButton btnNewButton = new JButton("Ingresos");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ingreso i = new Ingresos(user, proyecto, fechaInicio, fechaFin);
+				Ingresos i = new Ingresos(user, proyecto, fechaInicio, fechaFin);
 				i.setVisible(true);
 				dispose();
 			}
