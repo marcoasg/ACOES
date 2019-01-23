@@ -8,7 +8,7 @@ public class Gasto {
 	private static String BD_SERVER = "localhost";
     private static String BD_NAME = "ACOES";
 	
-	private float cantidad;
+	private double cantidad;
 	private String beneficiario;
 	private ProyectoLocal proyecto;
 	private Date fecha;
@@ -77,7 +77,7 @@ public class Gasto {
 		if(tupla == null) {
 			throw new Error("El gasto con codigo "+id+" no esta en la base de datos");
 		}
-		cantidad = (int)tupla[0];
+		cantidad = (double)tupla[0];
 		beneficiario= (String)tupla[1];
 		proyecto = new ProyectoLocal((int)tupla[2]);
 		fecha = (Date)tupla[3];
@@ -85,10 +85,10 @@ public class Gasto {
 		estado = (Integer)tupla[5] == 1 ? true : false;
 	}
 	
-	public Gasto(float cant, String beneficiario, ProyectoLocal proyecto, Date fecha) {
+	public Gasto(double cant, String beneficiario, ProyectoLocal proyecto, Date fecha) {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-		miBD.Insert("Insert into tGasto values("+ cant +", '" +beneficiario+"', " +proyecto.getCodigo()+", "+formatoDelTexto.format(new Date())+");" );
+		miBD.Insert("Insert into tGasto values("+ cant +", '" +beneficiario+"', " +proyecto.getCodigo()+", '"+formatoDelTexto.format(fecha)+"', 0);" );
 		this.cantidad=cant;
 		this.beneficiario = beneficiario;
 		this.proyecto = proyecto;
@@ -97,11 +97,11 @@ public class Gasto {
 		this.estado = false;
 	}
 
-	public float getCantidad() {
+	public double getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(float cantidad) {
+	public void setCantidad(double cantidad) {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		miBD.Update("UPDATE tGasto SET cantidad = " +cantidad+" WHERE codigo = " +this.codigo+";");
 		this.cantidad = cantidad;
@@ -167,7 +167,7 @@ public class Gasto {
 	}
 	public void validarGasto() {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
-		miBD.Update("UPDATE tGasto set estado = true");
+		miBD.Update("UPDATE tGasto set estado = 1 where codigo = " + codigo + ";");
 		estado = true;
 	}
 }

@@ -31,7 +31,7 @@ public class ValidarGastos extends JFrame {
 	private Usuario usuario;
 	private Gasto seleccionado;
 
-	public ValidarGastos(Usuario u, int volver_index) {
+	public ValidarGastos(Usuario u) {
 		setTitle("Validar Gastos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 579, 530);
@@ -78,7 +78,7 @@ public class ValidarGastos extends JFrame {
 		btnValidar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				seleccionado.validarGasto();
-				ValidarGastos vg = new ValidarGastos(u,volver_index);
+				ValidarGastos vg = new ValidarGastos(u);
 				vg.setVisible(true);
 				dispose();
 			}
@@ -90,7 +90,7 @@ public class ValidarGastos extends JFrame {
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				seleccionado.eliminarGasto();;
-				ValidarGastos vg = new ValidarGastos(u,volver_index);
+				ValidarGastos vg = new ValidarGastos(u);
 				vg.setVisible(true);
 				dispose();
 			}
@@ -99,6 +99,13 @@ public class ValidarGastos extends JFrame {
 		contentPane.add(btnEliminar);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InicioHonduras g = new InicioHonduras(u);
+				g.setVisible(true);
+				dispose();
+			}
+		});
 		btnVolver.setBounds(377, 365, 108, 44);
 		contentPane.add(btnVolver);
 	}

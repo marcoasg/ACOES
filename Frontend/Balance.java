@@ -58,9 +58,17 @@ public class Balance extends JFrame {
 		JButton btnNewButton = new JButton("Ingresos");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ingresos i = new Ingresos(user, proyecto, fechaInicio, fechaFin);
-				i.setVisible(true);
-				dispose();
+				try {
+					SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+					if(fechaInicio == null) fechaInicio= formatoDelTexto.parse("1492-01-01");
+					if(fechaFin == null) fechaFin = new Date();
+					Ingresos i = new Ingresos(user, proyecto, fechaInicio, fechaFin);
+					i.setVisible(true);
+					dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(53, 290, 109, 42);
@@ -79,9 +87,17 @@ public class Balance extends JFrame {
 		JButton btnGastos = new JButton("Gastos");
 		btnGastos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Gastos g = new Gastos(user, proyecto, fechaInicio, fechaFin);
-				g.setVisible(true);
-				dispose();
+				try {
+					SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+					if(fechaInicio == null) fechaInicio= formatoDelTexto.parse("1492-01-01");
+					if(fechaFin == null) fechaFin = new Date();
+					Gastos g = new Gastos(user, proyecto, fechaInicio, fechaFin);
+					g.setVisible(true);
+					dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnGastos.setBounds(217, 290, 109, 42);
@@ -132,10 +148,13 @@ public class Balance extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 				try {
-					fechaInicio = formatoDelTexto.parse(txtFechaInicio.getText());
-					fechaFin = formatoDelTexto.parse(txtFechaFin.getText());
-					if(fechaInicio.compareTo(fechaFin)>0) {
-						throw new Backend.Error();
+					
+					if(txtFechaInicio.getText().length() == 0) fechaInicio= formatoDelTexto.parse("1492-01-01"); else fechaInicio = formatoDelTexto.parse(txtFechaInicio.getText());
+					if(txtFechaFin.getText().length() == 0) fechaFin = new Date(); else fechaFin = formatoDelTexto.parse(txtFechaFin.getText());
+
+
+					if(fechaInicio.compareTo(fechaFin) > 0) {
+						throw new Backend.Error("Fecha fin debe ser posterior a fecha inicio");
 					}
 					for(Ingreso i: Ingreso.ListaIngresos(proyecto, fechaInicio, fechaFin)){
 						totalIngresos += i.getCantidad();
@@ -147,7 +166,8 @@ public class Balance extends JFrame {
 					} catch (ParseException e1) {
 						JOptionPane.showMessageDialog(null, "Formato de fechas incorrectos");
 					}catch(Backend.Error e1) {
-						JOptionPane.showMessageDialog(null, "Fecha fin debe ser posterior a fecha inicio");
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+
 					}
 				
 			}
@@ -172,8 +192,8 @@ public class Balance extends JFrame {
 	}
 	
 	private void actualizarVista() {
-		txtIngresos.setText(Float.toString(totalIngresos));
-		txtGastos.setText(Float.toString(totalGastos));
-		txtGastos.setText(Float.toString(totalIngresos-totalGastos));
+		txtIngresos.setText(Double.toString(totalIngresos));
+		txtGastos.setText(Double.toString(totalGastos));
+		txtBalance.setText(Double.toString(totalIngresos-totalGastos));
 	}
 }

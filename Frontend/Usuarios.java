@@ -57,40 +57,44 @@ public class Usuarios extends JFrame {
 	private JTextField textField;
 	
 	private void actualizarVista(Usuario seleccionado) {
-		if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
-			lblNewLabel.setText(seleccionado.getUsuario());
-			textNombre.setText(seleccionado.getNombre());
-			textApellidos.setText(seleccionado.getApellidos());
-			textRol.setText(seleccionado.getRol().getRolName());
-			textEstado.setText(seleccionado.getEstado());
-			textNIF.setText(seleccionado.getNif());
-			textDireccion.setText(seleccionado.getDireccion());
-			textCP.setText("" + (seleccionado.getCodigoPostal() == -1 ? "" : seleccionado.getCodigoPostal()));
-			textProvincia.setText(seleccionado.getProvincia());
-			textTelefonoFijo.setText(seleccionado.getTelefonoFijo());
-			textTelfMovil.setText(seleccionado.getTelefonoMovil());
-			textEmail.setText(seleccionado.getEmail());
-			textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
-			textSector.setText(seleccionado.getSector());
-			
-			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-			
-			if (seleccionado.getFechaAlta() == null) {
-				textFechaAlta.setText("");
-			} else {
-				String strFechaAlta = formatoDelTexto.format(seleccionado.getFechaAlta());
-				textFechaAlta.setText(strFechaAlta);
-			}
-			
-			if (seleccionado.getFechaBaja() == null) {
-				textFechaBaja.setText("");
-			} else {
-				String strFechaBaja = formatoDelTexto.format(seleccionado.getFechaBaja());
-				textFechaBaja.setText(strFechaBaja);
+		try {
+			if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
+				lblNewLabel.setText(seleccionado.getUsuario());
+				textNombre.setText(seleccionado.getNombre());
+				textApellidos.setText(seleccionado.getApellidos());
+				textRol.setText(seleccionado.getRol().getRolName());
+				textEstado.setText(seleccionado.getEstado());
+				textNIF.setText(seleccionado.getNif());
+				textDireccion.setText(seleccionado.getDireccion());
+				textCP.setText("" + (seleccionado.getCodigoPostal() == -1 ? "" : seleccionado.getCodigoPostal()));
+				textProvincia.setText(seleccionado.getProvincia());
+				textTelefonoFijo.setText(seleccionado.getTelefonoFijo());
+				textTelfMovil.setText(seleccionado.getTelefonoMovil());
+				textEmail.setText(seleccionado.getEmail());
+				textCertificado.setText(seleccionado.isCertificado() ? "Sí" : "No");
+				textSector.setText(seleccionado.getSector());
+				
+				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+				
+				if (seleccionado.getFechaAlta() == null) {
+					textFechaAlta.setText("");
+				} else {
+					String strFechaAlta = formatoDelTexto.format(seleccionado.getFechaAlta());
+					textFechaAlta.setText(strFechaAlta);
+				}
+				
+				if (seleccionado.getFechaBaja() == null) {
+					textFechaBaja.setText("");
+				} else {
+					String strFechaBaja = formatoDelTexto.format(seleccionado.getFechaBaja());
+					textFechaBaja.setText(strFechaBaja);
 
+				}
+				textObservaciones.setText(seleccionado.getObservaciones());
+				textField.setText(seleccionado.getSede().getLocalizacion());
 			}
-			textObservaciones.setText(seleccionado.getObservaciones());
-			textField.setText(seleccionado.getSede().getLocalizacion());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 		}
 		
 	

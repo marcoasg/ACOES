@@ -97,5 +97,23 @@ public class InicioHonduras extends JFrame {
 		btnNios.setBounds(158, 131, 104, 23);
 		getContentPane().add(btnNios);
 		
+		JButton btnValidarGastos = new JButton("Validar Gastos");
+		if(user.getRol().getRolName().equals("CoordinadorGeneralH")) {
+			btnValidarGastos.setVisible(true);
+		}else {
+			btnValidarGastos.setVisible(false);
+		}
+		btnValidarGastos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ValidarGastos vg = new ValidarGastos(u);
+				vg.setVisible(true);
+				dispose();
+				
+			}
+		});
+		btnValidarGastos.setBounds(158, 172, 104, 23);
+		getContentPane().add(btnValidarGastos);
+		
 	}
 }

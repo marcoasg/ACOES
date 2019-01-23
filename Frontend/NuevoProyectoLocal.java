@@ -73,11 +73,14 @@ public class NuevoProyectoLocal extends JFrame {
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelarr = new JButton("Cancelar");
-		btnAceptar.addActionListener(new ActionListener() {
+		btnCancelarr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ProyectosLocales pl = new ProyectosLocales(pg,user);
+				pl.setVisible(true);
 				dispose();
 			}
 		});
+
 		btnCancelarr.setBounds(575, 377, 115, 29);
 		contentPane.add(btnCancelarr);
 		

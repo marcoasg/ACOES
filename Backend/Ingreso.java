@@ -8,7 +8,7 @@ public class Ingreso {
 	private static String BD_SERVER = "localhost";
     private static String BD_NAME = "ACOES";
 	
-	private float cantidad;
+	private double cantidad;
 	private Socio socio;
 	private ProyectoLocal proyecto;
 	private Date fecha;
@@ -19,7 +19,7 @@ public class Ingreso {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		Ingreso[] resultado;
 		
-		for(Object[] tupla : miBD.Select("SELECT * FROM tIngreso WHERE proyecto = "+p+";")) {
+		for(Object[] tupla : miBD.Select("SELECT * FROM tIngreso WHERE proyecto = "+p.getCodigo()+";")) {
 			if((fi.compareTo((Date)tupla[3])<=0)&&(ff.compareTo((Date)tupla[3])>=0)){
 				lista.add(new Ingreso((Integer)tupla[4]));
 			}
@@ -43,7 +43,7 @@ public class Ingreso {
 		if(tupla == null) {
 			throw new Error("El ingreso con codigo "+id+" no esta en la base de datos");
 		}
-		cantidad = (int)tupla[0];
+		cantidad = (double)tupla[0];
 		socio = new Socio((int)tupla[1]);
 		proyecto = new ProyectoLocal((int)tupla[2]);
 		fecha = (Date)tupla[3];
@@ -53,7 +53,7 @@ public class Ingreso {
 	public Ingreso(float cant, Socio socio, ProyectoLocal proyecto, Date fecha) {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-		miBD.Insert("Insert into tIngreso values("+ cant +", " +socio.getNumSocio()+", " +proyecto.getCodigo()+", "+formatoDelTexto.format(new Date())+");" );
+		miBD.Insert("Insert into tIngreso values("+ cant +", " +socio.getNumSocio()+", " +proyecto.getCodigo()+", '"+formatoDelTexto.format(fecha)+"');" );
 		this.cantidad=cant;
 		this.socio = socio;
 		this.proyecto = proyecto;
@@ -61,11 +61,11 @@ public class Ingreso {
 		this.codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tIngreso;");
 	}
 
-	public float getCantidad() {
+	public double getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(float cantidad) {
+	public void setCantidad(double cantidad) {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		miBD.Update("UPDATE tIngreso SET cantidad = " +cantidad+" WHERE codigo = " +this.codigo+";");
 		this.cantidad = cantidad;

@@ -81,7 +81,7 @@ public class Gastos extends JFrame {
 					TableModel modeloSeleccion = table.getModel();
 					seleccionado = new Gasto((int)modeloSeleccion.getValueAt(i, 0));
 					tBeneficiario.setText(seleccionado.getBeneficiario());
-					tCantidad.setText(Float.toString(seleccionado.getCantidad()));
+					tCantidad.setText(Double.toString(seleccionado.getCantidad()));
 					SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 					String fecha = formatoDelTexto.format(seleccionado.getFecha());
 					tFecha.setText(fecha);
@@ -94,9 +94,17 @@ public class Gastos extends JFrame {
 			}
 		});
 		
-		
-		for(Gasto g:Gasto.ListaGastos(proyecto, fInicio, fFinal)) {
-			addGasto(g);
+		try {
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			if(fInicio == null) fInicio= formatoDelTexto.parse("1492-01-01");
+			if(fFinal == null) fFinal = new Date();
+			for(Gasto g:Gasto.ListaGastos(proyecto, fInicio, fFinal)) {
+				
+				addGasto(g);
+			}
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 		
 		
@@ -137,7 +145,7 @@ public class Gastos extends JFrame {
 				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 				
 					Date fecha = formatoDelTexto.parse(tFecha.getText());
-					Gasto nuevo = new Gasto(Float.parseFloat(tCantidad.getText()), tBeneficiario.getText(), proyecto, fecha);
+					Gasto nuevo = new Gasto(Double.parseDouble(tCantidad.getText()), tBeneficiario.getText(), proyecto, fecha);
 					addGasto(nuevo);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
@@ -148,22 +156,7 @@ public class Gastos extends JFrame {
 		});
 		btnRegistrarGasto.setBounds(523, 343, 137, 23);
 		contentPane.add(btnRegistrarGasto);
-		
-		JButton btnValidarGastos = new JButton("Validar gastos");
-		btnValidarGastos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ValidarGastos ventana = new ValidarGastos(user);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnValidarGastos.setBounds(523, 420, 137, 23);
-		contentPane.add(btnValidarGastos);
-		if(user.getRol().getRolName().equals("Coordinador general")) {
-			btnValidarGastos.setVisible(true);
-		}else {
-			btnValidarGastos.setVisible(false);
-		}
+
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -181,6 +174,7 @@ public class Gastos extends JFrame {
 		contentPane.add(lblEstado);
 		
 		tEstado = new JTextField();
+		tEstado.setEditable(false);
 		tEstado.setBounds(123, 460, 277, 20);
 		contentPane.add(tEstado);
 		tEstado.setColumns(10);

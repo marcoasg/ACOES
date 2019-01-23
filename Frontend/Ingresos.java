@@ -83,7 +83,7 @@ public class Ingresos extends JFrame {
 					seleccionado = new Ingreso((int)modeloSeleccion.getValueAt(i, 0));
 					
 					tProcedencia.setText(Integer.toString(seleccionado.getSocio().getNumSocio()));
-					tCantidad.setText(Float.toString(seleccionado.getCantidad()));
+					tCantidad.setText(Double.toString(seleccionado.getCantidad()));
 					SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 					String fecha = formatoDelTexto.format(seleccionado.getFecha());
 					tFecha.setText(fecha);
@@ -91,9 +91,16 @@ public class Ingresos extends JFrame {
 			}
 		});
 		
-		
-		for(Ingreso i:Ingreso.ListaIngresos(proyecto, fInicio, fFinal)) {
-			addIngreso(i);
+		try {
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+			if(fInicio == null) fInicio= formatoDelTexto.parse("1492-01-01");
+			if(fFinal == null) fFinal = new Date();
+			for(Ingreso i:Ingreso.ListaIngresos(proyecto, fInicio, fFinal)) {
+				addIngreso(i);
+			}
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 		
 		
