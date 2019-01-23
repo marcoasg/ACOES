@@ -476,6 +476,21 @@ public class Socios extends JFrame {
 		contentPane.add(textSede);
 		textSede.setColumns(10);
 		
+		JButton btnApadrinar = new JButton("Apadrinar");
+		btnApadrinar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (seleccionado != null) {
+					Apadrinar registro = new Apadrinar(user,seleccionado);
+					registro.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Seleccione un socio.");
+				}
+			}
+		});
+		btnApadrinar.setBounds(358, 441, 191, 23);
+		contentPane.add(btnApadrinar);
+		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {

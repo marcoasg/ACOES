@@ -72,7 +72,7 @@ public class Apadrinar extends JFrame {
 		contentPane.add(lblNiosParaApadrinar);
 		
 		BD miBD = new BD(BD_SERVER,BD_NAME);
-		List<Object[]> lista = miBD.Select("SELECT * from tNiño where codigo not in (select niño from tApadrinamiento);");
+		List<Object[]> lista = miBD.Select("SELECT * from tNiño where codigo not in (select niño from tApadrinamiento where fechaBaja = null);");
 		
 		String[] niños = new String[lista.size()];
 		codigos = new Integer[lista.size()];

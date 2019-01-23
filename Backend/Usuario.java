@@ -158,7 +158,7 @@ public class Usuario
             fechaAlta = (Date)tupla[15] == null ? null : (Date)tupla[15];
             fechaBaja = (Date)tupla[16] == null ? null : (Date)tupla[16];
             observaciones = (String)tupla[17] == null ? "" : (String)tupla[17];
-            if (rol.getPais() == "ESP") {
+            if (rol.getPais().equals("ESP")) {
             	sede = new Sede((String)tupla[18]);
             } else {
             	sede = null;

@@ -21,6 +21,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -70,11 +71,11 @@ public class Apadrinados extends JFrame {
 		});
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(110, 113, 253, 78);
+		textArea.setBounds(110, 129, 253, 78);
 		contentPane.add(textArea);
 		
 		JLabel lblContenido = new JLabel("Contenido:");
-		lblContenido.setBounds(10, 118, 75, 14);
+		lblContenido.setBounds(10, 134, 75, 14);
 		contentPane.add(lblContenido);
 		
 		JButton btnRegistrarEnvo = new JButton("Registrar env\u00EDo");
@@ -105,5 +106,21 @@ public class Apadrinados extends JFrame {
 		});
 		btnCancelar.setBounds(335, 224, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		JButton btnCancelarApadrinamiento = new JButton("Cancelar apadrinamiento");
+		btnCancelarApadrinamiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(seleccionado == null) throw new Backend.Error("Seleccione un niño");
+					Apadrinamiento a = new Apadrinamiento(s,seleccionado);
+					a.darDeBajaApadrinamiento();
+					DefaultListModel<String> modelo = new DefaultListModel<>();
+					int i = 0;
+
+					
+					list.setModel(modelo);
+			}
+		});
+		btnCancelarApadrinamiento.setBounds(110, 83, 254, 35);
+		contentPane.add(btnCancelarApadrinamiento);
 	}
 }
