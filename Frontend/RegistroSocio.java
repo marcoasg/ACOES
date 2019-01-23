@@ -48,6 +48,7 @@ public class RegistroSocio extends JFrame {
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
+	private JTextField textSede;
 	
 	public RegistroSocio(Usuario u) {
 		setTitle("Registrar un Socio");
@@ -164,38 +165,38 @@ public class RegistroSocio extends JFrame {
 		textField_11.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("e-mail:");
-		lblEmail.setBounds(348, 71, 89, 14);
+		lblEmail.setBounds(348, 96, 89, 14);
 		contentPane.add(lblEmail);
 		
 		textField_12 = new JTextField();
-		textField_12.setBounds(447, 68, 160, 20);
+		textField_12.setBounds(447, 93, 160, 20);
 		contentPane.add(textField_12);
 		textField_12.setColumns(10);
 		
 		JLabel lblCertificadosn = new JLabel("Certificado(S/N):");
-		lblCertificadosn.setBounds(348, 99, 99, 14);
+		lblCertificadosn.setBounds(348, 124, 99, 14);
 		contentPane.add(lblCertificadosn);
 		
 		textField_14 = new JTextField();
-		textField_14.setBounds(447, 96, 160, 20);
+		textField_14.setBounds(447, 118, 160, 20);
 		contentPane.add(textField_14);
 		textField_14.setColumns(10);
 		
 		JLabel lblSector = new JLabel("Sector:");
-		lblSector.setBounds(348, 124, 89, 14);
+		lblSector.setBounds(348, 149, 89, 14);
 		contentPane.add(lblSector);
 		
 		textField_15 = new JTextField();
-		textField_15.setBounds(447, 121, 160, 20);
+		textField_15.setBounds(447, 143, 160, 20);
 		contentPane.add(textField_15);
 		textField_15.setColumns(10);
 		
 		JLabel lblFechaAltayyyymmdd = new JLabel("Fecha alta (YYYY-MM-DD):");
-		lblFechaAltayyyymmdd.setBounds(348, 149, 138, 14);
+		lblFechaAltayyyymmdd.setBounds(348, 174, 138, 14);
 		contentPane.add(lblFechaAltayyyymmdd);
 		
 		textField_16 = new JTextField();
-		textField_16.setBounds(496, 146, 111, 20);
+		textField_16.setBounds(496, 171, 111, 20);
 		contentPane.add(textField_16);
 		textField_16.setColumns(10);
 		
@@ -215,7 +216,7 @@ public class RegistroSocio extends JFrame {
 				}  else {
 				try {
 					
-						Socio u = new Socio(textField.getText());
+						Socio u = new Socio(textField.getText(), textSede.getText());
 						u.setRelacion(textField_1.getText());
 						u.setNombre(textField_3.getText());
 						u.setApellidos(textField_4.getText());
@@ -268,6 +269,15 @@ public class RegistroSocio extends JFrame {
 		});
 		btnCancelar.setBounds(10, 388, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		JLabel lblSede = new JLabel("Sede");
+		lblSede.setBounds(348, 71, 46, 14);
+		contentPane.add(lblSede);
+		
+		textSede = new JTextField();
+		textSede.setBounds(447, 68, 160, 20);
+		contentPane.add(textSede);
+		textSede.setColumns(10);
 		
 
 	}

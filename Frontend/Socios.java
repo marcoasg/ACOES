@@ -59,6 +59,7 @@ public class Socios extends JFrame {
 	private JScrollPane panel;
 	private JScrollPane panelNiños;
 	private JTextField textField;
+	private JTextField textSede;
 	
 	private void actualizarVista(Socio seleccionado) {
 			textNombre.setText(seleccionado.getNombre());
@@ -91,6 +92,8 @@ public class Socios extends JFrame {
 
 			}
 			textObservaciones.setText(seleccionado.getObservaciones());
+			
+			textSede.setText(seleccionado.getSede().getLocalizacion());
 		}
 		
 	
@@ -385,6 +388,10 @@ public class Socios extends JFrame {
 					JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
 					
 				}
+			
+				if(seleccionado.getSede().getLocalizacion().equals(textSede.getText())) {
+					seleccionado.setSede(new Sede(textSede.getText()));
+				}
 				
 				actualizarVista(seleccionado);
 			}
@@ -472,6 +479,16 @@ public class Socios extends JFrame {
 		btnBuscar.setBounds(133, 490, 89, 23);
 		contentPane.add(btnBuscar);
 		
+		JLabel lblSede = new JLabel("Sede:");
+		lblSede.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSede.setBounds(402, 40, 46, 14);
+		contentPane.add(lblSede);
+		
+		textSede = new JTextField();
+		textSede.setBounds(488, 33, 86, 20);
+		contentPane.add(textSede);
+		textSede.setColumns(10);
+		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -505,6 +522,7 @@ public class Socios extends JFrame {
 
 					}
 					textObservaciones.setText(seleccionado.getObservaciones());
+					textSede.setText(seleccionado.getSede().getLocalizacion());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					
