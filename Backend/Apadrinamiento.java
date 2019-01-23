@@ -41,9 +41,11 @@ public class Apadrinamiento {
 	
 	public Apadrinamiento(Socio s, Niño n, int donacion) {
 		//inserta el apadrinamiento en la BD
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+    	List<Object[]> lista2 = miBD.Select("SELECT * FROM tEstancia WHERE niño = "
+    			+ n.getCodigo() + " and fechaBaja = null;");
 		Date fecha = new Date();
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-		BD miBD = new BD(BD_SERVER,BD_NAME);
 		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(fecha) +"',null,"+donacion+",null);");
 		socio = s;
 		niño = n;
@@ -51,6 +53,7 @@ public class Apadrinamiento {
 		fechaBaja = null;
 		codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tApadrinamiento;");
 		this.donacion = donacion;
+		Ingreso i = new Ingreso(donacion,socio,new ProyectoLocal((Integer)lista2.get(0)[1]),new Date());
 	}
 	
 	public Apadrinamiento(int cod) {
@@ -80,6 +83,7 @@ public class Apadrinamiento {
     	if (lista.isEmpty()) {
     		throw new Error("El apadrinamiento no existe en la base de datos.");
     	}else {
+    		
     		Object[] tupla = lista.get(0);
     		socio = new Socio((Integer) tupla[0]);
     		niño = new Niño((Integer) tupla[1]);
