@@ -13,13 +13,14 @@ public class Gasto {
 	private ProyectoLocal proyecto;
 	private Date fecha;
 	private int codigo;
+	private boolean estado;
 	
 	public static Gasto[] ListaGastos(ProyectoLocal p, Date fi, Date ff){
 		List<Gasto> lista = new ArrayList<Gasto>();
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		Gasto[] resultado;
 		
-		for(Object[] tupla : miBD.Select("SELECT * FROM tGasto WHERE proyecto = "+p+";")) {
+		for(Object[] tupla : miBD.Select("SELECT * FROM tGasto WHERE proyecto = "+p.getCodigo()+";")) {
 			if((fi.compareTo((Date)tupla[3])<=0)&&(ff.compareTo((Date)tupla[3])>=0)){
 				lista.add(new Gasto((Integer)tupla[4]));
 			}
@@ -34,6 +35,25 @@ public class Gasto {
 		
 	}
 	
+	public static Gasto[] ListaGastos(ProyectoLocal p){
+		List<Gasto> lista = new ArrayList<Gasto>();
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		Gasto[] resultado;
+		
+		for(Object[] tupla : miBD.Select("SELECT * FROM tGasto WHERE proyecto = "+p.getCodigo()+";")) {
+			lista.add(new Gasto((Integer)tupla[4]));	
+		}
+		resultado = new Gasto[lista.size()];
+		int i = 0;
+		for(Gasto g : lista) {
+			resultado[i] = g;
+			i++;
+		}
+		return resultado;
+		
+	}
+	
+	
 	public Gasto(int id) {
 		BD miBD = new BD(BD_SERVER,BD_NAME); 
 		Object[] tupla = miBD.Select("SELECT * FROM tGasto WHERE codigo =" + id +";").get(0);
@@ -46,6 +66,7 @@ public class Gasto {
 		proyecto = new ProyectoLocal((int)tupla[2]);
 		fecha = (Date)tupla[3];
 		codigo = (Integer)tupla[4];
+		estado = (Integer)tupla[5] == 1 ? true : false;
 	}
 	
 	public Gasto(float cant, String beneficiario, ProyectoLocal proyecto, Date fecha) {
@@ -102,6 +123,20 @@ public class Gasto {
 
 	public int getCodigo() {
 		return codigo;
+	}
+	
+	public boolean getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(boolean value) {
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		int aux = 0;
+		if(value == true) {
+			aux = 1;
+		}
+		miBD.Update("UPDATE tGasto SET estado = " +aux+" WHERE codigo = " +this.codigo+";");
+		this.estado = value;
 	}
 	
 }
