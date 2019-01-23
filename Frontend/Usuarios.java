@@ -54,6 +54,7 @@ public class Usuarios extends JFrame {
 	private JTextField textBuscar;
 	private JList list;
 	private JScrollPane panel;
+	private JTextField textField;
 	
 	private void actualizarVista(Usuario seleccionado) {
 		if (user.getRol().getNivel() >= seleccionado.getRol().getNivel()) {
@@ -186,22 +187,22 @@ public class Usuarios extends JFrame {
 		
 		JLabel lblCertificado = new JLabel("Certificado:");
 		lblCertificado.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCertificado.setBounds(435, 162, 95, 14);
+		lblCertificado.setBounds(435, 134, 95, 14);
 		contentPane.add(lblCertificado);
 		
 		JLabel lblSector = new JLabel("Sector:");
 		lblSector.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSector.setBounds(435, 190, 46, 14);
+		lblSector.setBounds(435, 162, 46, 14);
 		contentPane.add(lblSector);
 		
 		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
 		lblFechaDeAlta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaDeAlta.setBounds(435, 215, 95, 14);
+		lblFechaDeAlta.setBounds(435, 187, 95, 14);
 		contentPane.add(lblFechaDeAlta);
 		
 		JLabel lblFechaDeBaja = new JLabel("Fecha de Baja:");
 		lblFechaDeBaja.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaDeBaja.setBounds(435, 240, 95, 14);
+		lblFechaDeBaja.setBounds(435, 212, 95, 14);
 		contentPane.add(lblFechaDeBaja);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
@@ -298,22 +299,22 @@ public class Usuarios extends JFrame {
 		textEmail.setColumns(10);
 		
 		textCertificado = new JTextField();
-		textCertificado.setBounds(521, 159, 86, 20);
+		textCertificado.setBounds(521, 131, 86, 20);
 		contentPane.add(textCertificado);
 		textCertificado.setColumns(10);
 		
 		textSector = new JTextField();
-		textSector.setBounds(521, 184, 86, 20);
+		textSector.setBounds(521, 156, 86, 20);
 		contentPane.add(textSector);
 		textSector.setColumns(10);
 		
 		textFechaAlta = new JTextField();
-		textFechaAlta.setBounds(524, 209, 86, 20);
+		textFechaAlta.setBounds(524, 181, 86, 20);
 		contentPane.add(textFechaAlta);
 		textFechaAlta.setColumns(10);
 		
 		textFechaBaja = new JTextField();
-		textFechaBaja.setBounds(521, 234, 86, 20);
+		textFechaBaja.setBounds(521, 206, 86, 20);
 		contentPane.add(textFechaBaja);
 		textFechaBaja.setColumns(10);
 		
@@ -387,6 +388,7 @@ public class Usuarios extends JFrame {
 					if(!textObservaciones.getText().equals(seleccionado.getObservaciones())) {
 						seleccionado.setObservaciones(textObservaciones.getText());
 					}
+					seleccionado.setSede(new Sede(textField.getText()));
 					
 					JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
 					actualizarVista(seleccionado);
@@ -438,6 +440,16 @@ public class Usuarios extends JFrame {
 		textBuscar.setBounds(43, 60, 179, 20);
 		contentPane.add(textBuscar);
 		textBuscar.setColumns(10);
+		
+		JLabel lblSede = new JLabel("Sede:");
+		lblSede.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSede.setBounds(435, 237, 46, 14);
+		contentPane.add(lblSede);
+		
+		textField = new JTextField();
+		textField.setBounds(521, 234, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
