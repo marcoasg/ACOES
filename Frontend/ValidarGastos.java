@@ -9,6 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import Backend.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -17,9 +20,9 @@ public class ValidarGastos extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private Usuario usuario;
 
-
-	public ValidarGastos() {
+	public ValidarGastos(Usuario u) {
 		setTitle("Validar Gastos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 579, 530);

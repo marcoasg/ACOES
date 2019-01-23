@@ -23,8 +23,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Gastos extends JFrame {
 
@@ -35,10 +38,12 @@ public class Gastos extends JFrame {
 	private JTextField tFecha;
 	private Usuario user;
 	private Gasto seleccionado;
+	private Date fInicio;
+	private Date fFinal;
 	private ProyectoLocal proyecto;
 	private JTextField tEstado;
 	
-	public Gastos(Usuario u, ProyectoLocal pr) {
+	public Gastos(Usuario u, ProyectoLocal pr, Date fIni, Date fF) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 808, 562);
 		contentPane = new JPanel();
@@ -48,6 +53,8 @@ public class Gastos extends JFrame {
 		
 		user = u;
 		proyecto = pr;
+		fInicio = fIni;
+		fFinal = fF;
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 762, 302);
@@ -72,7 +79,7 @@ public class Gastos extends JFrame {
 				if(table.getSelectedRow() != -1) {
 					int i = table.getSelectedRow();
 					TableModel modeloSeleccion = table.getModel();
-					seleccionado = new Gasto((int)modeloSeleccion.getValueAt(i, 1));
+					seleccionado = new Gasto((int)modeloSeleccion.getValueAt(i, 0));
 					tBeneficiario.setText(seleccionado.getBeneficiario());
 					tCantidad.setText(Float.toString(seleccionado.getCantidad()));
 					SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
@@ -89,7 +96,7 @@ public class Gastos extends JFrame {
 		
 		
 		for(Gasto g:Gasto.ListaGastos(proyecto)) {
-			rellenarTabla(g);
+			addGasto(g);
 		}
 		
 		
@@ -121,11 +128,35 @@ public class Gastos extends JFrame {
 		tFecha.setBounds(123, 421, 277, 20);
 		contentPane.add(tFecha);
 		
+		
 		JButton btnRegistrarGasto = new JButton("Registrar gasto");
+		btnRegistrarGasto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				Object[] row = new Object[5];
+				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+				
+					Date fecha = formatoDelTexto.parse(tFecha.getText());
+					Gasto nuevo = new Gasto(Float.parseFloat(tCantidad.getText()), tBeneficiario.getText(), proyecto, fecha);
+					addGasto(nuevo);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnRegistrarGasto.setBounds(523, 343, 137, 23);
 		contentPane.add(btnRegistrarGasto);
 		
 		JButton btnValidarGastos = new JButton("Validar gastos");
+		btnValidarGastos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ValidarGastos ventana = new ValidarGastos(user);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
 		btnValidarGastos.setBounds(523, 420, 137, 23);
 		contentPane.add(btnValidarGastos);
 		if(user.getRol().getRolName().equals("Coordinador local")) {
@@ -135,6 +166,14 @@ public class Gastos extends JFrame {
 		}
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Crear ventana de Adri
+				Balance ventana = new Balance(proyecto, usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
 		btnVolver.setBounds(523, 381, 137, 23);
 		contentPane.add(btnVolver);
 		
@@ -148,7 +187,7 @@ public class Gastos extends JFrame {
 		tEstado.setColumns(10);
 	}
 
-	private void rellenarTabla(Gasto g) {
+	private void addGasto(Gasto g) {
 		int numCols = table.getModel().getColumnCount();
 		
 		Object[] fila = new Object[numCols];

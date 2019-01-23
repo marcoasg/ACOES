@@ -78,6 +78,7 @@ public class Gasto {
 		this.proyecto = proyecto;
 		this.fecha = fecha;
 		this.codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tGasto;");
+		this.estado = false;
 	}
 
 	public float getCantidad() {
