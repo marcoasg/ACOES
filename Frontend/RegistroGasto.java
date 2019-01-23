@@ -11,6 +11,8 @@ import Backend.ProyectoLocal;
 import Backend.Usuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -67,6 +69,15 @@ public class RegistroGasto extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Gasto g = new Gasto(Float.parseFloat(textField.getText()),textField_1.getText(),pr,textField_2.getText());
+				JOptionPane.showMessageDialog(null, "Gasto registrado con éxito.");
+				Gastos gs = new Gastos(user,pr);
+				gs.setVisible(true);
+				dispose();
+			}
+		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnRegistrar.setBounds(90, 206, 103, 32);
 		contentPane.add(btnRegistrar);
@@ -74,7 +85,9 @@ public class RegistroGasto extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Gastos g = new Gastos()
+				Gastos g = new Gastos(user,pr);
+				g.setVisible(true);
+				dispose();
 			}
 		});
 		btnVolver.setBounds(231, 212, 89, 23);
