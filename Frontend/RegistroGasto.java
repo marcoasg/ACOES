@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
@@ -74,7 +75,15 @@ public class RegistroGasto extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-				Gasto g = new Gasto(Float.parseFloat(textField.getText()),textField_1.getText(),pr,formato.parse(textField_2.getText()));
+				try {
+					Gasto g = new Gasto(Float.parseFloat(textField.getText()),textField_1.getText(),pr,formato.parse(textField_2.getText()));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "La cantidad debe ser un número.");
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "La fecha es incorrecta.");
+				}
 				JOptionPane.showMessageDialog(null, "Gasto registrado con éxito.");
 				Gastos gs = new Gastos(user,pr);
 				gs.setVisible(true);
