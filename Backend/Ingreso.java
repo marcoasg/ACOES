@@ -19,8 +19,8 @@ public class Ingreso {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		Ingreso[] resultado;
 		
-		for(Object[] tupla : miBD.Select("SELECT codigo FROM tIngreso WHERE proyecto = "+p+";")) {
-			if((fi.compareTo((Date)tupla[3])<0)&&(ff.compareTo((Date)tupla[3])>0)){
+		for(Object[] tupla : miBD.Select("SELECT * FROM tIngreso WHERE proyecto = "+p+";")) {
+			if((fi.compareTo((Date)tupla[3])<=0)&&(ff.compareTo((Date)tupla[3])>=0)){
 				lista.add(new Ingreso((Integer)tupla[4]));
 			}
 		}
@@ -35,7 +35,7 @@ public class Ingreso {
 	}
 	public Ingreso(int id) {
 		BD miBD = new BD(BD_SERVER,BD_NAME); 
-		Object[] tupla = miBD.Select("SELECT * FROM tIngreso WHERE codigo = id;").get(0);
+		Object[] tupla = miBD.Select("SELECT * FROM tIngreso WHERE codigo = "+ id + ";").get(0);
 		
 		if(tupla == null) {
 			throw new Error("El ingreso con codigo "+id+" no esta en la base de datos");
@@ -50,7 +50,7 @@ public class Ingreso {
 	public Ingreso(float cant, Socio socio, ProyectoLocal proyecto, Date fecha) {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-		miBD.Insert("Insert into tIngreso values("+ cantidad +", " +socio.getNumSocio()+", " +proyecto.getCodigo()+", "+formatoDelTexto.format(new Date())+");" );
+		miBD.Insert("Insert into tIngreso values("+ cant +", " +socio.getNumSocio()+", " +proyecto.getCodigo()+", "+formatoDelTexto.format(new Date())+");" );
 		this.cantidad=cant;
 		this.socio = socio;
 		this.proyecto = proyecto;
