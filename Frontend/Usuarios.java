@@ -90,6 +90,7 @@ public class Usuarios extends JFrame {
 
 			}
 			textObservaciones.setText(seleccionado.getObservaciones());
+			textField.setText(seleccionado.getSede().getLocalizacion());
 		}
 		
 	
