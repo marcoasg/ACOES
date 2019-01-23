@@ -94,7 +94,7 @@ public class DatosProyectoLocal extends JFrame {
 			}
 			}
 		});
-		btnEliminarNiño.setBounds(348, 369, 172, 29);
+		btnEliminarNiño.setBounds(262, 369, 172, 29);
 		contentPane.add(btnEliminarNiño);
 		
 		JButton btnNewButton = new JButton("Agregar ni\u00F1o");
@@ -127,6 +127,17 @@ public class DatosProyectoLocal extends JFrame {
 		});
 		btnVolver.setBounds(652, 373, 89, 23);
 		contentPane.add(btnVolver);
+		
+		JButton btnBalance = new JButton("Balance");
+		btnBalance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Balance b = new Balance(proyectoLocal, user);
+				b.setVisible(true);
+				dispose();
+			}
+		});
+		btnBalance.setBounds(457, 368, 140, 29);
+		contentPane.add(btnBalance);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {

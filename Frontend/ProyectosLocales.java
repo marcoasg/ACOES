@@ -91,7 +91,7 @@ public class ProyectosLocales extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(410, 337, 144, 29);
+		btnNewButton.setBounds(410, 366, 144, 29);
 		contentPane.add(btnNewButton);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -102,7 +102,7 @@ public class ProyectosLocales extends JFrame {
 				dispose();
 			}
 		});
-		btnRegistrar.setBounds(410, 292, 144, 29);
+		btnRegistrar.setBounds(410, 321, 144, 29);
 		contentPane.add(btnRegistrar);
 		
 		JButton btnNewButton_1 = new JButton("Entrar");
@@ -113,7 +113,7 @@ public class ProyectosLocales extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(410, 247, 144, 29);
+		btnNewButton_1.setBounds(410, 276, 144, 29);
 		contentPane.add(btnNewButton_1);
 		
 		
@@ -160,8 +160,9 @@ public class ProyectosLocales extends JFrame {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(410, 431, 144, 23);
+		btnVolver.setBounds(410, 411, 144, 23);
 		contentPane.add(btnVolver);
+		
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
