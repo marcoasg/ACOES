@@ -26,6 +26,27 @@ public class Usuario
     private Date fechaBaja;
     private String observaciones;
     private Sede sede;
+    
+	public static Usuario[] ListaUsuarios(Sede s)
+	{
+		// Retorna una lista con todos los objetos de la clase almacenados en la base de datos
+		List<Usuario> lista = new ArrayList<Usuario>();
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		Usuario[] resultado;
+		
+		for(Object[] tupla: miBD.Select("SELECT * FROM tUsuario WHERE sede = '"+s.getLocalizacion()+"';"))
+		{
+			Usuario r = new Usuario( (String)tupla[0]);
+			lista.add(r);
+		}
+		resultado = new Usuario[lista.size()];
+		int i = 0;
+		for (Usuario u : lista) {
+			resultado[i] = u;
+			i++;
+		}
+		return resultado;
+	}
 
 	public static Usuario[] ListaUsuarios()
 	{

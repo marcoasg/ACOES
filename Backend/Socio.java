@@ -27,6 +27,28 @@ public class Socio
     private String observaciones;
     private Sede sede;
 
+    
+	public static Socio[] ListaSocios(Sede s)
+	{
+		// Retorna una lista con todos los objetos de la clase almacenados en la base de datos
+		List<Socio> lista = new ArrayList<Socio>();
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		Socio[] resultado;
+		
+		for(Object[] tupla: miBD.Select("SELECT * FROM tSocio WHERE sede = '"+s.getLocalizacion()+"';"))
+		{
+			Socio r = new Socio( ((Integer)tupla[0]));
+			lista.add(r);
+		}
+		resultado = new Socio[lista.size()];
+		int i = 0;
+		for (Socio u : lista) {
+			resultado[i] = u;
+			i++;
+		}
+		return resultado;
+	}
+    
 	public static Socio[] ListaSocios()
 	{
 		// Retorna una lista con todos los objetos de la clase almacenados en la base de datos
