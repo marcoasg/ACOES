@@ -53,7 +53,23 @@ public class Gasto {
 		
 	}
 	
-	
+	public static Gasto[] ListaGastos(){
+		List<Gasto> lista = new ArrayList<Gasto>();
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		Gasto[] resultado;
+		
+		for(Object[] tupla : miBD.Select("SELECT * FROM tGasto WHERE estado = 0;")) {
+			lista.add(new Gasto((Integer)tupla[4]));	
+		}
+		resultado = new Gasto[lista.size()];
+		int i = 0;
+		for(Gasto g : lista) {
+			resultado[i] = g;
+			i++;
+		}
+		return resultado;
+		
+	}
 	public Gasto(int id) {
 		BD miBD = new BD(BD_SERVER,BD_NAME); 
 		Object[] tupla = miBD.Select("SELECT * FROM tGasto WHERE codigo =" + id +";").get(0);
@@ -139,5 +155,19 @@ public class Gasto {
 		miBD.Update("UPDATE tGasto SET estado = " +aux+" WHERE codigo = " +this.codigo+";");
 		this.estado = value;
 	}
-	
+	public void eliminarGasto() {
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		miBD.Delete("DELETE from tGasto where codigo =" + this.codigo + ";");
+		cantidad = -1;
+		beneficiario= null;
+		proyecto = null;
+		fecha = null;
+		codigo = -1;
+		estado = false;		
+	}
+	public void validarGasto() {
+		BD miBD = new BD(BD_SERVER,BD_NAME);
+		miBD.Update("UPDATE tGasto set estado = true");
+		estado = true;
+	}
 }
