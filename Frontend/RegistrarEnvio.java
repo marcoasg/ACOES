@@ -70,11 +70,11 @@ public class RegistrarEnvio extends JFrame {
 		});
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(110, 113, 253, 78);
+		textArea.setBounds(110, 132, 253, 78);
 		contentPane.add(textArea);
 		
 		JLabel lblContenido = new JLabel("Contenido:");
-		lblContenido.setBounds(10, 118, 75, 14);
+		lblContenido.setBounds(10, 137, 75, 14);
 		contentPane.add(lblContenido);
 		
 		JButton btnRegistrarEnvo = new JButton("Registrar env\u00EDo");
@@ -105,5 +105,10 @@ public class RegistrarEnvio extends JFrame {
 		});
 		btnCancelar.setBounds(335, 224, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		JButton btnCancelarApadrinamineto = new JButton("Cancelar apadrinamiento");
+		btnCancelarApadrinamineto.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCancelarApadrinamineto.setBounds(110, 87, 253, 26);
+		contentPane.add(btnCancelarApadrinamineto);
 	}
 }
