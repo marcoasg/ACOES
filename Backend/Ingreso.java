@@ -33,6 +33,9 @@ public class Ingreso {
 		return resultado;
 		
 	}
+	
+	
+	
 	public Ingreso(int id) {
 		BD miBD = new BD(BD_SERVER,BD_NAME); 
 		Object[] tupla = miBD.Select("SELECT * FROM tIngreso WHERE codigo = "+ id + ";").get(0);

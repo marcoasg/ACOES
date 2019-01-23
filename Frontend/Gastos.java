@@ -95,7 +95,7 @@ public class Gastos extends JFrame {
 		});
 		
 		
-		for(Gasto g:Gasto.ListaGastos(proyecto)) {
+		for(Gasto g:Gasto.ListaGastos(proyecto, fInicio, fFinal)) {
 			addGasto(g);
 		}
 		
@@ -159,7 +159,7 @@ public class Gastos extends JFrame {
 		});
 		btnValidarGastos.setBounds(523, 420, 137, 23);
 		contentPane.add(btnValidarGastos);
-		if(user.getRol().getRolName().equals("Coordinador local")) {
+		if(user.getRol().getRolName().equals("Coordinador general")) {
 			btnValidarGastos.setVisible(true);
 		}else {
 			btnValidarGastos.setVisible(false);

@@ -135,7 +135,7 @@ public class Balance extends JFrame {
 					fechaInicio = formatoDelTexto.parse(txtFechaInicio.getText());
 					fechaFin = formatoDelTexto.parse(txtFechaFin.getText());
 					if(fechaInicio.compareTo(fechaFin)>0) {
-						JOptionPane.showMessageDialog(null, "Fecha fin debe ser posterior a fecha inicio");
+						throw new Backend.Error();
 					}
 					for(Ingreso i: Ingreso.ListaIngresos(proyecto, fechaInicio, fechaFin)){
 						totalIngresos += i.getCantidad();
@@ -146,7 +146,9 @@ public class Balance extends JFrame {
 					actualizarVista();
 					} catch (ParseException e1) {
 						JOptionPane.showMessageDialog(null, "Formato de fechas incorrectos");
-				}
+					}catch(Backend.Error e1) {
+						JOptionPane.showMessageDialog(null, "Fecha fin debe ser posterior a fecha inicio");
+					}
 				
 			}
 		});

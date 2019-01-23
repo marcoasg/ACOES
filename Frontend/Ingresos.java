@@ -14,7 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import Backend.Gasto;
+import Backend.Ingreso;
 import Backend.ProyectoLocal;
+import Backend.Socio;
 import Backend.Usuario;
 
 import javax.swing.JLabel;
@@ -34,14 +36,13 @@ public class Ingresos extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField tCantidad;
-	private JTextField tBeneficiario;
+	private JTextField tProcedencia;
 	private JTextField tFecha;
 	private Usuario user;
-	private Gasto seleccionado;
+	private Ingreso seleccionado;
 	private Date fInicio;
 	private Date fFinal;
 	private ProyectoLocal proyecto;
-	private JTextField tEstado;
 	
 	public Ingresos(Usuario u, ProyectoLocal pr, Date fIni, Date fF) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +67,7 @@ public class Ingresos extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID", "BENEFICIARIO", "CANTIDAD", "FECHA", "ESTADO"
+				"ID", "PROCEDENCIA", "CANTIDAD", "FECHA"
 			}
 		));
 		scrollPane.setViewportView(table);
@@ -79,24 +80,20 @@ public class Ingresos extends JFrame {
 				if(table.getSelectedRow() != -1) {
 					int i = table.getSelectedRow();
 					TableModel modeloSeleccion = table.getModel();
-					seleccionado = new Gasto((int)modeloSeleccion.getValueAt(i, 0));
-					tBeneficiario.setText(seleccionado.getBeneficiario());
+					seleccionado = new Ingreso((int)modeloSeleccion.getValueAt(i, 0));
+					
+					tProcedencia.setText(Integer.toString(seleccionado.getSocio().getNumSocio()));
 					tCantidad.setText(Float.toString(seleccionado.getCantidad()));
 					SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 					String fecha = formatoDelTexto.format(seleccionado.getFecha());
 					tFecha.setText(fecha);
-					if((boolean) seleccionado.getEstado() == false) {
-						tEstado.setText("Pendiente");
-					}else {
-						tEstado.setText("Aceptado");
-					}
 				}
 			}
 		});
 		
 		
-		for(Gasto g:Gasto.ListaGastos(proyecto)) {
-			addGasto(g);
+		for(Ingreso i:Ingreso.ListaIngresos(proyecto, fInicio, fFinal)) {
+			addIngreso(i);
 		}
 		
 		
@@ -105,9 +102,9 @@ public class Ingresos extends JFrame {
 		lblCantidad.setBounds(42, 347, 71, 14);
 		contentPane.add(lblCantidad);
 		
-		JLabel lblBeneficiario = new JLabel("Beneficiario:");
-		lblBeneficiario.setBounds(42, 385, 71, 14);
-		contentPane.add(lblBeneficiario);
+		JLabel lblProcedencia = new JLabel("Procedencia:");
+		lblProcedencia.setBounds(42, 385, 71, 14);
+		contentPane.add(lblProcedencia);
 		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setBounds(42, 424, 71, 14);
@@ -118,10 +115,10 @@ public class Ingresos extends JFrame {
 		contentPane.add(tCantidad);
 		tCantidad.setColumns(10);
 		
-		tBeneficiario = new JTextField();
-		tBeneficiario.setColumns(10);
-		tBeneficiario.setBounds(123, 382, 277, 20);
-		contentPane.add(tBeneficiario);
+		tProcedencia = new JTextField();
+		tProcedencia.setColumns(10);
+		tProcedencia.setBounds(123, 382, 277, 20);
+		contentPane.add(tProcedencia);
 		
 		tFecha = new JTextField();
 		tFecha.setColumns(10);
@@ -129,41 +126,26 @@ public class Ingresos extends JFrame {
 		contentPane.add(tFecha);
 		
 		
-		JButton btnRegistrarGasto = new JButton("Registrar gasto");
-		btnRegistrarGasto.addActionListener(new ActionListener() {
+		JButton btnRegistrarIngreso = new JButton("Registrar ingreso");
+		btnRegistrarIngreso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 				Object[] row = new Object[5];
 				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 				
 					Date fecha = formatoDelTexto.parse(tFecha.getText());
-					Gasto nuevo = new Gasto(Float.parseFloat(tCantidad.getText()), tBeneficiario.getText(), proyecto, fecha);
-					addGasto(nuevo);
+					Ingreso nuevo = new Ingreso(Float.parseFloat(tCantidad.getText()), new Socio(Integer.parseInt(tProcedencia.getText()))
+					, proyecto, fecha);
+					addIngreso(nuevo);
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
 			}
 		});
-		btnRegistrarGasto.setBounds(523, 343, 137, 23);
-		contentPane.add(btnRegistrarGasto);
+		btnRegistrarIngreso.setBounds(523, 343, 137, 23);
+		contentPane.add(btnRegistrarIngreso);
 		
-		JButton btnValidarGastos = new JButton("Validar gastos");
-		btnValidarGastos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ValidarGastos ventana = new ValidarGastos(user);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnValidarGastos.setBounds(523, 420, 137, 23);
-		contentPane.add(btnValidarGastos);
-		if(user.getRol().getRolName().equals("Coordinador local")) {
-			btnValidarGastos.setVisible(true);
-		}else {
-			btnValidarGastos.setVisible(false);
-		}
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -175,32 +157,18 @@ public class Ingresos extends JFrame {
 		});
 		btnVolver.setBounds(523, 381, 137, 23);
 		contentPane.add(btnVolver);
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(42, 463, 46, 14);
-		contentPane.add(lblEstado);
-		
-		tEstado = new JTextField();
-		tEstado.setBounds(123, 460, 277, 20);
-		contentPane.add(tEstado);
-		tEstado.setColumns(10);
 	}
 
-	private void addGasto(Gasto g) {
+	private void addIngreso(Ingreso i) {
 		int numCols = table.getModel().getColumnCount();
 		
 		Object[] fila = new Object[numCols];
-		fila[0] = g.getCodigo();
-		fila[1] = g.getBeneficiario();
-		fila[2] = g.getCantidad();
+		fila[0] = i.getCodigo();
+		fila[1] = i.getSocio();
+		fila[2] = i.getCantidad();
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-		String fecha = formatoDelTexto.format(g.getFecha());
+		String fecha = formatoDelTexto.format(i.getFecha());
 		fila[3] = fecha;
-		if(g.getEstado() == false) {
-			fila[4] = "Pendiente";
-		}else {
-			fila[4] = "Aceptado";
-		}
 		((DefaultTableModel) table.getModel()).addRow(fila);
 	}
 }
