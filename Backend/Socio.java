@@ -77,16 +77,17 @@ public class Socio
             fechaAlta = tupla[15] == null ? null : (Date)tupla[15];
             fechaBaja = tupla[16] == null ? null : (Date)tupla[16];
             observaciones = tupla[17] == null ? "" : (String)tupla[17];
+            sede = new Sede((String)tupla[18]);
     	}
 	}
 	
 
     
-    public Socio(String a)
+    public Socio(String ag,String sede)
     {
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME); 
-    	miBD.Insert("INSERT INTO tSocio VALUES('" + a + "', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)");
+    	miBD.Insert("INSERT INTO tSocio VALUES('" + ag + "', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,'"+sede+"')");
     		numSocio = (Integer) miBD.Select("SELECT MAX(numSocio) FROM tSocio;").get(0)[0];
    	
     }
@@ -315,6 +316,16 @@ public class Socio
 		
 		
 		
+	}
+
+	public Sede getSede() {
+		return sede;
+	}
+
+	public void setSede(Sede sede) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tSocio set sede = '" + sede + "' WHERE numSocio = " + this.numSocio + ";");
+		this.sede = sede;
 	}
 	
 }
