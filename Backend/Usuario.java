@@ -390,7 +390,7 @@ public class Usuario
 
 	public void setSede(Sede sede) {
     	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tUsuario set sede = '" + sede + "' WHERE usuario = '" + this.usuario + "';");
+    	miBD.Update("UPDATE tUsuario set sede = '" + sede.getLocalizacion() + "' WHERE usuario = '" + this.usuario + "';");
 		this.sede = sede;
 	}
 }
