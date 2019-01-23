@@ -103,14 +103,20 @@ public class Apadrinar extends JFrame {
 				try {
 					if (seleccionado == null) throw new Error("Seleccione un niño.");
 					Apadrinamiento ap = new Apadrinamiento(s,seleccionado,Integer.parseInt(textField.getText()));
-					ap.setCuotaMensual(Integer.parseInt(textField_1.getText()));
+					
+					if (textField_1.getText().length() > 0) {
+						ap.setCuotaMensual(0);
+						ap.setCuotaMensual(Integer.parseInt(textField_1.getText()));
+					} else {
+						ap.setCuotaMensual(0);
+					}
 					JOptionPane.showMessageDialog(null, "¡" + (String)list.getSelectedValue() + " apadrinado!");
 					Socios s = new Socios(u);
 					s.setVisible(true);
 					dispose();
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "La donación ha de ser un número.");
+					JOptionPane.showMessageDialog(null, "La donación y la cuota han de ser un números.");
 				} catch (Backend.Error e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}

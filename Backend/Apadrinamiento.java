@@ -98,7 +98,6 @@ public class Apadrinamiento {
     	Date date = new Date();
     	String fecha = formatoDelTexto.format(date);
     	miBD.Update("UPDATE tApadrinamiento set fechaBaja = '" + fecha + "' WHERE codigo = " + this.codigo + ";");
-    	
     	fechaBaja = date;
 	}
 
