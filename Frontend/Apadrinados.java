@@ -50,12 +50,16 @@ public class Apadrinados extends JFrame {
 		
 		
 		Apadrinamiento[] lista = Apadrinamiento.ListaApadrinamientos();
-		Integer[] niños = new Integer[lista.length];
+		Integer[] codigos = new Integer[lista.length];
+		String[] niños = new String[lista.length];
 		int i = 0;
 		for (Apadrinamiento ap : lista) {
-			if (ap.getSocio().getNumSocio() == s.getNumSocio() && ap.getFechaBaja() == null)
-				niños[i] = ap.getNiño().getCodigo();
-			i++;
+			if (ap.getSocio().getNumSocio() == s.getNumSocio() && ap.getFechaBaja() == null) {
+				codigos[i] = ap.getNiño().getCodigo();
+				String apellidos = ap.getNiño().getApellidos() == null ? "" : ap.getNiño().getApellidos();
+				niños[i] = ap.getNiño().getNombre() + " " + apellidos;
+				i++;
+			}
 		}
 		JList list = new JList(niños);
 		list.setBounds(110, 10, 253, 66);
@@ -66,7 +70,7 @@ public class Apadrinados extends JFrame {
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				seleccionado = new Niño((Integer)list.getSelectedValue());
+				seleccionado = new Niño(codigos[list.getSelectedIndex()]);
 			}
 		});
 		
@@ -113,11 +117,9 @@ public class Apadrinados extends JFrame {
 				if(seleccionado == null) throw new Backend.Error("Seleccione un niño");
 					Apadrinamiento a = new Apadrinamiento(s,seleccionado);
 					a.darDeBajaApadrinamiento();
-					DefaultListModel<String> modelo = new DefaultListModel<>();
-					int i = 0;
-
-					
-					list.setModel(modelo);
+					Apadrinados ap = new Apadrinados(user,s);
+					ap.setVisible(true);
+					dispose();
 			}
 		});
 		btnCancelarApadrinamiento.setBounds(110, 83, 254, 35);
