@@ -53,7 +53,9 @@ public class Apadrinamiento {
 		fechaBaja = null;
 		codigo = (Integer)miBD.SelectEscalar("Select MAX(codigo) from tApadrinamiento;");
 		this.donacion = donacion;
-		Ingreso i = new Ingreso(donacion,socio,new ProyectoLocal((Integer)lista2.get(0)[1]),new Date());
+		if (donacion > 0) {
+			Ingreso i = new Ingreso(donacion,socio,new ProyectoLocal((Integer)lista2.get(0)[1]),new Date());
+		}
 	}
 	
 	public Apadrinamiento(int cod) {
