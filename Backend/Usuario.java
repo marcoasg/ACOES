@@ -25,6 +25,7 @@ public class Usuario
     private Date fechaAlta;
     private Date fechaBaja;
     private String observaciones;
+    private Sede sede;
 
 	public static Usuario[] ListaUsuarios()
 	{
@@ -81,6 +82,11 @@ public class Usuario
             fechaAlta = tupla[15] == null ? null : (Date)tupla[15];
             fechaBaja = tupla[16] == null ? null : (Date)tupla[16];
             observaciones = tupla[17] == null ? "" : (String)tupla[17];
+            if (rol.getPais() == "ESP") {
+            	sede = new Sede((String)tupla[18]);
+            } else {
+            	sede = null;
+            }
     	}
 	}
 	
@@ -131,6 +137,11 @@ public class Usuario
             fechaAlta = (Date)tupla[15] == null ? null : (Date)tupla[15];
             fechaBaja = (Date)tupla[16] == null ? null : (Date)tupla[16];
             observaciones = (String)tupla[17] == null ? "" : (String)tupla[17];
+            if (rol.getPais() == "ESP") {
+            	sede = new Sede((String)tupla[18]);
+            } else {
+            	sede = null;
+            }
     	}
         
     }
@@ -144,7 +155,7 @@ public class Usuario
     		throw new Error("Rellene los campos obligatorios.");
     	}
     	if (miBD.Select("SELECT * FROM tUsuario WHERE usuario = '"+n+"';").isEmpty()) {
-			miBD.Insert("INSERT into tUsuario values('"+n+"','"+p+"','"+r.getRolName()+"',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);");
+			miBD.Insert("INSERT into tUsuario values('"+n+"','"+p+"','"+r.getRolName()+"',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);");
     		
     		usuario = n;
 			password = p;
@@ -371,5 +382,15 @@ public class Usuario
     	BD miBD = new BD(BD_SERVER, BD_NAME);
     	miBD.Update("UPDATE tUsuario set observaciones = '" + observaciones + "' WHERE usuario = '" + this.usuario + "';");
 		this.observaciones = observaciones;
+	}
+
+	public Sede getSede() {
+		return sede;
+	}
+
+	public void setSede(Sede sede) {
+    	BD miBD = new BD(BD_SERVER, BD_NAME);
+    	miBD.Update("UPDATE tUsuario set sede = '" + sede + "' WHERE usuario = '" + this.usuario + "';");
+		this.sede = sede;
 	}
 }

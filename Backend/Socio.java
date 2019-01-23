@@ -25,6 +25,7 @@ public class Socio
     private Date fechaAlta;
     private Date fechaBaja;
     private String observaciones;
+    private Sede sede;
 
 	public static Socio[] ListaSocios()
 	{
