@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Backend.Gasto;
 import Backend.ProyectoLocal;
 import Backend.Usuario;
 
@@ -17,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class RegistroGasto extends JFrame {
@@ -71,7 +73,8 @@ public class RegistroGasto extends JFrame {
 		JButton btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Gasto g = new Gasto(Float.parseFloat(textField.getText()),textField_1.getText(),pr,textField_2.getText());
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+				Gasto g = new Gasto(Float.parseFloat(textField.getText()),textField_1.getText(),pr,formato.parse(textField_2.getText()));
 				JOptionPane.showMessageDialog(null, "Gasto registrado con éxito.");
 				Gastos gs = new Gastos(user,pr);
 				gs.setVisible(true);
