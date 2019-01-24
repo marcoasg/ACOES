@@ -89,9 +89,11 @@ public class ProyectoGeneral {
     }
     
     public void setDescripcion(String value) {
-    	BD miBD = new BD(BD_SERVER, BD_NAME);
-    	miBD.Update("UPDATE tProyectoGen set descripcion = '" + value + "' WHERE nombre = '" + this.nombre + "';");
-    	descripcion = value;
+    	if(value!=null) {
+	    	BD miBD = new BD(BD_SERVER, BD_NAME);
+	    	miBD.Update("UPDATE tProyectoGen set descripcion = '" + value + "' WHERE nombre = '" + this.nombre + "';");
+	    	descripcion = value;
+    	}
     }
     
     public String getDescripcion() {

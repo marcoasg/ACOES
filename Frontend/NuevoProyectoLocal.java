@@ -81,7 +81,7 @@ public class NuevoProyectoLocal extends JFrame {
 			}
 		});
 
-		btnCancelarr.setBounds(575, 377, 115, 29);
+		btnCancelarr.setBounds(574, 375, 115, 29);
 		contentPane.add(btnCancelarr);
 		
 		Usuario[] us = Usuario.ListaUsuarios();

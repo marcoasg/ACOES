@@ -132,7 +132,7 @@ public class ProyectosGenerales extends JFrame {
 		btnNuevoProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					if (user.getRol().getNivel() == 3) {
-						NuevoProyectoGeneral np = new NuevoProyectoGeneral(user);
+						NuevoProyectoGeneralBien np = new NuevoProyectoGeneralBien(user);
 						np.setVisible(true);
 						dispose();
 					} else {

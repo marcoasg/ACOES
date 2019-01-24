@@ -40,11 +40,11 @@ public class NuevoProyectoGeneral extends JFrame {
 		contentPane.add(lblNombre);
 		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
-		lblDescripcin.setBounds(10, 131, 64, 14);
+		lblDescripcin.setBounds(10, 131, 122, 14);
 		contentPane.add(lblDescripcin);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(10, 226, 46, 14);
+		lblUsuario.setBounds(10, 226, 103, 14);
 		contentPane.add(lblUsuario);
 		
 		textField = new JTextField();
