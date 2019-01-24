@@ -78,10 +78,13 @@ public class ProyectoLocal {
 	    }
 	    
 	    public void setLocalizacion(String value) {
-	    	// Actualiza el atributo en memoria y en la base de datos
-	    	BD miBD = new BD(BD_SERVER, BD_NAME);
-	    	miBD.Update("UPDATE tProyectoLoc set localizacion = '" + value + "' WHERE codigo = '" + this.codigo + "';");
-	    	localizacion = value;
+	    	if (value.length()!=0) {
+				// Actualiza el atributo en memoria y en la base de datos
+				BD miBD = new BD(BD_SERVER, BD_NAME);
+				miBD.Update(
+						"UPDATE tProyectoLoc set localizacion = '" + value + "' WHERE codigo = '" + this.codigo + "';");
+				localizacion = value;
+			}
 	    }
 	    
 	    public String getLocalizacion() {

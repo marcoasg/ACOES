@@ -27,14 +27,15 @@ public class InicioHonduras extends JFrame {
 		setFont(new Font("Dialog", Font.BOLD, 12));
 		setTitle("ACOES Honduras");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 372, 272);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(109, 55, 315, 14);
 		getContentPane().add(label);
 		
 		JButton btnUsuarios = new JButton("Usuarios");
-		btnUsuarios.setBounds(10, 41, 89, 23);
+		btnUsuarios.setBounds(77, 92, 104, 23);
+		getContentPane().add(btnUsuarios);
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -45,7 +46,7 @@ public class InicioHonduras extends JFrame {
 		});
 		
 		JButton btnCerrarSesin = new JButton("Cerrar sesi\u00F3n");
-		btnCerrarSesin.setBounds(295, 7, 128, 23);
+		btnCerrarSesin.setBounds(214, 0, 128, 23);
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Login log = new Login();
@@ -65,12 +66,12 @@ public class InicioHonduras extends JFrame {
 				dispose();
 			}
 		});
-		btnPerfil.setBounds(196, 7, 89, 23);
+		btnPerfil.setBounds(77, 58, 104, 23);
 		getContentPane().add(btnPerfil);
 		
 		JLabel lblMenu = new JLabel("Men\u00FA");
 		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMenu.setBounds(21, 16, 46, 14);
+		lblMenu.setBounds(103, 9, 46, 14);
 		getContentPane().add(lblMenu);
 		
 		JButton btnP = new JButton("Proyectos");
@@ -83,7 +84,7 @@ public class InicioHonduras extends JFrame {
 
 			}
 		});
-		btnP.setBounds(158, 93, 104, 23);
+		btnP.setBounds(77, 126, 104, 23);
 		getContentPane().add(btnP);
 		
 		JButton btnNios = new JButton("Ni\u00F1os");
@@ -94,7 +95,7 @@ public class InicioHonduras extends JFrame {
 				dispose();
 			}
 		});
-		btnNios.setBounds(158, 131, 104, 23);
+		btnNios.setBounds(77, 164, 104, 23);
 		getContentPane().add(btnNios);
 		
 		JButton btnValidarGastos = new JButton("Validar Gastos");
@@ -112,7 +113,7 @@ public class InicioHonduras extends JFrame {
 				
 			}
 		});
-		btnValidarGastos.setBounds(158, 172, 104, 23);
+		btnValidarGastos.setBounds(64, 198, 127, 23);
 		getContentPane().add(btnValidarGastos);
 		
 	}

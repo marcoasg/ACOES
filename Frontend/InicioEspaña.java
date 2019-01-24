@@ -31,14 +31,16 @@ public class InicioEspaña extends JFrame {
 		setFont(new Font("Dialog", Font.BOLD, 12));
 		setTitle("ACOES España");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 352, 250);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(109, 55, 315, 14);
 		getContentPane().add(label);
 		
 		JButton btnUsuarios = new JButton("Usuarios");
-		btnUsuarios.setBounds(10, 41, 89, 23);
+		btnUsuarios.setBounds(69, 126, 89, 23);
+		getContentPane().add(btnUsuarios);
+
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -49,7 +51,7 @@ public class InicioEspaña extends JFrame {
 		});
 		
 		JButton btnCerrarSesin = new JButton("Cerrar sesi\u00F3n");
-		btnCerrarSesin.setBounds(295, 7, 128, 23);
+		btnCerrarSesin.setBounds(205, 11, 128, 23);
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Login log = new Login();
@@ -69,16 +71,16 @@ public class InicioEspaña extends JFrame {
 				dispose();
 			}
 		});
-		btnPerfil.setBounds(196, 7, 89, 23);
+		btnPerfil.setBounds(69, 92, 89, 23);
 		getContentPane().add(btnPerfil);
 		
 		JLabel lblMenu = new JLabel("Men\u00FA");
 		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMenu.setBounds(21, 16, 46, 14);
+		lblMenu.setBounds(91, 34, 46, 14);
 		getContentPane().add(lblMenu);
 		
 		JButton btnSocios = new JButton("Socios");
-		btnSocios.setBounds(10, 77, 89, 23);
+		btnSocios.setBounds(69, 162, 89, 23);
 		btnSocios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Socios socios = new Socios(user);

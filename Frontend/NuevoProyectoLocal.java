@@ -61,11 +61,16 @@ public class NuevoProyectoLocal extends JFrame {
 				if(seleccionado==null) {
 					JOptionPane.showMessageDialog(null, "Seleccione un coordinador");
 				}else {
-					pl = new ProyectoLocal(pg,seleccionado);
-					pl.setLocalizacion(textField.getText());
-					ProyectosLocales prl= new ProyectosLocales(pg, user);				
-					prl.setVisible(true);
-					dispose();
+					try {
+						pl = new ProyectoLocal(pg,seleccionado);
+						pl.setLocalizacion(textField.getText());
+						ProyectosLocales prl= new ProyectosLocales(pg, user);				
+						prl.setVisible(true);
+						dispose();
+					} catch (Backend.Error e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "Este coordinador ya coordina otro proyecto.");
+					}
 				}
 			}
 		});

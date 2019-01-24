@@ -67,11 +67,16 @@ public class NuevoProyectoGeneralBien extends JFrame {
 				}else if(txtNom.getText().length() == 0){
 					JOptionPane.showMessageDialog(null, "Escriba un nombre para el proyecto.");
 				}else {
-					pl = new ProyectoGeneral(txtNom.getText(), seleccionado);
-					pl.setDescripcion(txtDes.getText());
-					ProyectosGenerales prg = new ProyectosGenerales(user);				
-					prg.setVisible(true);
-					dispose();
+					try {
+						pl = new ProyectoGeneral(txtNom.getText(), seleccionado);
+						pl.setDescripcion(txtDes.getText());
+						ProyectosGenerales prg = new ProyectosGenerales(user);				
+						prg.setVisible(true);
+						dispose();
+					} catch (Backend.Error e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "Este coordinador ya coordina otro proyecto.");
+					}
 				}
 			}
 		});
@@ -94,12 +99,14 @@ public class NuevoProyectoGeneralBien extends JFrame {
 		String[] coor = new String[us.length];
 		int i = 0;
 		for(Usuario u1 : us) {
-			if(u1.getRol().getRolName().equalsIgnoreCase("CoordinadorGeneralH")) {
+			if(u1.getRol().getRolName().equals("CoordinadorProyectoH")) {
 				coor[i]=u1.getUsuario();
 			}
 			i++;
 		}
-		panel = new JScrollPane();
+		list = new JList(coor);
+		list.setBounds(49, 109, 718, 156);
+		panel = new JScrollPane(list);
 		panel.setBounds(49, 109, 718, 156);
 		contentPane.add(panel);
 		
@@ -108,9 +115,7 @@ public class NuevoProyectoGeneralBien extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		list = new JList(coor);
-		contentPane.add(list);
-		list.setBounds(49, 109, 718, 156);
+
 		
 		JLabel lblIntroducirDescripcionDel = new JLabel("Introducir descripci\u00F3n del proyecto:");
 		lblIntroducirDescripcionDel.setBounds(49, 317, 271, 20);
