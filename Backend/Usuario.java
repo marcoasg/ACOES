@@ -242,7 +242,7 @@ public class Usuario
     {
 		// Si el objeto actual es administrador
 		// Actualiza el atributo rol de u en memoria y en la base de datos
-    	if (this.rol.getRolName().equals("Administrador") ) {
+    	if (this.rol.getRolName().equals("Administrador") || this.rol.getNivel() >= 3) {
         	BD miBD = new BD(BD_SERVER, BD_NAME);
         	miBD.Update("UPDATE tUsuario set rol = '" + r.getRolName() + "' WHERE usuario = '" + u.getUsuario() + "';");
     		u.rol = r;

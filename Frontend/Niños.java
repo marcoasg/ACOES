@@ -233,7 +233,7 @@ public class Niños extends JFrame {
 		JButton btnBorrarNiño = new JButton("Dar de baja ni\u00F1o");
 		btnBorrarNiño.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Niño niño = new Niño( Integer.parseInt((String) list.getSelectedValue()));
+				Niño niño = new Niño(codigos[list.getSelectedIndex()]);
 				niño.desactivaNiño();
 				textFechaSalida.setText(niño.getFechaSalida().toString());
 				JOptionPane.showMessageDialog(null, "Se ha dado de baja al niño.");
@@ -329,7 +329,6 @@ public class Niños extends JFrame {
 					if(!textSexo.getText().equals(seleccionado.getSexo())) {
 						seleccionado.setSexo(textSexo.getText());
 					}
-					if(textFechaNacimiento.getText().length() > 0 && (seleccionado.getFechaNacimiento() == null || (!textFechaNacimiento.getText().equals("") && !textFechaNacimiento.getText().equals(seleccionado.getFechaNacimiento().toString()))) ) {
 						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 						String strFecha = textFechaNacimiento.getText();
 						Date fechaNacimiento = null;
@@ -339,29 +338,25 @@ public class Niños extends JFrame {
 							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
 						}
 						seleccionado.setFechaNacimiento(fechaNacimiento);
-					}
-					if(textFechaEntrada.getText().length() > 0 && (seleccionado.getFechaEntrada() == null || (!textFechaEntrada.getText().equals("") && !textFechaEntrada.getText().equals(seleccionado.getFechaEntrada().toString()))) ) {
-						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-						String strFecha = textFechaEntrada.getText();
+					
+						String strFecha2 = textFechaEntrada.getText();
 						Date fechaEntrada = null;
 						try {
-							fechaEntrada = formatoDelTexto.parse(strFecha);
+							fechaEntrada = formatoDelTexto.parse(strFecha2);
 						} catch (ParseException e) {
 							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
 						}
 						seleccionado.setFechaEntrada(fechaEntrada);
-					}
-					if(textFechaSalida.getText().length() > 0 && (seleccionado.getFechaSalida() == null || (!textFechaSalida.getText().equals("") && !textFechaSalida.getText().equals(seleccionado.getFechaSalida().toString()))) ) {
-						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-						String strFecha = textFechaSalida.getText();
+					
+						String strFecha3 = textFechaSalida.getText();
 						Date fechaSalida = null;
 						try {
-							fechaSalida = formatoDelTexto.parse(strFecha);
+							fechaSalida = formatoDelTexto.parse(strFecha3);
 						} catch (ParseException e) {
 							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
 						}
 						seleccionado.setFechaSalida(fechaSalida);
-					}
+					
 					if(!textCurso.getText().equals(seleccionado.getCurso())) {
 						seleccionado.setCurso(textCurso.getText());
 					}

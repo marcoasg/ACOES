@@ -50,7 +50,7 @@ public class Ingreso {
 		codigo = (Integer)tupla[4];
 	}
 	
-	public Ingreso(float cant, Socio socio, ProyectoLocal proyecto, Date fecha) {
+	public Ingreso(double cant, Socio socio, ProyectoLocal proyecto, Date fecha) {
 		BD miBD = new BD(BD_SERVER,BD_NAME);
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		miBD.Insert("Insert into tIngreso values("+ cant +", " +socio.getNumSocio()+", " +proyecto.getCodigo()+", '"+formatoDelTexto.format(fecha)+"');" );

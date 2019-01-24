@@ -71,18 +71,19 @@ public class Apadrinar extends JFrame {
 		lblNiosParaApadrinar.setBounds(146, 11, 126, 14);
 		contentPane.add(lblNiosParaApadrinar);
 		
-		BD miBD = new BD(BD_SERVER,BD_NAME);
-		List<Object[]> lista = miBD.Select("SELECT * from tNiño where codigo not in (select niño from tApadrinamiento where fechaBaja = null);");
+		Niño[] listaNiños = Niño.ListaNiños();
 		
-		String[] niños = new String[lista.size()];
-		codigos = new Integer[lista.size()];
+		String[] niños = new String[listaNiños.length];
+		codigos = new Integer[listaNiños.length];
 
 		int i = 0;
-		for (Object[] tupla : lista) {
-			codigos[i] = (Integer)tupla[1];
-			String apellidos = tupla[2] == null ? "" : (String)tupla[2];
-			niños[i] = (String)tupla[0] + " "+ apellidos;
-			i++;
+		for (Niño n : listaNiños) {
+			if (!Apadrinamiento.estaApadrinado(n)) {
+				codigos[i] = n.getCodigo();
+				String apellidos = n.getApellidos();
+				niños[i] = n.getNombre() + " " + apellidos;
+				i++;
+			}
 		}
 		
 		JList list = new JList(niños);

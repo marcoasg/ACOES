@@ -74,7 +74,7 @@ public class Niño
     {
 		// Crea el objeto y lo inserta en la base de datos
     	BD miBD = new BD(BD_SERVER,BD_NAME); 
-    	miBD.Insert("INSERT INTO tNiño VALUES(null, null, null, null, null, null, null, null, null, null, null, null, null)");
+    	miBD.Insert("INSERT INTO tNiño VALUES(null, null, null, null, null, null, null, null, null, null, null, null)");
     	codigo = (Integer) miBD.Select("SELECT MAX(codigo) FROM tNiño;").get(0)[0];
    	
     }
@@ -168,7 +168,14 @@ public class Niño
 	public void setFechaNacimiento(Date value) {
 		BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tNiño set fechaNacimiento = '" + formatoDelTexto.format(value) + "' WHERE codigo = " + this.codigo + ";");
+    	String strFecha = value == null ? "" : formatoDelTexto.format(value);
+    	if (!strFecha.equals("")) {
+			miBD.Update(
+					"UPDATE tNiño set fechaNacimiento = '" + strFecha + "' WHERE codigo = " + this.codigo + ";");
+		} else {
+			miBD.Update(
+					"UPDATE tNiño set fechaNacimiento = null WHERE codigo = " + this.codigo + ";");
+		}
 		this.fechaNacimiento = value;
 	}
 
@@ -179,7 +186,13 @@ public class Niño
 	public void setFechaEntrada(Date value) {
 		BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tNiño set fechaEntrada = '" + formatoDelTexto.format(value) + "' WHERE codigo = " + this.codigo + ";");
+    	String strFecha = value == null ? "" : formatoDelTexto.format(value);
+    	if (!strFecha.equals("")) {
+			miBD.Update("UPDATE tNiño set fechaEntrada = '" + strFecha + "' WHERE codigo = " + this.codigo + ";");
+		}else {
+			miBD.Update("UPDATE tNiño set fechaEntrada = null WHERE codigo = " + this.codigo + ";");
+
+		}
 		this.fechaEntrada = value;
 	}
 
@@ -190,7 +203,13 @@ public class Niño
 	public void setFechaSalida(Date value) {
 		BD miBD = new BD(BD_SERVER, BD_NAME);
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-    	miBD.Update("UPDATE tNiño set fechaSalida = '" + formatoDelTexto.format(value) + "' WHERE codigo = " + this.codigo + ";");
+    	String strFecha = value == null ? "" : formatoDelTexto.format(value);
+    	if (!strFecha.equals("")) {
+			miBD.Update("UPDATE tNiño set fechaSalida = '" + strFecha + "' WHERE codigo = " + this.codigo + ";");
+		} else {
+			miBD.Update("UPDATE tNiño set fechaSalida = null WHERE codigo = " + this.codigo + ";");
+
+		}
 		this.fechaSalida = value;
 	}
 

@@ -141,7 +141,7 @@ public class Ingresos extends JFrame {
 				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 				
 					Date fecha = formatoDelTexto.parse(tFecha.getText());
-					Ingreso nuevo = new Ingreso(Float.parseFloat(tCantidad.getText()), new Socio(Integer.parseInt(tProcedencia.getText()))
+					Ingreso nuevo = new Ingreso(Double.parseDouble(tCantidad.getText()), new Socio(Integer.parseInt(tProcedencia.getText()))
 					, proyecto, fecha);
 					addIngreso(nuevo);
 				} catch (ParseException e1) {

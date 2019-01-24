@@ -147,6 +147,8 @@ public class Balance extends JFrame {
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+				totalIngresos = 0;
+				totalGastos = 0;
 				try {
 					
 					if(txtFechaInicio.getText().length() == 0) fechaInicio= formatoDelTexto.parse("1492-01-01"); else fechaInicio = formatoDelTexto.parse(txtFechaInicio.getText());

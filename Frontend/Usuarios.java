@@ -17,6 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.HeadlessException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -334,69 +335,75 @@ public class Usuarios extends JFrame {
 				if(seleccionado == null) {
 					
 				}else {
-					if(!textNombre.getText().equals(seleccionado.getNombre())) {
-						seleccionado.setNombre(textNombre.getText());
-					}
-					if(!textApellidos.getText().equals(seleccionado.getApellidos())) {
-						seleccionado.setApellidos(textApellidos.getText());
-					}
-					if(Rol.rolValido(textRol.getText(),seleccionado.getRol().getPais())) {
-							user.ModiRol(seleccionado, new Rol(textRol.getText(),seleccionado.getRol().getPais()));
-					} else {
-						JOptionPane.showMessageDialog(null, "Rol no válido o no compatible en su país.");
-					}
-					
-					if(!textEstado.getText().equals(seleccionado.getEstado())) {
-						seleccionado.setEstado(textEstado.getText());
-					}
-					if(!textNIF.getText().equals(seleccionado.getNif())) {
-						seleccionado.setNif(textNIF.getText());
-					}
-					if(!textDireccion.getText().equals(seleccionado.getDireccion())) {
-						seleccionado.setDireccion(textDireccion.getText());
-					}
-					if(Integer.parseInt(textCP.getText()) != seleccionado.getCodigoPostal()) {
-						seleccionado.setCodigoPostal(Integer.parseInt(textCP.getText()));
-					}
-					if(!textProvincia.getText().equals(seleccionado.getProvincia())) {
-						seleccionado.setProvincia(textProvincia.getText());
-					}
-					if(!textTelefonoFijo.getText().equals(seleccionado.getTelefonoFijo())) {
-						seleccionado.setTelefonoFijo(textTelefonoFijo.getText());
-					}
-					if(!textTelfMovil.getText().equals(seleccionado.getTelefonoMovil())) {
-						seleccionado.setTelefonoMovil(textTelfMovil.getText());
-					}
-					if(!textEmail.getText().equals(seleccionado.getEmail())) {
-						seleccionado.setEmail(textEmail.getText());
-					}
-					if(seleccionado.isCertificado() && textCertificado.getText().equals("No")) {
-						seleccionado.setCertificado(false);
-					}
-					if(!seleccionado.isCertificado() && textCertificado.getText().equals("Sí")) {
-						seleccionado.setCertificado(true);
-					}
-					if(!textSector.getText().equals(seleccionado.getSector())) {
-						seleccionado.setSector(textSector.getText());
-					}
-					if(seleccionado.getFechaAlta() == null || (!textFechaAlta.getText().equals("") && !textFechaAlta.getText().equals(seleccionado.getFechaAlta().toString())) ) {
-						SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-						String strFecha = textFechaAlta.getText();
-						Date fechaAlta = null;
-						try {
-							fechaAlta = formatoDelTexto.parse(strFecha);
-						} catch (ParseException e) {
-							if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+					try {
+						if(!textNombre.getText().equals(seleccionado.getNombre())) {
+							seleccionado.setNombre(textNombre.getText());
 						}
-						seleccionado.setFechaAlta(fechaAlta);
+						if(!textApellidos.getText().equals(seleccionado.getApellidos())) {
+							seleccionado.setApellidos(textApellidos.getText());
+						}
+						if(Rol.rolValido(textRol.getText(),seleccionado.getRol().getPais())) {
+								user.ModiRol(seleccionado, new Rol(textRol.getText(),seleccionado.getRol().getPais()));
+						} else {
+							JOptionPane.showMessageDialog(null, "Rol no válido o no compatible en su país.");
+						}
+						
+						if(!textEstado.getText().equals(seleccionado.getEstado())) {
+							seleccionado.setEstado(textEstado.getText());
+						}
+						if(!textNIF.getText().equals(seleccionado.getNif())) {
+							seleccionado.setNif(textNIF.getText());
+						}
+						if(!textDireccion.getText().equals(seleccionado.getDireccion())) {
+							seleccionado.setDireccion(textDireccion.getText());
+						}
+						if(Integer.parseInt(textCP.getText().equals("") ? "-1" : textCP.getText()) != seleccionado.getCodigoPostal()) {
+							seleccionado.setCodigoPostal(Integer.parseInt(textCP.getText()));
+						}
+						if(!textProvincia.getText().equals(seleccionado.getProvincia())) {
+							seleccionado.setProvincia(textProvincia.getText());
+						}
+						if(!textTelefonoFijo.getText().equals(seleccionado.getTelefonoFijo())) {
+							seleccionado.setTelefonoFijo(textTelefonoFijo.getText());
+						}
+						if(!textTelfMovil.getText().equals(seleccionado.getTelefonoMovil())) {
+							seleccionado.setTelefonoMovil(textTelfMovil.getText());
+						}
+						if(!textEmail.getText().equals(seleccionado.getEmail())) {
+							seleccionado.setEmail(textEmail.getText());
+						}
+						if(seleccionado.isCertificado() && textCertificado.getText().equals("No")) {
+							seleccionado.setCertificado(false);
+						}
+						if(!seleccionado.isCertificado() && textCertificado.getText().equals("Sí")) {
+							seleccionado.setCertificado(true);
+						}
+						if(!textSector.getText().equals(seleccionado.getSector())) {
+							seleccionado.setSector(textSector.getText());
+						}
+						if(seleccionado.getFechaAlta() == null || (!textFechaAlta.getText().equals("") && !textFechaAlta.getText().equals(seleccionado.getFechaAlta().toString())) ) {
+							SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+							String strFecha = textFechaAlta.getText();
+							Date fechaAlta = null;
+							try {
+								fechaAlta = formatoDelTexto.parse(strFecha);
+							} catch (ParseException e) {
+								if (strFecha.length() != 0 || strFecha.length() != 0)JOptionPane.showMessageDialog(null, "La fecha no es válida.");
+							}
+							seleccionado.setFechaAlta(fechaAlta);
+						}
+						if(!textObservaciones.getText().equals(seleccionado.getObservaciones())) {
+							seleccionado.setObservaciones(textObservaciones.getText());
+						}
+						seleccionado.setSede(new Sede(textField.getText()));
+						
+						JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
+						actualizarVista(seleccionado);
+					} catch (HeadlessException e) {
+						// TODO Auto-generated catch block
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
 					}
-					if(!textObservaciones.getText().equals(seleccionado.getObservaciones())) {
-						seleccionado.setObservaciones(textObservaciones.getText());
-					}
-					seleccionado.setSede(new Sede(textField.getText()));
-					
-					JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario.");
-					actualizarVista(seleccionado);
 					
 				}
 				

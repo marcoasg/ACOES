@@ -43,7 +43,7 @@ public class Apadrinamiento {
 		//inserta el apadrinamiento en la BD
 		BD miBD = new BD(BD_SERVER,BD_NAME);
     	List<Object[]> lista2 = miBD.Select("SELECT * FROM tEstancia WHERE niño = "
-    			+ n.getCodigo() + " and fechaBaja = null;");
+    			+ n.getCodigo() + ";");
 		Date fecha = new Date();
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 		miBD.Insert("Insert into tApadrinamiento values("+s.getNumSocio()+","+n.getCodigo()+",'"+ formatoDelTexto.format(fecha) +"',null,"+donacion+",null);");
@@ -95,6 +95,19 @@ public class Apadrinamiento {
     		donacion = (Integer) tupla[5];
     	}
 	
+	}
+	
+	public static boolean estaApadrinado(Niño n) {
+		Apadrinamiento[] lista = ListaApadrinamientos();
+		
+		int i = 0;
+		while (i < lista.length) {
+			if (lista[i].getNiño().getCodigo() == n.getCodigo() && lista[i].getFechaBaja() == null) {
+				return true;
+			}
+			i++;
+		}
+		return false;
 	}
 	
 	
